@@ -1,0 +1,235 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : 本机环境
+Source Server Version : 50722
+Source Host           : localhost:3306
+Source Database       : p2p_basics
+
+Target Server Type    : MYSQL
+Target Server Version : 50722
+File Encoding         : 65001
+
+Date: 2019-02-22 10:30:05
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for gjj_sys_dict
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_sys_dict`;
+CREATE TABLE `gjj_sys_dict` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(50) DEFAULT NULL COMMENT '名称',
+  `nid` varchar(100) DEFAULT NULL COMMENT '唯一标识',
+  `pid` int(11) DEFAULT NULL COMMENT '父级id',
+  `value` varchar(50) DEFAULT NULL COMMENT '值',
+  `type` int(2) DEFAULT NULL COMMENT '类型  (详情见dict表basics_dict_type) ',
+  `code` varchar(50) DEFAULT NULL COMMENT '代码',
+  `java_type` varchar(50) DEFAULT NULL COMMENT 'java类型 (详情见dict表basics_java_type)',
+  `sort` int(3) DEFAULT '1' COMMENT '排序',
+  `status` int(2) DEFAULT '1' COMMENT '状态，(详情见dict表basics_use_status) ',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `add_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `relate_id` varchar(100) DEFAULT '' COMMENT '关联字典id',
+  PRIMARY KEY (`id`),
+  KEY `nid` (`nid`) USING BTREE,
+  KEY `pid` (`pid`) USING BTREE,
+  KEY `value` (`value`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典表';
+
+-- ----------------------------
+-- Table structure for gjj_sys_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_sys_menu`;
+CREATE TABLE `gjj_sys_menu` (
+  `id` int(8) NOT NULL AUTO_INCREMENT COMMENT '主键标示',
+  `name` varchar(128) DEFAULT '' COMMENT '菜单名称',
+  `pid` int(8) DEFAULT '0' COMMENT '父级ID',
+  `level_id` tinyint(2) DEFAULT '0' COMMENT '等级',
+  `url` varchar(512) DEFAULT '' COMMENT '链接地址',
+  `icon_cls` varchar(512) DEFAULT '' COMMENT '图标',
+  `status` tinyint(4) DEFAULT '0' COMMENT '状态',
+  `sort` tinyint(4) DEFAULT '1' COMMENT '排序',
+  `code` varchar(128) DEFAULT NULL COMMENT '代码',
+  `state` varchar(16) DEFAULT NULL COMMENT '是否可展开',
+  `resource_type` varchar(16) DEFAULT NULL COMMENT '资源类型',
+  `add_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `add_user` varchar(30) DEFAULT NULL COMMENT '添加用户',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `update_user` varchar(30) DEFAULT NULL COMMENT '修改用户',
+  `remark` varchar(256) DEFAULT '' COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单表';
+
+-- ----------------------------
+-- Table structure for gjj_sys_operate
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_sys_operate`;
+CREATE TABLE `gjj_sys_operate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) DEFAULT NULL COMMENT '用户名',
+  `real_name` varchar(50) DEFAULT NULL,
+  `pwd` varchar(255) DEFAULT NULL COMMENT '密码',
+  `mobile_phone` varchar(50) DEFAULT NULL COMMENT '手机号',
+  `add_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `partner_id` int(11) DEFAULT NULL COMMENT '商户id',
+  `login_ip` varchar(255) DEFAULT NULL COMMENT '最近登录ip',
+  `login_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最近登录时间',
+  `status` int(11) DEFAULT '1' COMMENT '状态',
+  `openid` varchar(32) DEFAULT NULL COMMENT '钉钉系统用户id',
+  PRIMARY KEY (`id`),
+  KEY `sys_operate_partner` (`partner_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作员表';
+
+-- ----------------------------
+-- Table structure for gjj_sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_sys_role`;
+CREATE TABLE `gjj_sys_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL COMMENT '角色名',
+  `remark` varchar(255) DEFAULT NULL,
+  `add_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
+
+-- ----------------------------
+-- Table structure for gjj_sys_role_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_sys_role_menu`;
+CREATE TABLE `gjj_sys_role_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) DEFAULT NULL COMMENT '角色id',
+  `menu_id` int(11) DEFAULT NULL COMMENT '菜单id',
+  `add_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色菜单表';
+
+-- ----------------------------
+-- Table structure for gjj_sys_role_operate
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_sys_role_operate`;
+CREATE TABLE `gjj_sys_role_operate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `operate_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作员与角色关系表';
+DROP TABLE IF EXISTS `gjj_sys_dict`;
+CREATE TABLE `gjj_sys_dict` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` VARCHAR(50) DEFAULT NULL COMMENT '名称',
+  `nid` VARCHAR(100) DEFAULT NULL COMMENT '唯一标识',
+  `pid` INT(11) DEFAULT NULL COMMENT '父级id',
+  `value` VARCHAR(50) DEFAULT NULL COMMENT '值',
+  `type` INT(2) DEFAULT NULL COMMENT '类型  (详情见dict表basics_dict_type) ',
+  `code` VARCHAR(50) DEFAULT NULL COMMENT '代码',
+  `java_type` VARCHAR(50) DEFAULT NULL COMMENT 'java类型 (详情见dict表basics_java_type)',
+  `sort` INT(3) DEFAULT '1' COMMENT '排序',
+  `status` INT(2) DEFAULT '1' COMMENT '状态，(详情见dict表basics_use_status) ',
+  `remark` VARCHAR(255) DEFAULT NULL COMMENT '备注',
+  `add_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `relate_id` VARCHAR(100) DEFAULT '' COMMENT '关联字典id',
+  PRIMARY KEY (`id`),
+  KEY `nid` (`nid`),
+  KEY `pid` (`pid`),
+  KEY `value` (`value`)
+) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='字典表';
+
+CREATE TABLE `gjj_sys_config` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(30) DEFAULT '' COMMENT '名称',
+  `nid` varchar(50) DEFAULT '' COMMENT '标识',
+  `value` varchar(2058) DEFAULT '' COMMENT '名称对应的值',
+  `type` tinyint(4) DEFAULT NULL COMMENT '类型 1:系统底层配置信息， 2:各种费率配置信息， 3:邮件/短信配置信息， 4:附加增值功能配置信息， 5:第三方资金托管相关的配置， 6.网站汇付天下相关配置信息， 7:短信模板替换参数配置信息',
+  `status` tinyint(1) DEFAULT '0' COMMENT '状态 0:不启用 1：启用',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='系统参数表';
+
+-- ----------------------------
+-- Table structure for `gjj_sys_operate_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_sys_operate_log`;
+CREATE TABLE `gjj_sys_operate_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `trace_id` varchar(32) NOT NULL COMMENT '追踪日志id',
+  `class_name` varchar(255) DEFAULT NULL COMMENT '类名',
+  `request_url` varchar(255) NOT NULL COMMENT '请求的地址',
+  `request_param` text COMMENT '请求的参数',
+  `request_method` varchar(100) NOT NULL COMMENT '请求的方法名',
+  `response_param` text COMMENT '返回参数',
+  `operate_id` int(11) NOT NULL COMMENT '操作人ID',
+  `operate_name` varchar(20) DEFAULT NULL COMMENT '操作人姓名',
+  `add_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作员操作记录表';
+
+-- ----------------------------
+-- Table structure for `gjj_sys_event_hook`
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_sys_event_hook`;
+CREATE TABLE `gjj_sys_event_hook` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `name` varchar(32) DEFAULT NULL COMMENT '名称',
+  `service_bean` varchar(32) DEFAULT NULL COMMENT '源事件对象bean',
+  `service_method` varchar(32) DEFAULT NULL COMMENT '源事件方法',
+  `status` varchar(8) DEFAULT NULL COMMENT '状态:1启动 0禁止  字典代码:basis_status',
+  `execute_type` varchar(8) DEFAULT NULL COMMENT '执行类型  java代表执行代码 sql代表执行',
+  `execute_sql` varchar(255) DEFAULT NULL COMMENT '执行sql',
+  `execute_sql_param` varchar(255) DEFAULT NULL COMMENT '执行sql参数',
+  `execute_bean` varchar(255) DEFAULT NULL COMMENT '执行对象类',
+  `execute_method` varchar(255) DEFAULT NULL COMMENT '执行对象方法',
+  `execute_param` varchar(255) DEFAULT NULL COMMENT '执行对象参数',
+  `add_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='事件hook表';
+
+-- ----------------------------
+-- Records of gjj_sys_event_hook
+-- ----------------------------
+-- ----------------------------
+-- Table structure for gjj_notice
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_notice`;
+CREATE TABLE `gjj_notice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `nid` varchar(30) DEFAULT '',
+  `receive_user` varchar(11) DEFAULT NULL COMMENT '接收用户',
+  `status` tinyint(1) DEFAULT '0' COMMENT '状态，0：发送失败；1：发送成功',
+  `use_status` tinyint(1) DEFAULT '0' COMMENT '是否已使用 0未使用 1已使用',
+  `title` varchar(50) DEFAULT '' COMMENT '标题',
+  `content` text COMMENT '发送内容',
+  `result` varchar(1000) DEFAULT '' COMMENT '发送结果信息',
+  `add_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `code` varchar(6) DEFAULT NULL COMMENT '验证码',
+  PRIMARY KEY (`id`),
+  KEY `index_add_time` (`add_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='短信记录表';
+
+-- ----------------------------
+-- Table structure for gjj_notice_type
+-- ----------------------------
+DROP TABLE IF EXISTS `gjj_notice_type`;
+CREATE TABLE `gjj_notice_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `nid` varchar(30) NOT NULL DEFAULT '' COMMENT '编码，与notice_type组合起来唯一',
+  `name` varchar(30) DEFAULT '' COMMENT '名称',
+  `send` tinyint(1) DEFAULT '0' COMMENT '是否发送：0-不发送，1-发送',
+  `title_templet` varchar(250) DEFAULT '' COMMENT '标题的freemarker模板',
+  `templet` varchar(1024) DEFAULT '' COMMENT '内容的freemarker模板',
+  `remark` varchar(250) DEFAULT '' COMMENT '备注',
+  `add_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `add_ip` varchar(15) DEFAULT '' COMMENT '添加IP',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='短信模版表';

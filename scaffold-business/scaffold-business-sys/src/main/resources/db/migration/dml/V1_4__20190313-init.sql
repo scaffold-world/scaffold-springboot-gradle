@@ -1,0 +1,2 @@
+INSERT INTO gjj_sys_menu(`id`, `name`, `pid`, `level_id`, `url`, `icon_cls`, `status`, `sort`, `code`, `state`, `resource_type`, `add_time`, `add_user`, `update_time`, `update_user`, `remark`) VALUES (-1, '国际化管理', 7, 0, '/sys/sysI18n/sysI18nIndex', '', 1, 2, 'sys:sysI18n:sysI18nIndex', 'open', 'window', '2019-03-13 01:13:08', NULL, '2019-03-13 01:13:08', NULL, '');
+INSERT INTO gjj_sys_role_menu(`id`, `role_id`, `menu_id`, `add_time`, `update_time`) VALUES (-1, 1, -1, '2019-03-13 00:33:28', '2019-03-13 00:33:28');
