@@ -32,25 +32,25 @@
 	</where>
   </sql>
   <select id="selectById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_role where id = #{id}
+    select <include refid="sql_columns" /> from sys_role where id = #{id}
   </select>
   <select id="selectLockById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_role where id = #{id} for update
+    select <include refid="sql_columns" /> from sys_role where id = #{id} for update
   </select>
   <select id="selectOne" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_role <include refid="sql_where" />
+    select <include refid="sql_columns" /> from sys_role <include refid="sql_where" />
   </select>
   <select id="findList" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_role <include refid="sql_where" />
+    select <include refid="sql_columns" /> from sys_role <include refid="sql_where" />
   </select>
   <select id="selectMap" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_role <include refid="sql_map_where" />
+    select <include refid="sql_columns" /> from sys_role <include refid="sql_map_where" />
   </select>
   <select id="count" resultType="java.lang.Integer">
-    select count(1) from gjj_sys_role <include refid="sql_where" />
+    select count(1) from sys_role <include refid="sql_where" />
   </select>
   <sql id="sql_insert_columns">
-    insert into gjj_sys_role
+    insert into sys_role
 	 <trim prefix="(" suffix=")" suffixOverrides="," >
 	  <if test="null != item.name"> name,</if>
 	  <if test="null != item.remark"> remark,</if>
@@ -77,7 +77,7 @@
 	</foreach>
   </insert>
   <sql id="sql_update">
-    update gjj_sys_role set id = #{item.id}
+    update sys_role set id = #{item.id}
       <if test="null != item.name">, name = #{item.name}</if>
       <if test="null != item.remark">, remark = #{item.remark}</if>
       <if test="null != item.addTime">, add_time = #{item.addTime}</if>
@@ -86,7 +86,7 @@
 	where id = #{item.id}
   </sql>
   <sql id="sql_update_all">
-    update gjj_sys_role set id = #{item.id}
+    update sys_role set id = #{item.id}
 	  , name = #{item.name}
 	  , remark = #{item.remark}
 	  , add_time = #{item.addTime}
@@ -106,15 +106,15 @@
     <include refid="sql_update_all" />
   </update>
   <delete id="delArray">
-    delete from gjj_sys_role where id in
+    delete from sys_role where id in
 	<foreach collection="array" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
   <delete id="delList">
-    delete from gjj_sys_role where id in
+    delete from sys_role where id in
 	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
     <select id="listAll" resultMap="BaseResultMap" >
-        select * from gjj_sys_role   where 1=1
+        select * from sys_role   where 1=1
         <if test="null != name">and  name = #{name}</if>
         <if test="null != remark">and remark = #{remark}</if>
         <if test="null != status">and status = #{status}</if>

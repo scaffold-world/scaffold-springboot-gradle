@@ -16,10 +16,10 @@ Date: 2019-02-22 10:30:05
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for gjj_sys_dict
+-- Table structure for sys_dict
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_sys_dict`;
-CREATE TABLE `gjj_sys_dict` (
+DROP TABLE IF EXISTS `sys_dict`;
+CREATE TABLE `sys_dict` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(50) DEFAULT NULL COMMENT '名称',
   `nid` varchar(100) DEFAULT NULL COMMENT '唯一标识',
@@ -41,10 +41,10 @@ CREATE TABLE `gjj_sys_dict` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典表';
 
 -- ----------------------------
--- Table structure for gjj_sys_menu
+-- Table structure for sys_menu
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_sys_menu`;
-CREATE TABLE `gjj_sys_menu` (
+DROP TABLE IF EXISTS `sys_menu`;
+CREATE TABLE `sys_menu` (
   `id` int(8) NOT NULL AUTO_INCREMENT COMMENT '主键标示',
   `name` varchar(128) DEFAULT '' COMMENT '菜单名称',
   `pid` int(8) DEFAULT '0' COMMENT '父级ID',
@@ -65,10 +65,10 @@ CREATE TABLE `gjj_sys_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单表';
 
 -- ----------------------------
--- Table structure for gjj_sys_operate
+-- Table structure for sys_operate
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_sys_operate`;
-CREATE TABLE `gjj_sys_operate` (
+DROP TABLE IF EXISTS `sys_operate`;
+CREATE TABLE `sys_operate` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(50) DEFAULT NULL COMMENT '用户名',
   `real_name` varchar(50) DEFAULT NULL,
@@ -86,10 +86,10 @@ CREATE TABLE `gjj_sys_operate` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作员表';
 
 -- ----------------------------
--- Table structure for gjj_sys_role
+-- Table structure for sys_role
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_sys_role`;
-CREATE TABLE `gjj_sys_role` (
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL COMMENT '角色名',
   `remark` varchar(255) DEFAULT NULL,
@@ -100,10 +100,10 @@ CREATE TABLE `gjj_sys_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
--- Table structure for gjj_sys_role_menu
+-- Table structure for sys_role_menu
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_sys_role_menu`;
-CREATE TABLE `gjj_sys_role_menu` (
+DROP TABLE IF EXISTS `sys_role_menu`;
+CREATE TABLE `sys_role_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) DEFAULT NULL COMMENT '角色id',
   `menu_id` int(11) DEFAULT NULL COMMENT '菜单id',
@@ -113,17 +113,17 @@ CREATE TABLE `gjj_sys_role_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色菜单表';
 
 -- ----------------------------
--- Table structure for gjj_sys_role_operate
+-- Table structure for sys_role_operate
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_sys_role_operate`;
-CREATE TABLE `gjj_sys_role_operate` (
+DROP TABLE IF EXISTS `sys_role_operate`;
+CREATE TABLE `sys_role_operate` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `operate_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作员与角色关系表';
-DROP TABLE IF EXISTS `gjj_sys_dict`;
-CREATE TABLE `gjj_sys_dict` (
+DROP TABLE IF EXISTS `sys_dict`;
+CREATE TABLE `sys_dict` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` VARCHAR(50) DEFAULT NULL COMMENT '名称',
   `nid` VARCHAR(100) DEFAULT NULL COMMENT '唯一标识',
@@ -144,7 +144,7 @@ CREATE TABLE `gjj_sys_dict` (
   KEY `value` (`value`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='字典表';
 
-CREATE TABLE `gjj_sys_config` (
+CREATE TABLE `sys_config` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(30) DEFAULT '' COMMENT '名称',
   `nid` varchar(50) DEFAULT '' COMMENT '标识',
@@ -156,10 +156,10 @@ CREATE TABLE `gjj_sys_config` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='系统参数表';
 
 -- ----------------------------
--- Table structure for `gjj_sys_operate_log`
+-- Table structure for `sys_operate_log`
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_sys_operate_log`;
-CREATE TABLE `gjj_sys_operate_log` (
+DROP TABLE IF EXISTS `sys_operate_log`;
+CREATE TABLE `sys_operate_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `trace_id` varchar(32) NOT NULL COMMENT '追踪日志id',
   `class_name` varchar(255) DEFAULT NULL COMMENT '类名',
@@ -174,10 +174,10 @@ CREATE TABLE `gjj_sys_operate_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作员操作记录表';
 
 -- ----------------------------
--- Table structure for `gjj_sys_event_hook`
+-- Table structure for `sys_event_hook`
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_sys_event_hook`;
-CREATE TABLE `gjj_sys_event_hook` (
+DROP TABLE IF EXISTS `sys_event_hook`;
+CREATE TABLE `sys_event_hook` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `name` varchar(32) DEFAULT NULL COMMENT '名称',
   `service_bean` varchar(32) DEFAULT NULL COMMENT '源事件对象bean',
@@ -195,13 +195,13 @@ CREATE TABLE `gjj_sys_event_hook` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='事件hook表';
 
 -- ----------------------------
--- Records of gjj_sys_event_hook
+-- Records of sys_event_hook
 -- ----------------------------
 -- ----------------------------
--- Table structure for gjj_notice
+-- Table structure for notice
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_notice`;
-CREATE TABLE `gjj_notice` (
+DROP TABLE IF EXISTS `notice`;
+CREATE TABLE `notice` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `nid` varchar(30) DEFAULT '',
   `receive_user` varchar(11) DEFAULT NULL COMMENT '接收用户',
@@ -217,10 +217,10 @@ CREATE TABLE `gjj_notice` (
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='短信记录表';
 
 -- ----------------------------
--- Table structure for gjj_notice_type
+-- Table structure for notice_type
 -- ----------------------------
-DROP TABLE IF EXISTS `gjj_notice_type`;
-CREATE TABLE `gjj_notice_type` (
+DROP TABLE IF EXISTS `notice_type`;
+CREATE TABLE `notice_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `nid` varchar(30) NOT NULL DEFAULT '' COMMENT '编码，与notice_type组合起来唯一',
   `name` varchar(30) DEFAULT '' COMMENT '名称',
@@ -233,3 +233,36 @@ CREATE TABLE `gjj_notice_type` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='短信模版表';
+
+DROP TABLE IF EXISTS `job_info`;
+CREATE TABLE `job_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `job_name` varchar(50) DEFAULT NULL COMMENT '任务名称',
+  `job_group` varchar(50) DEFAULT NULL COMMENT '任务分组',
+  `job_description` varchar(50) DEFAULT NULL COMMENT '任务描述',
+  `start_withrun` smallint(2) DEFAULT '0' COMMENT '是否随着程序启动自动启动任务 0否 1是',
+  `job_status` smallint(2) DEFAULT '1' COMMENT '1正在运行 0已经停止',
+  `cron_expression` varchar(20) DEFAULT NULL COMMENT 'cron表达式',
+  `bean_class` varchar(150) DEFAULT NULL COMMENT '任务执行时调用哪个类的方法 包名+类名',
+  `spring_id` varchar(20) DEFAULT NULL COMMENT 'Spring bean 名',
+  `method_name` varchar(35) DEFAULT NULL,
+  `param_json` varchar(255) DEFAULT NULL COMMENT '方法执行需要的参数，配置为json',
+  `is_concurrent` smallint(2) DEFAULT NULL COMMENT '任务是否可以并发(一个还没完就执行下一个） 1可以 0不可以',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sys_i18n`;
+CREATE TABLE `sys_i18n` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `model` varchar(32) NOT NULL COMMENT '模块',
+  `name` varchar(64) NOT NULL COMMENT '名称',
+  `text` varchar(256) NOT NULL COMMENT '内容',
+  `zh_CH` varchar(256) DEFAULT NULL COMMENT '中文内容',
+  `en_US` varchar(256) DEFAULT NULL COMMENT '英文内容',
+  `id_ID` varchar(256) DEFAULT NULL COMMENT '印尼内容',
+  `add_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '插入时间',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='国际化翻译表';

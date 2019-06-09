@@ -5,6 +5,6 @@ import com.jiaheng.scaffold.sys.sys.domain.SysRoleOperate;
 import org.apache.ibatis.annotations.Select;
 
 public interface SysRoleOperateMapper extends BaseMapper<SysRoleOperate> {
-    @Select("select * from gjj_sys_role_operate where operate_id =#{operateId}")
+    @Select("select * from sys_role_operate where operate_id =#{operateId}")
     SysRoleOperate selectByOperateId(Long operateId);
 }

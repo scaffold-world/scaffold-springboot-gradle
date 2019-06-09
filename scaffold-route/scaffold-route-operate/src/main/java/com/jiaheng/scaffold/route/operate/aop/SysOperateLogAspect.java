@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * @Author zhangjiaheng@jianbing.com
+ * @Author zhangjiahengpoping@gmail.com
  * @Description 拦截后台操纵数据库的请求 保存日志记录
  **/
 @Aspect

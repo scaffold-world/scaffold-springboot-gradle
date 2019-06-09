@@ -9,9 +9,9 @@ import java.util.List;
 public interface SysRoleMapper extends BaseMapper<SysRole> {
     List<SysRole> listAll(SysRole sysRoleModel);
 
-    @Select("select * from gjj_sys_role where id = #{roleId}")
+    @Select("select * from sys_role where id = #{roleId}")
     SysRole queryByRoleId(Long roleId);
 
-    @Select("select * from gjj_sys_role")
+    @Select("select * from sys_role")
     List<SysRole> queryAll();
 }

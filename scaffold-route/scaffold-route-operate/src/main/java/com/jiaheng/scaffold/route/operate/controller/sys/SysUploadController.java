@@ -17,7 +17,6 @@ import java.util.Map;
 
 /**
  * @Description 文件上传
- * @Author Garvey
  * @Date 2018/11/1 19:49
  */
 @Controller

@@ -12,7 +12,7 @@ import lombok.Setter;
 */
 @Getter
 @Setter
-@TableName(name = "gjj_sys_operate_log")
+@TableName(name = "sys_operate_log")
 public class SysOperateLog extends BaseEntity {
     /** 追踪日志id**/
     private String traceId;

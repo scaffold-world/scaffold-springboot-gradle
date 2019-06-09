@@ -12,7 +12,7 @@ import lombok.Setter;
 */
 @Getter
 @Setter
-@TableName(name = "gjj_sys_i18n")
+@TableName(name = "sys_i18n")
 public class SysI18n extends BaseEntity {
     /** 模块**/
     private String model;

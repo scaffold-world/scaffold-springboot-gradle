@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 /**
- * @Author zhangjiaheng@jianbing.com
+ * @Author zhangjiahengpoping@gmail.com
  * @Description
  **/
 @Configuration
@@ -19,9 +19,9 @@ public class SchedulerConfig {
     public SchedulerFactoryBean schedulerFactory() {
         SchedulerFactoryBean bean = new SchedulerFactoryBean();
         // 用于quartz集群,QuartzScheduler 启动时更新己存在的Job
-        //bean.setOverwriteExistingJobs(true);
-        // 延时启动，应用启动1秒后
-        bean.setStartupDelay(1);
+        // bean.setOverwriteExistingJobs(true);
+        // 延时启动，应用启动10秒后
+        bean.setStartupDelay(10);
         // 注册触发器
         //bean.setTriggers(trigger);
         return bean;

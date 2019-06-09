@@ -57,7 +57,7 @@ public class DictFolderGenerateUtils {
         //String fileName = StringUtil.clearUnderlineCap(dictNid);
 
         try {
-            String sql="select * from gjj_sys_dict where  pid = 0 and type = 1 order by sort";
+            String sql="select * from sys_dict where  pid = 0 and type = 1 order by sort";
             ps=conn.prepareStatement(sql);
             //ps.setString(1,dictNid);
             rs=ps.executeQuery();//执行数据库查询的方法，放到rs中
@@ -87,7 +87,7 @@ public class DictFolderGenerateUtils {
     }
 
     private void recursion(List<SysDict> sysDictList,Connection conn,PreparedStatement ps) throws Exception{
-        String sql="select * from gjj_sys_dict where  pid =? and type = 1 order by sort";
+        String sql="select * from sys_dict where  pid =? and type = 1 order by sort";
         if(sysDictList!=null && !sysDictList.isEmpty()){
             for(SysDict tempSysDict:sysDictList){
                 if(tempSysDict.getType()==1){

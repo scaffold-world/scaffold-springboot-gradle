@@ -8,7 +8,7 @@ import java.util.Locale;
 
 /**
  * @description:
- * @author: yangdeke@jianbing.com
+ * @author: zhangjiahengpoping@gmail.com
  * @date: 2019-03-12 00:15
  **/
 public class MyLocaleResolver implements LocaleResolver {

@@ -34,19 +34,19 @@
 	</where>
   </sql>
   <select id="selectById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_config where id = #{id}
+    select <include refid="sql_columns" /> from sys_config where id = #{id}
   </select>
   <select id="selectLockById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_config where id = #{id} for update
+    select <include refid="sql_columns" /> from sys_config where id = #{id} for update
   </select>
   <select id="selectOne" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_config <include refid="sql_where" />
+    select <include refid="sql_columns" /> from sys_config <include refid="sql_where" />
   </select>
   <select id="count">
-    select count(1) from gjj_sys_config <include refid="sql_where" />
+    select count(1) from sys_config <include refid="sql_where" />
   </select>
   <sql id="sql_insert_columns">
-    insert into gjj_sys_config
+    insert into sys_config
 	 <trim prefix="(" suffix=")" suffixOverrides="," >
 	  <if test="null != item.name"> name,</if>
 	  <if test="null != item.nid"> nid,</if>
@@ -75,7 +75,7 @@
 	</foreach>
   </insert>
   <sql id="sql_update">
-    update gjj_sys_config set id = #{item.id}
+    update sys_config set id = #{item.id}
       <if test="null != item.name">, name = #{item.name}</if>
       <if test="null != item.nid">, nid = #{item.nid}</if>
       <if test="null != item.value">, value = #{item.value}</if>
@@ -85,7 +85,7 @@
 	where id = #{item.id}
   </sql>
   <sql id="sql_update_all">
-    update gjj_sys_config set id = #{item.id}
+    update sys_config set id = #{item.id}
 	  , name = #{item.name}
 	  , nid = #{item.nid}
 	  , value = #{item.value}
@@ -106,11 +106,11 @@
     <include refid="sql_update_all" />
   </update>
   <delete id="delArray">
-    delete from gjj_sys_config where id in
+    delete from sys_config where id in
 	<foreach collection="array" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
   <delete id="delList">
-    delete from gjj_sys_config where id in
+    delete from sys_config where id in
 	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
 </mapper>

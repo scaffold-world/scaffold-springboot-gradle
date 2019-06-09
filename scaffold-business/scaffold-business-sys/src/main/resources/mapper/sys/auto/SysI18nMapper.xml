@@ -43,28 +43,28 @@
 	</where>
   </sql>
   <select id="selectById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_i18n where id = #{id}
+    select <include refid="sql_columns" /> from sys_i18n where id = #{id}
   </select>
   <select id="selectCacheById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_i18n where id = #{id}
+    select <include refid="sql_columns" /> from sys_i18n where id = #{id}
   </select>
   <select id="selectLockById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_i18n where id = #{id} for update
+    select <include refid="sql_columns" /> from sys_i18n where id = #{id} for update
   </select>
   <select id="selectOne" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_i18n <include refid="sql_where" />
+    select <include refid="sql_columns" /> from sys_i18n <include refid="sql_where" />
   </select>
   <select id="findList" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_i18n <include refid="sql_where" />
+    select <include refid="sql_columns" /> from sys_i18n <include refid="sql_where" />
   </select>
   <select id="selectMap" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_i18n <include refid="sql_map_where" />
+    select <include refid="sql_columns" /> from sys_i18n <include refid="sql_map_where" />
   </select>
   <select id="count" resultType="java.lang.Integer">
-    select count(1) from gjj_sys_i18n <include refid="sql_where" />
+    select count(1) from sys_i18n <include refid="sql_where" />
   </select>
   <sql id="sql_insert_columns">
-    insert into gjj_sys_i18n
+    insert into sys_i18n
 	 <trim prefix="(" suffix=")" suffixOverrides="," >
 	  <if test="null != item.model"> model,</if>
 	  <if test="null != item.name"> name,</if>
@@ -97,7 +97,7 @@
 	</foreach>
   </insert>
   <sql id="sql_update">
-    update gjj_sys_i18n set id = #{item.id}
+    update sys_i18n set id = #{item.id}
       <if test="null != item.id">, id = #{item.id}</if>
       <if test="null != item.model">, model = #{item.model}</if>
       <if test="null != item.name">, name = #{item.name}</if>
@@ -110,7 +110,7 @@
 	where id = #{item.id}
   </sql>
   <sql id="sql_update_all">
-    update gjj_sys_i18n set id = #{item.id}
+    update sys_i18n set id = #{item.id}
 	  , id = #{item.id}
 	  , model = #{item.model}
 	  , name = #{item.name}
@@ -135,11 +135,11 @@
   </update>
   <update id="updateCompare" />
   <delete id="delArray">
-    delete from gjj_sys_i18n where id in
+    delete from sys_i18n where id in
 	<foreach collection="array" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
   <delete id="delList">
-    delete from gjj_sys_i18n where id in
+    delete from sys_i18n where id in
 	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
 </mapper>

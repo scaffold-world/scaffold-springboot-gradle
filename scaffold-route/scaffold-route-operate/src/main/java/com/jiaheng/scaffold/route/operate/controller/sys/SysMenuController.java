@@ -72,21 +72,22 @@ public class SysMenuController extends BaseController {
      * @return
      */
     @RequestMapping("/sysMenuEdit")
-    public String sysMenuEdit(Model model, SysMenuReq sysMenu) {
-        SysMenuResp tempSysMenu = null;
-
-        if (sysMenu.getId() == null) {
-            tempSysMenu = Builder.build(sysMenu,SysMenuResp.class);
-        } else {
-            tempSysMenu =  Builder.build(sysMenuService.selectById(sysMenu.getId()), SysMenuResp.class);
-        }
-        model.addAttribute("sysMenu", tempSysMenu);
-
+    public String sysMenuEdit(Model model, Long id) {
+        SysMenuBO menu = sysMenuService.selectById(id);
+        model.addAttribute("sysMenu", menu);
         shiroService.updatePermission();
-
-
-
         return ftlPath + "sysMenuEdit";
+    }
+
+    /**
+     * 根据ID 递归删除菜单
+     * @param id 要删除的菜单ID
+     */
+    @ResponseBody
+    @RequestMapping("/deleteMenusById")
+    public ResponseModel deleteMenusById(Long id){
+        sysMenuService.deleteMenusById(id);
+        return doneSuccess();
     }
 
     /**
@@ -102,7 +103,7 @@ public class SysMenuController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
 
 
-        SysOperate sysOperate =(SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
+        SysOperate sysOperate = (SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
 
         shiroService.updatePermission();
 
@@ -139,6 +140,7 @@ public class SysMenuController extends BaseController {
 
     /**
      * 用户授权菜单展示
+     *
      * @param model
      * @param pid
      * @return
@@ -151,51 +153,49 @@ public class SysMenuController extends BaseController {
 
         SysOperate sysOperate = (SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
 
-        List<SysMenuBO> list = sysMenuService.findByPidAndId(pid,sysOperate.getId());
+        List<SysMenuBO> list = sysMenuService.findByPidAndId(pid, sysOperate.getId());
 
 
-        return Builder.buildList(list,SysMenuResp.class);
+        return Builder.buildList(list, SysMenuResp.class);
 
     }
 
     /**
      * 查找全部菜单
+     *
      * @param roleId
      * @return
      */
     @RequestMapping(value = "/allMenus")
     @ResponseBody
-    public List<SysMenuResp> allMenus(Long id,Long roleId) {
-        logger.info("allMenus id:{},ruleId:{}",id,roleId);
-        if(id ==null){
+    public List<SysMenuResp> allMenus(Long id, Long roleId) {
+        logger.info("allMenus id:{},ruleId:{}", id, roleId);
+        if (id == null) {
             id = 0L;
         }
-        List<SysMenuResp> list=new ArrayList<>();
+        List<SysMenuResp> list = new ArrayList<>();
         List<SysMenuBO> voList = sysMenuService.findByPid(id);
 
-        List<SysMenuResp> sysMenuRespList = Builder.buildList(voList,SysMenuResp.class);
-        logger.info("allMenus size:",list.size());
-        if(roleId == null){
+        List<SysMenuResp> sysMenuRespList = Builder.buildList(voList, SysMenuResp.class);
+        logger.info("allMenus size:", list.size());
+        if (roleId == null) {
             list = new ArrayList<>();
             return list;
         }
 
         SysRole sysRole = sysRoleService.findById(roleId);
 
-        for(SysMenuResp sysMenu :sysMenuRespList){
-            SysRoleMenuBO sysRoleMenu= sysRoleMenuService.selectByRoleIdAndMenuId(sysRole.getId(),sysMenu.getId());
-            if(sysRoleMenu!=null){
+        for (SysMenuResp sysMenu : sysMenuRespList) {
+            SysRoleMenuBO sysRoleMenu = sysRoleMenuService.selectByRoleIdAndMenuId(sysRole.getId(), sysMenu.getId());
+            if (sysRoleMenu != null) {
                 sysMenu.setAutoStatus(SysConstant.MENU_STATUS_OPEN);
-            }else{
+            } else {
                 sysMenu.setAutoStatus(SysConstant.MENU_STATUS_COLOSE);
             }
         }
 
         return sysMenuRespList;
     }
-
-
-
 
 
 }

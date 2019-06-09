@@ -11,7 +11,7 @@ import org.quartz.JobExecutionContext;
  */
 public class AbstractTaskExecutor implements Job {
 
-    public static Class getExecutorClazz(boolean flag) {
+    public static Class<? extends Job> getExecutorClazz(boolean flag) {
         return flag ? TaskAllowConcurrentExecutor.class : TaskDisallowConcurrentExecutor.class;
     }
 

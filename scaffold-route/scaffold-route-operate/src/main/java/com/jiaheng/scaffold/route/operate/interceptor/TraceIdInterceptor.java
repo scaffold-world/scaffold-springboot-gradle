@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @description:全局日志traceId拦截器
- * @author: yangdeke@jianbing.com
+ * @author: zhangjiahengpoping@gmail.com
  * @date: 2019-02-26 23:28
  **/
 public class TraceIdInterceptor extends HandlerInterceptorAdapter {

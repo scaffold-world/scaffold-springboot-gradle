@@ -3,7 +3,7 @@ package com.jiaheng.scaffold.sys.sys.domain;
 import com.jiaheng.scaffold.common.base.BaseEntity;
 
 /**
- * @Author zhangjiaheng@jianbing.com
+ * @Author zhangjiahengpoping@gmail.com
  * @Description
  **/
 public class SysRoleMenu extends BaseEntity {

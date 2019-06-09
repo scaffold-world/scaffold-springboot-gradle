@@ -1,7 +1,7 @@
 /**
  * @Title: CacheConstant.java
  * @Package com.jiaheng.scaffold.p2p.common.constant
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-6-28
  */
 package com.jiaheng.scaffold.common.constant_manual;
@@ -9,7 +9,7 @@ package com.jiaheng.scaffold.common.constant_manual;
 /**
  * 缓存常量类
  *
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-6-28
  */
 public class RedisConstant {

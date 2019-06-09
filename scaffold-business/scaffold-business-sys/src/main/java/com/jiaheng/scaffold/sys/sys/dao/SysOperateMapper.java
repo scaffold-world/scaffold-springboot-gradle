@@ -17,7 +17,7 @@ public interface SysOperateMapper  extends BaseMapper<SysOperate> {
 
     void saveOperate(SysOperate sysOperate);
 
-    @Select("select * from gjj_sys_operate where id=#{id}")
+    @Select("select * from sys_operate where id=#{id}")
     SysOperate findById(Long id);
 
     void updateSysOperate(SysOperate sysOperate);
@@ -27,7 +27,7 @@ public interface SysOperateMapper  extends BaseMapper<SysOperate> {
      * @param id
      * @param openid
      */
-    @Update("update gjj_sys_operate set openid = #{openid} where id = #{id}")
+    @Update("update sys_operate set openid = #{openid} where id = #{id}")
     void updateOpenidById(@Param("id") Long id, @Param("openid") String openid);
 
     List<SysOperate> findByIds(@Param("ids")List<Long> ids);

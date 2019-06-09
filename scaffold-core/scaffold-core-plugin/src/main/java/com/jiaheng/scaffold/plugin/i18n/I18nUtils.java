@@ -55,7 +55,7 @@ public class I18nUtils {
         List<Message> enList = new ArrayList<>();
         List<Message> idList = new ArrayList<>();
         try {
-            String sql="select * from gjj_sys_i18n";
+            String sql="select * from sys_i18n";
             ps=conn.prepareStatement(sql);
             rs=ps.executeQuery();//执行数据库查询的方法，放到rs中
             list = ResultSetUtils.convertToList(rs,I18n.class);

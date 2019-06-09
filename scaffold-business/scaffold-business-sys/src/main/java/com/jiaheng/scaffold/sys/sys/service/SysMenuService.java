@@ -54,4 +54,11 @@ public interface SysMenuService extends BaseServiceInterface<SysMenuAO, SysMenuB
      * @param name
      */
     List<SysMenuBO> findAllMenus(String name);
+
+    /**
+     * 根据ID 递归删除
+     * @param id
+     * @return
+     */
+    Integer deleteMenusById(Long id);
 }

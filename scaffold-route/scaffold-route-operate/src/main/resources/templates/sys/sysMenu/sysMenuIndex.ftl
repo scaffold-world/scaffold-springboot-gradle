@@ -8,6 +8,11 @@
 <body>
 <div class="weadmin-nav">
     <div class="dHead">
+        <span class="layui-breadcrumb">
+        <a href="javascript:void(0)">权限配置</a>
+        <a href="javascript:void(0)">资源管理</a>
+        <#--<a><cite>资源管理</cite></a>-->
+      </span>
         <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float: right"
            href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">&#x1002;</i></a>
     </div>
@@ -17,10 +22,14 @@
         <div class="layui-inline">
             <input type="text" name="name" placeholder="请输入资源名" id="menu-name" autocomplete="off" class="layui-input">
         </div>
-        <button class="layui-btn" onclick="query()"><i class="layui-icon">&#xe615;</i></button>
-        <button class="layui-btn" onclick="addMenuDialog('添加菜单',_ctx + '/sys/sysMenu/sysMenuEdit?id=',750,480)"><i
-                class="layui-icon"></i> 新增
-        </button>
+        <div class="layui-btn-group">
+            <button class="layui-btn" onclick="query()"><i class="layui-icon">&#xe615;</i></button>
+            <button class="layui-btn" onclick="addMenuDialog('添加菜单',_ctx + '/sys/sysMenu/sysMenuEdit?id=',750,480)"><i
+                        class="layui-icon"></i> 新增
+            </button>
+            <button class="layui-btn layui-btn-warm" onclick="openAll()"> 展开全部
+            </button>
+        </div>
     </div>
     <div style="height: 100%">
         <div class="dBody">
@@ -61,7 +70,8 @@
                 , {
                     field: 'resourceType',
                     width: 100,
-                    title: '资源类别', <@th type="templet" nid="basics_sys_menu" fieldName="resourceType"></@th>}
+                    title: '资源类别', <@th type="templet" nid="basics_sys_menu" fieldName="resourceType"></@th>
+                }
                 , {field: 'url', width: 200, title: '链接地址'}
                 , {field: 'sort', width: 80, title: '排序'}
                 , {field: 'code', width: 200, title: '代码'}
@@ -76,7 +86,7 @@
                 }
                 , {
                     width: 100, title: '操作', align: 'center', templet: function (d) {
-                        var html = '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="add">编辑</a>';
+                        var html = '<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>';
                         html += '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
                         return html;
                     }
@@ -96,11 +106,10 @@
         });
 
         treeGrid.on('tool(' + tableId + ')', function (obj) {
-            console.log(obj);
             if (obj.event === 'del') {//删除行
                 del(obj);
-            } else if (obj.event === "add") {//添加行
-                add(obj);
+            } else if (obj.event === "edit") {//编辑行
+                WeAdminShow("编辑菜单", _ctx + "/sys/sysMenu/sysMenuEdit?id=" + obj.data.id, 750, 480);
             }
         });
 
@@ -113,6 +122,9 @@
 
         window.addMenuDialog = function (title, url, width, height) {
             var data = treeGrid.radioStatus(tableId);
+            if(data.resourceType === ""){
+
+            }
             if (data.id) {
                 WeAdminShow(title, url + data.id, width, height);
             } else {
@@ -126,12 +138,28 @@
 
     function del(obj) {
         layer.confirm("你确定删除数据吗？如果存在下级节点则一并删除，此操作不能撤销！", {icon: 3, title: '提示'},
-                function (index) {//确定回调
-                    obj.del();
-                    layer.close(index);
-                }, function (index) {//取消回调
-                    layer.close(index);
-                }
+            function (index) {//确定回调
+                var id = obj.data.id;
+                $.ajax({
+                    url: _ctx + "/sys/sysMenu/deleteMenusById",
+                    data: {
+                        id: id
+                    },
+                    success: function (data) {
+                        if(data.code === 0){
+                            obj.del();
+                            layer.close(index);
+                        }else{
+                            layer.msg(data.msg, {
+                                icon: 1,
+                                time: 1000
+                            });
+                        }
+                    }
+                });
+            }, function (index) {//取消回调
+                layer.close(index);
+            }
         );
     }
 
@@ -162,7 +190,7 @@
 
     function getCheckData() {
         var checkStatus = treeGrid.checkStatus(tableId)
-                , data = checkStatus.data;
+            , data = checkStatus.data;
         layer.alert(JSON.stringify(data));
     }
 
@@ -173,7 +201,7 @@
 
     function getCheckLength() {
         var checkStatus = treeGrid.checkStatus(tableId)
-                , data = checkStatus.data;
+            , data = checkStatus.data;
         layer.msg('选中了：' + data.length + ' 个');
     }
 

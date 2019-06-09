@@ -6,7 +6,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  * @description: 线程池配置
- * @author: yangdeke@jianbing.com
+ * @author: zhangjiahengpoping@gmail.com
  * @date: 2019-02-24 15:57
  **/
 @Configuration

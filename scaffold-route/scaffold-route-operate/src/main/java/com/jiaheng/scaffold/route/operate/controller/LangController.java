@@ -12,7 +12,7 @@ import java.util.Locale;
 
 /**
  * @description: 语言切换Controller
- * @author: yangdeke@jianbing.com
+ * @author: zhangjiahengpoping@gmail.com
  * @date: 2019-03-12 17:17
  **/
 @RestController

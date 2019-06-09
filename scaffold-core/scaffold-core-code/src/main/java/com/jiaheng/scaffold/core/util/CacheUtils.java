@@ -2,7 +2,7 @@
  * @Title: CacheUtils.java
  * @Package com.jiaheng.scaffold.p2p.core.core.util
  * 
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-6-29
  */
 package com.jiaheng.scaffold.core.util;
@@ -22,7 +22,7 @@ import java.util.Set;
 /**
  * 通用缓存工具类
  * 
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-6-29
  */
 public class CacheUtils {
@@ -581,7 +581,7 @@ public class CacheUtils {
 	 * 当 key 不存在时，返回 -2 。 当 key 存在但没有设置剩余生存时间时，返回 -1 。 否则，以秒为单位，返回 key 的剩余生存时间。
 	 * @param key
 	 * @return   
-	 * @author yangdeke@jianbing.com
+	 * @author zhangjiahengpoping@gmail.com
 	 * @date 2017-9-26
 	 */
 	public static Long ttl(String key){

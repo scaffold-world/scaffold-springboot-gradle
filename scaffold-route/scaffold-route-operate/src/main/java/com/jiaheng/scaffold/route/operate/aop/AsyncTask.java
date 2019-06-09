@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * @Author zhangjiaheng@jianbing.com
+ * @Author zhangjiahengpoping@gmail.com
  * @Description 异步执行任务类
  **/
 @Component

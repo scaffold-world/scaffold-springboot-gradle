@@ -393,7 +393,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
      * @param d
      * @param hour
      * @return
-     * @author yangdeke@jianbing.com
+     * @author zhangjiahengpoping@gmail.com
      * @date 2017-9-20
      */
     public static Date rollHour(Date d,int hour){

@@ -15,6 +15,7 @@ import com.jiaheng.scaffold.common.asserts.Assert;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenuAO, SysMenuBO, SysMenu> implements SysMenuService {
@@ -69,6 +70,16 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenuAO
         return Builder.buildList(dao.findList(menu),SysMenuBO.class);
     }
 
+    @Override
+    public Integer deleteMenusById(Long id) {
+        List<SysMenu> list = dao.findByPid(id);
+        List<Long> listIds = list.stream().map(SysMenu::getId).collect(Collectors.toList());
+        for (Long cId : listIds) {
+            deleteMenusById(cId);
+        }
+        return dao.deleteById(id) + listIds.size();
+    }
+
 
     @Override
     public void save(SysMenuAO sysMenuAO) {
@@ -95,7 +106,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenuAO
         } else {
             SysMenu tempSysMenu = dao.selectById(sysMenu.getId());
             if (!tempSysMenu.getPid().equals( sysMenu.getPid())) {
-                throw new BusinessException(BaseResultCodeEnum.MERCH_SYS_MENU_PID_NOT_CHANGE);
+                throw new BusinessException(BaseResultCodeEnum.FAIL);
             }
 
             BeanUtils.copyPropertiesByList(sysMenu, tempSysMenu, new String[]{

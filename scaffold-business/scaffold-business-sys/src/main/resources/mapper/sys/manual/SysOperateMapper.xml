@@ -5,7 +5,7 @@
 
     <select id="queryAllOperate" resultMap="BaseResultMap">
 
-        select * from gjj_sys_operate
+        select * from sys_operate
         <where>
             <if test="null!=userName">and user_name like concat('%',#{userName},'%')</if>
 
@@ -16,7 +16,7 @@
     </select>
 
     <insert id="saveOperate">
-        insert into gjj_sys_operate
+        insert into sys_operate
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="null != userName">user_name,</if>
             <if test="null != pwd">pwd,</if>
@@ -41,7 +41,7 @@
 
 
     <update id="updateSysOperate">
-        update gjj_sys_operate set id = #{id}
+        update sys_operate set id = #{id}
         <if test="null != userName">,user_name = #{userName}</if>
         <if test="null != pwd">, pwd = #{pwd}</if>
         <if test="null != addTime">, add_time = #{addTime}</if>
@@ -54,11 +54,11 @@
     </update>
 
     <select id="findByUserName" resultMap="BaseResultMap">
-        select * from gjj_sys_operate where user_name=#{userName}
+        select * from sys_operate where user_name=#{userName}
     </select>
 
     <select id="findByIds" resultMap="BaseResultMap">
-        select * from gjj_sys_operate
+        select * from sys_operate
         <where>
             <if test="null != ids and ids.size>0">
                 id in

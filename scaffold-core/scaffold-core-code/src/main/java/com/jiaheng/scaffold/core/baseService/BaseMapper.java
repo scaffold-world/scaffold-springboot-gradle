@@ -2,7 +2,7 @@
  * @Title: BaseMapper.java
  * @Package com.jiaheng.scaffold.common.mapper
  * TODO
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-6-27
  */
 package com.jiaheng.scaffold.core.baseService;
@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * mapper的基类
  * 
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-6-27
  */
 public interface BaseMapper<T> {

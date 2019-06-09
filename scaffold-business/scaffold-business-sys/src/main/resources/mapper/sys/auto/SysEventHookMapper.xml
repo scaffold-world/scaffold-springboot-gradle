@@ -51,28 +51,28 @@
 	</where>
   </sql>
   <select id="selectById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_event_hook where id = #{id}
+    select <include refid="sql_columns" /> from sys_event_hook where id = #{id}
   </select>
   <select id="selectCacheById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_event_hook where id = #{id}
+    select <include refid="sql_columns" /> from sys_event_hook where id = #{id}
   </select>
   <select id="selectLockById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_event_hook where id = #{id} for update
+    select <include refid="sql_columns" /> from sys_event_hook where id = #{id} for update
   </select>
   <select id="selectOne" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_event_hook <include refid="sql_where" />
+    select <include refid="sql_columns" /> from sys_event_hook <include refid="sql_where" />
   </select>
   <select id="findList" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_event_hook <include refid="sql_where" />
+    select <include refid="sql_columns" /> from sys_event_hook <include refid="sql_where" />
   </select>
   <select id="selectMap" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_event_hook <include refid="sql_map_where" />
+    select <include refid="sql_columns" /> from sys_event_hook <include refid="sql_map_where" />
   </select>
   <select id="count" resultType="java.lang.Integer">
-    select count(1) from gjj_sys_event_hook <include refid="sql_where" />
+    select count(1) from sys_event_hook <include refid="sql_where" />
   </select>
   <sql id="sql_insert_columns">
-    insert into gjj_sys_event_hook
+    insert into sys_event_hook
 	 <trim prefix="(" suffix=")" suffixOverrides=",">
 	  <if test="null != item.name"> name,</if>
 	  <if test="null != item.serviceBean"> service_bean,</if>
@@ -113,7 +113,7 @@
 	</foreach>
   </insert>
   <sql id="sql_update">
-    update gjj_sys_event_hook set id = #{item.id}
+    update sys_event_hook set id = #{item.id}
       <if test="null != item.name">, name = #{item.name}</if>
       <if test="null != item.serviceBean">, service_bean = #{item.serviceBean}</if>
       <if test="null != item.serviceMethod">, service_method = #{item.serviceMethod}</if>
@@ -129,7 +129,7 @@
 	where id = #{item.id}
   </sql>
   <sql id="sql_update_all">
-    update gjj_sys_event_hook set id = #{item.id}
+    update sys_event_hook set id = #{item.id}
 	  , name = #{item.name}
 	  , service_bean = #{item.serviceBean}
 	  , service_method = #{item.serviceMethod}
@@ -156,11 +156,11 @@
     <include refid="sql_update_all" />
   </update>
   <delete id="delArray">
-    delete from gjj_sys_event_hook where id in
+    delete from sys_event_hook where id in
 	<foreach close=")" collection="array" index="index" item="item" open="(" separator=",">#{item}</foreach>
   </delete>
   <delete id="delList">
-    delete from gjj_sys_event_hook where id in
+    delete from sys_event_hook where id in
 	<foreach close=")" collection="list" index="index" item="item" open="(" separator=",">#{item}</foreach>
   </delete>
 </mapper>

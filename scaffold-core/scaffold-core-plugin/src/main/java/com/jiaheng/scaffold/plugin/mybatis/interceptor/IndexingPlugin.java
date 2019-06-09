@@ -2,7 +2,7 @@
  * @Title: IndexingPlugin.java
  * @Package com.jiaheng.scaffold.mybatis.interceptor
  * 
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-8-9
  */
 package com.jiaheng.scaffold.plugin.mybatis.interceptor;
@@ -32,7 +32,7 @@ import java.util.Properties;
 
 /**
  * MySQL查询语句性能分析功能:检测索引是否存在
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-8-9
  */
 @Intercepts({ @Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class,

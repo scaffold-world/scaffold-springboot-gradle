@@ -1083,7 +1083,7 @@ public class JedisUtils {
 	 * 	当 key 不存在时，返回 -2 。 当 key 存在但没有设置剩余生存时间时，返回 -1 。 否则，以秒为单位，返回 key 的剩余生存时间。
 	 * @param key
 	 * @return   
-	 * @author yangdeke@jianbing.com
+	 * @author zhangjiahengpoping@gmail.com
 	 * @date 2017-9-26
 	 */
 	public static long ttl(String key){

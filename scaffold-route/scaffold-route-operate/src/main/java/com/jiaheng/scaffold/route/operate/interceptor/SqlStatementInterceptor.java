@@ -14,7 +14,7 @@ import java.util.Properties;
 
 /**
  * @description:
- * @author: yangdeke@jianbing.com
+ * @author: zhangjiahengpoping@gmail.com
  * @date: 2019-02-27 11:21
  **/
 @Intercepts({@Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
@@ -49,7 +49,7 @@ public class SqlStatementInterceptor implements Interceptor{
 //                for(Object obj:map.values()){
 //                    if(obj instanceof BaseEntity){
 //                        BaseEntity entity = (BaseEntity)obj;
-//                        entity.setTableName("gjj_test_table");
+//                        entity.setTableName("test_table");
 //                    }
 //                }
 //            }

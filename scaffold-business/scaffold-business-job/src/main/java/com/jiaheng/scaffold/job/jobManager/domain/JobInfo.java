@@ -14,7 +14,7 @@ import java.util.Date;
 */
 @Getter
 @Setter
-@TableName(name = "gjj_job_info")
+@TableName(name = "job_info")
 public class JobInfo extends BaseEntity {
     /** 任务名称**/
     private String jobName;

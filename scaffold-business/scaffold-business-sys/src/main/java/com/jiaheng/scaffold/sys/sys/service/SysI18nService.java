@@ -7,7 +7,7 @@ import com.jiaheng.scaffold.sys.sys.bo.SysI18nBO;
 
 /**
  * @description:
- * @author: yangdeke@jianbing.com
+ * @author: zhangjiahengpoping@gmail.com
  * @date: 2019-03-12 19:05
  **/
 public interface SysI18nService extends BaseServiceInterface<SysI18nAO, SysI18nBO>{

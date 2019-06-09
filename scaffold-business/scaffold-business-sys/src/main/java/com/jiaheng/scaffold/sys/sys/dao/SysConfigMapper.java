@@ -12,6 +12,6 @@ public interface SysConfigMapper extends BaseMapper<SysConfig> {
      * 查询开启状态下的配置
      * @return
      */
-    @Select("select * from gjj_sys_config where status =1")
+    @Select("select * from sys_config where status =1")
     List<SysConfig> findListByStatus();
 }

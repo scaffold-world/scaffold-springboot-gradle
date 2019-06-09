@@ -51,28 +51,28 @@
 	</where>
   </sql>
   <select id="selectById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_job_info where id = #{id}
+    select <include refid="sql_columns" /> from job_info where id = #{id}
   </select>
   <select id="selectCacheById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_job_info where id = #{id}
+    select <include refid="sql_columns" /> from job_info where id = #{id}
   </select>
   <select id="selectLockById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_job_info where id = #{id} for update
+    select <include refid="sql_columns" /> from job_info where id = #{id} for update
   </select>
   <select id="selectOne" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_job_info <include refid="sql_where" />
+    select <include refid="sql_columns" /> from job_info <include refid="sql_where" />
   </select>
   <select id="findList" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_job_info <include refid="sql_where" />
+    select <include refid="sql_columns" /> from job_info <include refid="sql_where" />
   </select>
   <select id="selectMap" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_job_info <include refid="sql_map_where" />
+    select <include refid="sql_columns" /> from job_info <include refid="sql_map_where" />
   </select>
   <select id="count" resultType="java.lang.Integer">
-    select count(1) from gjj_job_info <include refid="sql_where" />
+    select count(1) from job_info <include refid="sql_where" />
   </select>
   <sql id="sql_insert_columns">
-    insert into gjj_job_info
+    insert into job_info
 	 <trim prefix="(" suffix=")" suffixOverrides="," >
 	  <if test="null != item.jobName"> job_name,</if>
 	  <if test="null != item.jobGroup"> job_group,</if>
@@ -113,7 +113,7 @@
 	</foreach>
   </insert>
   <sql id="sql_update">
-    update gjj_job_info set id = #{item.id}
+    update job_info set id = #{item.id}
       <if test="null != item.jobName">, job_name = #{item.jobName}</if>
       <if test="null != item.jobGroup">, job_group = #{item.jobGroup}</if>
       <if test="null != item.jobDescription">, job_description = #{item.jobDescription}</if>
@@ -129,7 +129,7 @@
 	where id = #{item.id}
   </sql>
   <sql id="sql_update_all">
-    update gjj_job_info set id = #{item.id}
+    update job_info set id = #{item.id}
 	  , job_name = #{item.jobName}
 	  , job_group = #{item.jobGroup}
 	  , job_description = #{item.jobDescription}
@@ -156,11 +156,11 @@
     <include refid="sql_update_all" />
   </update>
   <delete id="delArray">
-    delete from gjj_job_info where id in
+    delete from job_info where id in
 	<foreach collection="array" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
   <delete id="delList">
-    delete from gjj_job_info where id in
+    delete from job_info where id in
 	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
 </mapper>

@@ -45,28 +45,28 @@
 	</where>
   </sql>
   <select id="selectById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_operate_log where id = #{id}
+    select <include refid="sql_columns" /> from sys_operate_log where id = #{id}
   </select>
   <select id="selectCacheById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_operate_log where id = #{id}
+    select <include refid="sql_columns" /> from sys_operate_log where id = #{id}
   </select>
   <select id="selectLockById" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_operate_log where id = #{id} for update
+    select <include refid="sql_columns" /> from sys_operate_log where id = #{id} for update
   </select>
   <select id="selectOne" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_operate_log <include refid="sql_where" />
+    select <include refid="sql_columns" /> from sys_operate_log <include refid="sql_where" />
   </select>
   <select id="findList" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_operate_log <include refid="sql_where" />
+    select <include refid="sql_columns" /> from sys_operate_log <include refid="sql_where" />
   </select>
   <select id="selectMap" resultMap="BaseResultMap">
-    select <include refid="sql_columns" /> from gjj_sys_operate_log <include refid="sql_map_where" />
+    select <include refid="sql_columns" /> from sys_operate_log <include refid="sql_map_where" />
   </select>
   <select id="count" resultType="java.lang.Integer">
-    select count(1) from gjj_sys_operate_log <include refid="sql_where" />
+    select count(1) from sys_operate_log <include refid="sql_where" />
   </select>
   <sql id="sql_insert_columns">
-    insert into gjj_sys_operate_log
+    insert into sys_operate_log
 	 <trim prefix="(" suffix=")" suffixOverrides="," >
 	  <if test="null != item.traceId"> trace_id,</if>
 	  <if test="null != item.className"> class_name,</if>
@@ -101,7 +101,7 @@
 	</foreach>
   </insert>
   <sql id="sql_update">
-    update gjj_sys_operate_log set id = #{item.id}
+    update sys_operate_log set id = #{item.id}
       <if test="null != item.traceId">, trace_id = #{item.traceId}</if>
       <if test="null != item.className">, class_name = #{item.className}</if>
       <if test="null != item.requestUrl">, request_url = #{item.requestUrl}</if>
@@ -114,7 +114,7 @@
 	where id = #{item.id}
   </sql>
   <sql id="sql_update_all">
-    update gjj_sys_operate_log set id = #{item.id}
+    update sys_operate_log set id = #{item.id}
 	  , trace_id = #{item.traceId}
 	  , class_name = #{item.className}
 	  , request_url = #{item.requestUrl}
@@ -139,11 +139,11 @@
   </update>
   <update id="updateCompare" />
   <delete id="delArray">
-    delete from gjj_sys_operate_log where id in
+    delete from sys_operate_log where id in
 	<foreach collection="array" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
   <delete id="delList">
-    delete from gjj_sys_operate_log where id in
+    delete from sys_operate_log where id in
 	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
   </delete>
 </mapper>

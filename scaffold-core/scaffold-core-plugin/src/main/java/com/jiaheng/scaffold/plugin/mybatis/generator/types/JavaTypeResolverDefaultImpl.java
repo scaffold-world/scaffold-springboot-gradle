@@ -2,7 +2,7 @@
  * @Title: JavaTypeResolverDefaultImpl.java
  * @Package com.jiaheng.scaffold.mybatis.generator.types
  * 
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-7-29
  */
 package com.jiaheng.scaffold.plugin.mybatis.generator.types;
@@ -20,7 +20,7 @@ import java.util.*;
 
 /**
  * 
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-7-29
  */
 public class JavaTypeResolverDefaultImpl implements JavaTypeResolver {
@@ -190,7 +190,7 @@ public class JavaTypeResolverDefaultImpl implements JavaTypeResolver {
      * @param column
      * @param defaultType
      * @return   
-     * @author yangdeke@jianbing.com
+     * @author zhangjiahengpoping@gmail.com
      * @date 2017-7-29
      */
     protected FullyQualifiedJavaType calculateBitIntegerReplacement(IntrospectedColumn column, FullyQualifiedJavaType defaultType) {

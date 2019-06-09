@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 
 /**
  * @description: 国际化Controller
- * @author: yangdeke@jianbing.com
+ * @author: zhangjiahengpoping@gmail.com
  * @date: 2019-03-12 17:50
  **/
 @Controller

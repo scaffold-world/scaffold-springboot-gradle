@@ -53,7 +53,7 @@ public class GJJTableConstantGenerateUtils {
         String fileName = StringUtil.clearUnderlineCap(dictNid);
 
         try {
-            String sql="select * from gjj_"+dictNid+" group by nid";
+            String sql="select * from "+dictNid+" group by nid";
             ps=conn.prepareStatement(sql);
             // ps.setString(1,dictNid);
             rs=ps.executeQuery();//执行数据库查询的方法，放到rs中

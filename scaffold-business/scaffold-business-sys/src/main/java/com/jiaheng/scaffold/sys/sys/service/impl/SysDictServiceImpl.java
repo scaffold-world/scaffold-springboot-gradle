@@ -57,7 +57,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<SysDictMapper,SysDictAO,
      */
     @Override
     public List<SysDictBO> findByPartnerNid(String nid) {
-        List<SysDict> list = new ArrayList<>();
+        List<SysDict> list;
         Object obj = JedisUtils.getObjectMapField(RedisConstant.SYS_DICT_NID, nid);
         if (obj == null) {
             list = dao.findByPartnerNid(nid);
@@ -178,7 +178,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<SysDictMapper,SysDictAO,
         } else {
             SysDict tempSysDict = dao.selectById(dict.getId());
             if (!tempSysDict.getPid().equals(dict.getPid())) {
-                throw new BusinessException(BaseResultCodeEnum.MERCH_SYS_MENU_PID_NOT_CHANGE);
+                throw new BusinessException(BaseResultCodeEnum.FAIL);
             }
 
             BeanUtils.copyPropertiesByList(dict, tempSysDict, new String[]{

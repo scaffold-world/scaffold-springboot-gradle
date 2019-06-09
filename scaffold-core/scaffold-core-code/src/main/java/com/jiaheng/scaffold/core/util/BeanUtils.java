@@ -36,7 +36,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 	 * @param target 目标类
 	 * @param copyFields 需拷贝的字段
 	 * @throws BeansException
-	 * @author yangdeke@jianbing.com
+	 * @author zhangjiahengpoping@gmail.com
 	 * @date 2016-11-2
 	 */
 	public static void copyPropertiesByList(Object source, Object target, String[] copyFields)
@@ -81,7 +81,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 	 * @param source 源类
 	 * @param target 目标类
 	 * @throws BeansException
-	 * @author yangdeke@jianbing.com
+	 * @author zhangjiahengpoping@gmail.com
 	 * @date 2016-11-8
 	 */
 	public static void copyPropertiesNotNull(Object source, Object target)
@@ -95,7 +95,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 	 * @param target 目标类
 	 * @param ignoreProperties 不需拷贝的字段
 	 * @throws BeansException
-	 * @author yangdeke@jianbing.com
+	 * @author zhangjiahengpoping@gmail.com
 	 * @date 2016-11-8
 	 */
 	public static void copyPropertiesNotNull(Object source, Object target,String... ignoreProperties)
@@ -143,7 +143,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 	 * @param source 源类
 	 * @param target 目标类
 	 * @throws BeansException
-	 * @author yangdeke@jianbing.com
+	 * @author zhangjiahengpoping@gmail.com
 	 * @date 2016-11-8
 	 */
 	public static void copyPropertiesConver(Object source, Object target)
@@ -157,7 +157,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 	 * @param target 目标类
 	 * @param ignoreProperties 不需拷贝的字段
 	 * @throws BeansException
-	 * @author yangdeke@jianbing.com
+	 * @author zhangjiahengpoping@gmail.com
 	 * @date 2017-6-26
 	 */
 	public static void copyPropertiesConver(Object source, Object target,String... ignoreProperties)

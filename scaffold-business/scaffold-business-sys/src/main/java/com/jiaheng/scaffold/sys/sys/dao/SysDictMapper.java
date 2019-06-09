@@ -9,22 +9,22 @@ import java.util.List;
 
 public interface SysDictMapper extends BaseMapper<SysDict> {
 
-    @Select("SELECT pid FROM gjj_sys_dict WHERE id = #{id}")
+    @Select("SELECT pid FROM sys_dict WHERE id = #{id}")
     Long findPid(@Param("id") Long id);
 
 
-    @Select("select * from gjj_sys_dict where id in(select menu_id  from gjj_sys_role_menu  where role_id = (select  role_id from  gjj_sys_role_operate  where operate_id =#{id})) and pid =#{pid};")
+    @Select("select * from sys_dict where id in(select menu_id  from sys_role_menu  where role_id = (select  role_id from  sys_role_operate  where operate_id =#{id})) and pid =#{pid};")
     List<SysDict> findSysDictByPidAndId(@Param("pid") Long pid, @Param("id") Long id);
 
-    @Select("select * from gjj_sys_dict where pid=#{pid} order by sort asc")
+    @Select("select * from sys_dict where pid=#{pid} order by sort asc")
     List<SysDict> listByPid(Long pid);
 
     List<SysDict> findByPartnerNid(@Param("nid") String nid);
 
 
-    @Select("select * from gjj_sys_dict where nid = #{nid} and type=2 and status = 1 order by sort")
+    @Select("select * from sys_dict where nid = #{nid} and type=2 and status = 1 order by sort")
     List<SysDict> findByNid(@Param("nid") String nid);
 
-    @Select("SELECT * FROM gjj_sys_dict where nid like 'order_property%'")
+    @Select("SELECT * FROM sys_dict where nid like 'order_property%'")
     List<SysDict> findOrderPropertyList();
 }

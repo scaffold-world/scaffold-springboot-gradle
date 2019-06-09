@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * @Author zhangjiaheng@jianbing.com
+ * @Author zhangjiahengpoping@gmail.com
  * @Description 程序启动之后 开始执行所有的定时任务
  **/
 
@@ -35,7 +35,7 @@ public class StartAllJobInit implements CommandLineRunner {
         List<JobInfoBO> list = jobInfoService.findList(new JobInfoAO());
         for (JobInfoBO jobinfo :list) {
             try {
-                if("0".equals(jobinfo.getStartWithrun())){
+                if(0 == jobinfo.getStartWithrun()){
                     logger.info("任务{}未设置自动启动。", jobinfo.getJobName());
                     jobInfoService.updateJobStatus(jobinfo.getId(), BasicsConstantManual.BASICS_SYS_JOB_STATUS_STOP);
                 }else{

@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * @description:aop事务配置
- * @author: yangdeke@jianbing.com
+ * @author: zhangjiahengpoping@gmail.com
  * @date: 2019-02-27 23:56
  **/
 @Configuration

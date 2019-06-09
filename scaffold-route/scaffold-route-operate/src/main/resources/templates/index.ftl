@@ -70,7 +70,7 @@
 <!-- 中部结束 -->
 <!-- 底部开始 -->
 <div class="footer">
-    <div class="copyright">Copyright ©2018 <a href="https://fatezhang.github.io" target="_blank" style="color: #93D1FF">&nbsp;&nbsp;&nbsp;&nbsp; zhangjiaheng@gmail.com</a></div>
+    <div class="copyright">Copyright ©2018 <a href="https://fatezhang.github.io" target="_blank" style="color: #93D1FF">&nbsp;&nbsp;&nbsp;&nbsp; zhangjiahengpoping@gmail.com</a></div>
 </div>
 <!-- 底部结束 -->
 <script type="text/javascript">

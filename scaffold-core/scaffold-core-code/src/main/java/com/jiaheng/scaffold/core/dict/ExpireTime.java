@@ -3,7 +3,7 @@ package com.jiaheng.scaffold.core.dict;
 /**
  * 
  * 失效时间枚举类
- * @author yangdeke@jianbing.com
+ * @author zhangjiahengpoping@gmail.com
  * @date 2017-6-28
  */
 public enum ExpireTime {
