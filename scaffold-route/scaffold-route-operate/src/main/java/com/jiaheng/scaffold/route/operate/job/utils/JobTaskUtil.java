@@ -2,8 +2,9 @@ package com.jiaheng.scaffold.route.operate.job.utils;
 
 import com.jiaheng.scaffold.job.jobManager.ao.JobInfoAO;
 import com.jiaheng.scaffold.job.jobManager.bo.JobInfoBO;
+import com.jiaheng.scaffold.route.operate.job.executer.AbstractTaskExecutor;
 import com.jiaheng.scaffold.route.operate.job.executer.TaskDisallowConcurrentExecutor;
-import com.jiaheng.scaffold.route.operate.job.executer.TaskJobExecutor;
+import com.jiaheng.scaffold.route.operate.job.executer.TaskAllowConcurrentExecutor;
 import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
@@ -46,8 +47,7 @@ public class JobTaskUtil {
         CronTrigger trigger = (CronTrigger)scheduler.getTrigger(triggerKey);
         // 不存在，创建一个
         if(trigger == null){
-            Class clazz = IS_CONCURRENT.equals(job.getIsConcurrent()) ?
-                    TaskJobExecutor.class : TaskDisallowConcurrentExecutor.class;
+            Class clazz = AbstractTaskExecutor.getExecutorClazz(IS_CONCURRENT.equals(job.getIsConcurrent().toString()));
 
             JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(job.getJobName(), job.getJobGroup()).build();
 
