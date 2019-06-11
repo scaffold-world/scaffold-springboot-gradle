@@ -21,7 +21,7 @@
                 <span class="we-red">*</span>菜单名称
             </label>
             <div class="layui-input-inline">
-                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" value="${sysMenu.name!''}" name="name" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -29,7 +29,7 @@
                 <span class="we-red">*</span>链接地址
             </label>
             <div class="layui-input-inline">
-                <input type="text" name="url" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="url" value="${sysMenu.url}" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
