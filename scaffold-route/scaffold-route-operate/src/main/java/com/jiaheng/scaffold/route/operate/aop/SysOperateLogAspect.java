@@ -31,7 +31,7 @@ public class SysOperateLogAspect {
     /**
      * 只拦截operate后台的请求
      */
-    @Pointcut(value = "execution(* com.jiaheng.scaffold.controller.*.*(..)) || execution( * com.jiaheng.scaffold.controller.*.*.*(..))")
+    @Pointcut(value = "execution(* com.jiaheng.scaffold.route.operate.controller.*.*(..)) || execution( * com.jiaheng.scaffold.route.operate.controller.*.*.*(..))")
     public void pointcutOperate(){}
 
     @AfterReturning(pointcut="pointcutOperate()",returning = "retValue")
