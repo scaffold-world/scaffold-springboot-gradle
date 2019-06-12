@@ -17,6 +17,15 @@
     <artifactId>scaffold-route</artifactId>
 
     <dependencies>
+        <!--Swagger-UI API文档生产工具-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
         <!-- self dependency start -->
         <dependency>
             <groupId>com.jiaheng.scaffold</groupId>

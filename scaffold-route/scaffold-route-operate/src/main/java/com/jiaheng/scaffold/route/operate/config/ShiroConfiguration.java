@@ -101,9 +101,7 @@ public class ShiroConfiguration {
         filterChainDefinitionManager.put("/logout", "logout");
         filterChainDefinitionManager.put("/login", "anon");
         filterChainDefinitionManager.put("/static/**","anon");
-        filterChainDefinitionManager.put("/notify/**","anon");
         filterChainDefinitionManager.put("/lang/**","anon");
-
         filterChainDefinitionManager.put("/*/login/check", "anon");
         filterChainDefinitionManager.put("/*/logout", "logout");
         filterChainDefinitionManager.put("/*/login", "anon");

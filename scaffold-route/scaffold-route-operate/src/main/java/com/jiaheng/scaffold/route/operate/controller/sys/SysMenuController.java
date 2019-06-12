@@ -18,12 +18,15 @@ import com.jiaheng.scaffold.sys.sys.service.SysMenuService;
 import com.jiaheng.scaffold.sys.sys.service.SysRoleMenuService;
 import com.jiaheng.scaffold.sys.sys.service.SysRoleOperateService;
 import com.jiaheng.scaffold.sys.sys.service.SysRoleService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -36,6 +39,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/sys/sysMenu")
+@Api(tags = "SysMenuController", description = "系统菜单配置")
 public class SysMenuController extends BaseController {
     public static final String ftlPath = "/sys/sysMenu/";
 
@@ -85,7 +89,8 @@ public class SysMenuController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/deleteMenusById")
-    public ResponseModel deleteMenusById(Long id){
+    @ApiOperation(value = "根据id递归删除菜单及子菜单")
+    public ResponseModel deleteMenusById(@RequestParam(name = "id") Long id){
         sysMenuService.deleteMenusById(id);
         return doneSuccess();
     }
@@ -100,27 +105,16 @@ public class SysMenuController extends BaseController {
     @ResponseBody
     public ResponseModel sysMenuSaveValid(SysMenuReq sysMenu) {
         sysMenuService.save(Builder.build(sysMenu, SysMenuAO.class));
-        Subject subject = SecurityUtils.getSubject();
-
-
-        SysOperate sysOperate = (SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
-
         shiroService.updatePermission();
-
-
         return doneSuccess();
     }
 
-    /**
-     * 根据父id查询菜单记录
-     *
-     * @return
-     */
     @RequestMapping("/findAllMenus")
     @ResponseBody
+    @ApiOperation(value = "根据父id查询菜单记录")
     public ResponseListModel<SysMenuBO> findAllMenus(String name) {
         List<SysMenuBO> sysMenus = sysMenuService.findAllMenus(name);
-        return new ResponseListModel<>(sysMenus, Long.valueOf(sysMenus.size()));
+        return new ResponseListModel<>(sysMenus, (long) sysMenus.size());
     }
 
     /**
@@ -132,22 +126,18 @@ public class SysMenuController extends BaseController {
     @RequestMapping("/findFatherIds")
     @ResponseBody
     public String findFatherIds(Long id) {
-        String ids = sysMenuService.findFatherIds(id);
-
-        return ids;
+        return sysMenuService.findFatherIds(id);
     }
 
 
     /**
      * 用户授权菜单展示
-     *
-     * @param model
      * @param pid
      * @return
      */
     @RequestMapping(value = "/rightMenus")
     @ResponseBody
-    public List<SysMenuResp> right(Model model, Long pid) {
+    public List<SysMenuResp> right(Long pid) {
 
         Subject subject = SecurityUtils.getSubject();
 
@@ -169,18 +159,14 @@ public class SysMenuController extends BaseController {
     @RequestMapping(value = "/allMenus")
     @ResponseBody
     public List<SysMenuResp> allMenus(Long id, Long roleId) {
-        logger.info("allMenus id:{},ruleId:{}", id, roleId);
         if (id == null) {
             id = 0L;
         }
-        List<SysMenuResp> list = new ArrayList<>();
         List<SysMenuBO> voList = sysMenuService.findByPid(id);
 
         List<SysMenuResp> sysMenuRespList = Builder.buildList(voList, SysMenuResp.class);
-        logger.info("allMenus size:", list.size());
         if (roleId == null) {
-            list = new ArrayList<>();
-            return list;
+            return new ArrayList<>();
         }
 
         SysRole sysRole = sysRoleService.findById(roleId);
