@@ -122,7 +122,7 @@
 
         window.addMenuDialog = function (title, url, width, height) {
             var data = treeGrid.radioStatus(tableId);
-            if(data.resourceType === ""){
+            if (data.resourceType === "") {
 
             }
             if (data.id) {
@@ -142,14 +142,16 @@
                 var id = obj.data.id;
                 $.ajax({
                     url: _ctx + "/sys/sysMenu/deleteMenusById",
+                    type: "POST",
                     data: {
                         id: id
                     },
                     success: function (data) {
-                        if(data.code === 0){
+                        console.log("data.code " + data.code + " " + (data.code === 0));
+                        if (data.code === 0) {
                             obj.del();
                             layer.close(index);
-                        }else{
+                        } else {
                             layer.msg(data.msg, {
                                 icon: 1,
                                 time: 1000

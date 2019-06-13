@@ -46,48 +46,27 @@ public class SysMenuController extends BaseController {
 
     @Autowired
     SysMenuService sysMenuService;
-
     @Autowired
     SysRoleService sysRoleService;
-
     @Autowired
     SysRoleOperateService sysRoleOperateService;
-
     @Autowired
     SysRoleMenuService sysRoleMenuService;
-
     @Resource
     ShiroService shiroService;
 
-    /**
-     * 初始化
-     *
-     * @return
-     */
     @RequestMapping("/sysMenuIndex")
     public String sysMenuIndex() {
-
         return ftlPath + "sysMenuIndex";
     }
 
-    /**
-     * 编辑页面
-     *
-     * @return
-     */
     @RequestMapping("/sysMenuEdit")
     public String sysMenuEdit(Model model, Long id) {
         SysMenuBO menu = sysMenuService.selectById(id);
         model.addAttribute("sysMenu", menu);
-        shiroService.updatePermission();
         return ftlPath + "sysMenuEdit";
     }
 
-    /**
-     * 根据ID 递归删除菜单
-     * @param id 要删除的菜单ID
-     */
-    @ResponseBody
     @RequestMapping("/deleteMenusById")
     @ApiOperation(value = "根据id递归删除菜单及子菜单")
     public ResponseModel deleteMenusById(@RequestParam(name = "id") Long id){
@@ -95,12 +74,6 @@ public class SysMenuController extends BaseController {
         return doneSuccess();
     }
 
-    /**
-     * 保存菜单记录
-     *
-     * @param sysMenu
-     * @return
-     */
     @RequestMapping("/sysMenuSave")
     @ResponseBody
     public ResponseModel sysMenuSaveValid(SysMenuReq sysMenu) {
@@ -117,12 +90,6 @@ public class SysMenuController extends BaseController {
         return new ResponseListModel<>(sysMenus, (long) sysMenus.size());
     }
 
-    /**
-     * 根据id查询所有父类id
-     *
-     * @param id
-     * @return
-     */
     @RequestMapping("/findFatherIds")
     @ResponseBody
     public String findFatherIds(Long id) {
@@ -130,13 +97,9 @@ public class SysMenuController extends BaseController {
     }
 
 
-    /**
-     * 用户授权菜单展示
-     * @param pid
-     * @return
-     */
     @RequestMapping(value = "/rightMenus")
     @ResponseBody
+    @ApiOperation("根据pid获取到当前登陆用户所有的权限菜单")
     public List<SysMenuResp> right(Long pid) {
 
         Subject subject = SecurityUtils.getSubject();
@@ -150,12 +113,6 @@ public class SysMenuController extends BaseController {
 
     }
 
-    /**
-     * 查找全部菜单
-     *
-     * @param roleId
-     * @return
-     */
     @RequestMapping(value = "/allMenus")
     @ResponseBody
     public List<SysMenuResp> allMenus(Long id, Long roleId) {

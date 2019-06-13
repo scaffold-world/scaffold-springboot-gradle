@@ -311,12 +311,12 @@ body {
   left: 0;
   z-index: 2;
   padding-top: 10px;
-  background-color: #484850 !important;
+  background-color: #2f2f31 !important;
   width: 220px;
   max-width: 220px;
   overflow: auto;
   overflow-x: hidden;
-  border-right: 1px solid #e5e5e5;
+  border-right: 1px solid #5fb878;
 }
 .left-nav #nav .current {
   background-color: rgba(0, 0, 0, 0.3);
@@ -332,7 +332,7 @@ body {
   padding: 10px 15px 10px 20px;
   display: block;
   cursor: pointer;
-  color: #bbdac5 !important;
+  color: #e7eaf4 !important;
 }
 .left-nav #nav li a cite {
   font-size: 14px;
