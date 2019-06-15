@@ -76,6 +76,7 @@ public class SysMenuController extends BaseController {
 
     @RequestMapping("/sysMenuSave")
     @ResponseBody
+    @ApiOperation("保存新增或者修改的菜单")
     public ResponseModel sysMenuSaveValid(SysMenuReq sysMenu) {
         sysMenuService.save(Builder.build(sysMenu, SysMenuAO.class));
         shiroService.updatePermission();
