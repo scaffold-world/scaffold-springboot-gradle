@@ -42,6 +42,9 @@ public class IndexController extends BaseController {
 
         SysOperate sysOperate = (SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
 
+        if(null == sysOperate){
+            return "login";
+        }
 
         List<SysMenuBO> list = sysMenuService.findByPidAndId(1L, sysOperate.getId());
 

@@ -24,7 +24,7 @@
         </div>
         <div class="layui-btn-group">
             <button class="layui-btn" onclick="query()"><i class="layui-icon">&#xe615;</i></button>
-            <button class="layui-btn" onclick="addMenuDialog('添加菜单',_ctx + '/sys/sysMenu/sysMenuEdit?id=',750,480)"><i
+            <button class="layui-btn" onclick="addMenuDialog('添加菜单',_ctx + '/sys/sysMenu/sysMenuEdit?pid=',750,480)"><i
                         class="layui-icon"></i> 新增
             </button>
             <button class="layui-btn layui-btn-warm" onclick="openAll()"> 展开全部
@@ -122,9 +122,6 @@
 
         window.addMenuDialog = function (title, url, width, height) {
             var data = treeGrid.radioStatus(tableId);
-            if (data.resourceType === "") {
-
-            }
             if (data.id) {
                 WeAdminShow(title, url + data.id, width, height);
             } else {

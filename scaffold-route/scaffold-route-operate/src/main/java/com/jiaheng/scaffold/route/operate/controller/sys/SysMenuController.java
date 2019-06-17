@@ -61,8 +61,14 @@ public class SysMenuController extends BaseController {
     }
 
     @RequestMapping("/sysMenuEdit")
-    public String sysMenuEdit(Model model, Long id) {
-        SysMenuBO menu = sysMenuService.selectById(id);
+    public String sysMenuEdit(Model model, Long id, Long pid) {
+        SysMenuBO menu;
+        if(null == id){
+            menu = new SysMenuBO();
+            menu.setPid(pid);
+        }else{
+            menu = sysMenuService.selectById(id);
+        }
         model.addAttribute("sysMenu", menu);
         return ftlPath + "sysMenuEdit";
     }
