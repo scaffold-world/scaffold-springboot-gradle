@@ -37,7 +37,7 @@
         <!-- 生成的文件编码 -->
         <property name="javaFileEncoding" value="utf-8"/>
         <!-- 通过自定义插件类生成自定义注解和接口 -->
-        <plugin type="com.jiaheng.scaffold.plugin.mybatis.generator.GenPlugin">
+        <plugin type="com.cms.scaffold.plugin.mybatis.generator.GenPlugin">
             <property name="mappers" value="BaseMapper"/>
         </plugin>
         <commentGenerator>
@@ -54,7 +54,7 @@
                用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
                注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型；
            -->
-        <javaTypeResolver type="com.jiaheng.scaffold.plugin.mybatis.generator.types.JavaTypeResolverDefaultImpl">
+        <javaTypeResolver type="com.cms.scaffold.plugin.mybatis.generator.types.JavaTypeResolverDefaultImpl">
             <!--
                 true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
                 false：默认,
@@ -69,7 +69,7 @@
         <!-- 生成实体类配置 -->
         <javaModelGenerator targetPackage="${generator.javaModelTargetPackage}"
                             targetProject="${generator.path}${generator.javaModelTargetProject}">
-            <property name="rootClass" value="com.jiaheng.scaffold.common.base.BaseEntity"/>
+            <property name="rootClass" value="com.cms.scaffold.common.base.BaseEntity"/>
         </javaModelGenerator>
         <!-- 生成映射文件配置 -->
         <sqlMapGenerator targetPackage="${generator.sqlMapTargetPackage}"
@@ -136,7 +136,7 @@
         <!-- 生成的文件编码 -->
         <property name="javaFileEncoding" value="utf-8"/>
         <!-- 通过自定义插件类生成自定义注解和接口 -->
-        <plugin type="com.jiaheng.scaffold.plugin.mybatis.generator.GenPlugin">
+        <plugin type="com.cms.scaffold.plugin.mybatis.generator.GenPlugin">
             <property name="mappers" value="BaseMapper"/>
         </plugin>
         <commentGenerator>
@@ -153,7 +153,7 @@
                用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
                注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型；
            -->
-        <javaTypeResolver type="com.jiaheng.scaffold.plugin.mybatis.generator.types.JavaTypeResolverDefaultImpl">
+        <javaTypeResolver type="com.cms.scaffold.plugin.mybatis.generator.types.JavaTypeResolverDefaultImpl">
             <!--
                 true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
                 false：默认,
@@ -168,7 +168,7 @@
         <!-- 生成实体类配置 -->
         <javaModelGenerator targetPackage="${generator.BO.javaModelTargetPackage}"
                             targetProject="${generator.path}${generator.javaModelTargetProject}">
-            <property name="rootClass" value="com.jiaheng.scaffold.common.base.BaseBO"/>
+            <property name="rootClass" value="com.cms.scaffold.common.base.BaseBO"/>
         </javaModelGenerator>
 
         <!-- 选择一个table来生成相关文件，可以有一个或多个table，必须要有table元素
@@ -228,7 +228,7 @@
         <!-- 生成的文件编码 -->
         <property name="javaFileEncoding" value="utf-8"/>
         <!-- 通过自定义插件类生成自定义注解和接口 -->
-        <plugin type="com.jiaheng.scaffold.plugin.mybatis.generator.GenPlugin">
+        <plugin type="com.cms.scaffold.plugin.mybatis.generator.GenPlugin">
             <property name="mappers" value="BaseMapper"/>
         </plugin>
         <commentGenerator>
@@ -245,7 +245,7 @@
                用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
                注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型；
            -->
-        <javaTypeResolver type="com.jiaheng.scaffold.plugin.mybatis.generator.types.JavaTypeResolverDefaultImpl">
+        <javaTypeResolver type="com.cms.scaffold.plugin.mybatis.generator.types.JavaTypeResolverDefaultImpl">
             <!--
                 true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
                 false：默认,
@@ -260,7 +260,7 @@
         <!-- 生成实体类配置 -->
         <javaModelGenerator targetPackage="${generator.AO.javaModelTargetPackage}"
                             targetProject="${generator.path}${generator.javaModelTargetProject}">
-            <property name="rootClass" value="com.jiaheng.scaffold.common.base.BaseAO"/>
+            <property name="rootClass" value="com.cms.scaffold.common.base.BaseAO"/>
         </javaModelGenerator>
 
         <!-- 选择一个table来生成相关文件，可以有一个或多个table，必须要有table元素

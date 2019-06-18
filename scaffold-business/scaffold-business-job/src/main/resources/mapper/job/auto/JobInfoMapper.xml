@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jiaheng.scaffold.job.jobManager.dao.JobInfoMapper">
-  <resultMap id="BaseResultMap" type="com.jiaheng.scaffold.job.jobManager.domain.JobInfo">
+<mapper namespace="com.cms.scaffold.job.jobManager.dao.JobInfoMapper">
+  <resultMap id="BaseResultMap" type="com.cms.scaffold.job.jobManager.domain.JobInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="job_name" jdbcType="VARCHAR" property="jobName" />
     <result column="job_group" jdbcType="VARCHAR" property="jobGroup" />

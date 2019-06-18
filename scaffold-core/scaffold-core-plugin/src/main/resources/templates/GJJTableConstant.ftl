@@ -1,4 +1,4 @@
-package com.jiaheng.scaffold.common.constant_auto;
+package com.cms.scaffold.common.constant_auto;
 
 /**
 * Created by ${author} on ${date}

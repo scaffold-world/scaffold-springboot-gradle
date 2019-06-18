@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.jiaheng.scaffold</groupId>
+    <groupId>com.cms.scaffold</groupId>
     <artifactId>scaffold</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
@@ -117,22 +117,22 @@
         <dependencies>
             <!-- self dependency start -->
             <dependency>
-                <groupId>com.jiaheng.scaffold</groupId>
+                <groupId>com.cms.scaffold</groupId>
                 <artifactId>scaffold-core-common</artifactId>
                 <version>${scaffold.common.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jiaheng.scaffold</groupId>
+                <groupId>com.cms.scaffold</groupId>
                 <artifactId>scaffold-core-code</artifactId>
                 <version>${scaffold.code.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jiaheng.scaffold</groupId>
+                <groupId>com.cms.scaffold</groupId>
                 <artifactId>scaffold-business-sys</artifactId>
                 <version>${scaffold.business.sys.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.jiaheng.scaffold</groupId>
+                <groupId>com.cms.scaffold</groupId>
                 <artifactId>scaffold-business-job</artifactId>
                 <version>${scaffold.business.job.version}</version>
             </dependency>
