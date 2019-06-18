@@ -33,7 +33,7 @@ import java.util.List;
 
 /**
  * 商户资源管理菜单Controller
- * Created by 张嘉恒 on 2018/3/17.
+ * Created by zhangjiahengpoping@gmail.com on 2018/3/17.
  */
 @Controller
 @RequestMapping("/sys/sysMenu")

@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
- * Created by 张嘉恒 on 2018/4/16.
+ * Created by zhangjiahengpoping@gmail.com on 2018/4/16.
  */
 @org.springframework.context.annotation.Configuration
 public class FreemarkerConfig {

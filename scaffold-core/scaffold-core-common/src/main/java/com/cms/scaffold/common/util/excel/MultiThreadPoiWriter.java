@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * 进行sheet写操作的sheet。
- * Created by 张嘉恒 on 2018/5/5.
+ * Created by zhangjiahengpoping@gmail.com on 2018/5/5.
  */
 public class MultiThreadPoiWriter implements Runnable {
 

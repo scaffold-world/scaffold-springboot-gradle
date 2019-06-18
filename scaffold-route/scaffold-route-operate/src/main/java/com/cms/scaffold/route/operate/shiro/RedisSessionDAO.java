@@ -16,7 +16,7 @@ import java.util.Set;
 
 /**
  * 自定义授权会话管理类
- * Created by 张嘉恒 on 2018/4/12.
+ * Created by zhangjiahengpoping@gmail.com on 2018/4/12.
  */
 public class RedisSessionDAO extends AbstractSessionDAO {
 

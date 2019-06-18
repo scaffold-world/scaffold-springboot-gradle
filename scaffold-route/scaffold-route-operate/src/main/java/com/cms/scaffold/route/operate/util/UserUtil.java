@@ -8,7 +8,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 /**
- * Created by 张嘉恒 on 2018/2/13.
+ * Created by zhangjiahengpoping@gmail.com on 2018/2/13.
  */
 public class UserUtil {
 

@@ -1,7 +1,7 @@
 package com.cms.scaffold.common.constant_manual;
 
 /**
- * Created by 张嘉恒 on 2018/4/24.
+ * Created by zhangjiahengpoping@gmail.com on 2018/4/24.
  */
 public class AdvanceFilterOpConstantManual {
 

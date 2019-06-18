@@ -3,7 +3,7 @@ package com.cms.scaffold.plugin.dict;
 import java.util.List;
 
 /**
- * Created by 张嘉恒 on 2018/4/15.
+ * Created by zhangjiahengpoping@gmail.com on 2018/4/15.
  */
 public class SysDict {
 

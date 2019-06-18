@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 字典表头工厂实现类
- * Created by 张嘉恒 on 2018/7/2.
+ * Created by zhangjiahengpoping@gmail.com on 2018/7/2.
  */
 public class ThFormatterSelect implements ThFormatterInterface {
 

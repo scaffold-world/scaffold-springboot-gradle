@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @Description: spring转换器, 对接口入参中string类型的日期统一处理
- * @Author: 张嘉恒
+ * @Author: zhangjiahengpoping@gmail.com
  * @Date: 2018/3/26 15:13
  **/
 @Component

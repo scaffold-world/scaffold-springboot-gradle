@@ -7,12 +7,12 @@ import java.io.*;
 import java.util.HashMap;
 
 /**
- * Created by 张嘉恒 on 2018/2/8.
+ * Created by zhangjiahengpoping@gmail.com on 2018/2/8.
  */
 public class CodeGenerateUtils {
 
 
-    private final String AUTHOR = "张嘉恒";
+    private final String AUTHOR = "zhangjiahengpoping@gmail.com";
     private final String CURRENT_DATE = DateUtil.dateStr2(DateUtil.getNow());
     private final String tableName = PropertiesUtil.getValue("generator.tableName");
     private final String URL = PropertiesUtil.getValue("generator.connectionUrl");

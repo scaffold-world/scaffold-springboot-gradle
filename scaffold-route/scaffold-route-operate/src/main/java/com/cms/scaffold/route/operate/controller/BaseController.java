@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 /**
- * Created by 张嘉恒 on 2018/3/16.
+ * Created by zhangjiahengpoping@gmail.com on 2018/3/16.
  */
 @Controller
 public class BaseController {

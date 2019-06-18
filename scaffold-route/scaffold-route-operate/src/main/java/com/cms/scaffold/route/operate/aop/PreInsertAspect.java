@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * 切面类
  * 保存更新记录时，同时更新添加时间和更新时间
- * Created by 张嘉恒 on 2018/3/20.
+ * Created by zhangjiahengpoping@gmail.com on 2018/3/20.
  */
 @Aspect
 @Component

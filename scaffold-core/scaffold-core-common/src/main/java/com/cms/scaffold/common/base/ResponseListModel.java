@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @Description: 分页查询返回结果类
- * @Author: 张嘉恒
+ * @Author: zhangjiahengpoping@gmail.com
  * @Date: 2018/3/21 20:08
  **/
 @Data

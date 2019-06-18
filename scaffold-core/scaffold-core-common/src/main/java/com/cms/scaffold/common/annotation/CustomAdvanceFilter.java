@@ -5,7 +5,7 @@ import com.cms.scaffold.common.constant_manual.AdvanceFilterOpConstantManual;
 import java.lang.annotation.*;
 
 /**
- * Created by 张嘉恒 on 2018/8/2.
+ * Created by zhangjiahengpoping@gmail.com on 2018/8/2.
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

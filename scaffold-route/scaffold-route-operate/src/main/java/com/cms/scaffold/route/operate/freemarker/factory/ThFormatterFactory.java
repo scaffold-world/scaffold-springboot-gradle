@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * 表头格式工厂类
- * Created by 张嘉恒 on 2018/7/2.
+ * Created by zhangjiahengpoping@gmail.com on 2018/7/2.
  */
 public class ThFormatterFactory {
 
