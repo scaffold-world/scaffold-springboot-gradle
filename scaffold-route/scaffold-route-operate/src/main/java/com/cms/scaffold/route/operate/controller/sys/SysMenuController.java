@@ -25,9 +25,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -55,32 +53,33 @@ public class SysMenuController extends BaseController {
     @Resource
     ShiroService shiroService;
 
-    @RequestMapping("/sysMenuIndex")
+    @GetMapping("/sysMenuIndex")
     public String sysMenuIndex() {
         return ftlPath + "sysMenuIndex";
     }
 
-    @RequestMapping("/sysMenuEdit")
+    @GetMapping("/sysMenuEdit")
     public String sysMenuEdit(Model model, Long id, Long pid) {
         SysMenuBO menu;
-        if(null == id){
+        if (null == id) {
             menu = new SysMenuBO();
             menu.setPid(pid);
-        }else{
+        } else {
             menu = sysMenuService.selectById(id);
         }
         model.addAttribute("sysMenu", menu);
         return ftlPath + "sysMenuEdit";
     }
 
-    @RequestMapping("/deleteMenusById")
+    @PostMapping("/deleteMenusById")
     @ApiOperation(value = "根据id递归删除菜单及子菜单")
-    public ResponseModel deleteMenusById(@RequestParam(name = "id") Long id){
+    @ResponseBody
+    public ResponseModel deleteMenusById(@RequestParam(name = "id") Long id) {
         sysMenuService.deleteMenusById(id);
         return doneSuccess();
     }
 
-    @RequestMapping("/sysMenuSave")
+    @PostMapping("/sysMenuSave")
     @ResponseBody
     @ApiOperation("保存新增或者修改的菜单")
     public ResponseModel sysMenuSaveValid(SysMenuReq sysMenu) {
@@ -89,7 +88,7 @@ public class SysMenuController extends BaseController {
         return doneSuccess();
     }
 
-    @RequestMapping("/findAllMenus")
+    @GetMapping("/findAllMenus")
     @ResponseBody
     @ApiOperation(value = "根据父id查询菜单记录")
     public ResponseListModel<SysMenuBO> findAllMenus(String name) {
@@ -97,21 +96,22 @@ public class SysMenuController extends BaseController {
         return new ResponseListModel<>(sysMenus, (long) sysMenus.size());
     }
 
-    @RequestMapping("/findFatherIds")
+    @GetMapping("/findFatherIds")
     @ResponseBody
     public String findFatherIds(Long id) {
         return sysMenuService.findFatherIds(id);
     }
 
 
-    @RequestMapping(value = "/rightMenus")
+    @GetMapping(value = "/rightMenus")
     @ResponseBody
     @ApiOperation("根据pid获取到当前登陆用户所有的权限菜单")
     public List<SysMenuResp> right(Long pid) {
 
         Subject subject = SecurityUtils.getSubject();
 
-        SysOperate sysOperate = (SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
+        SysOperate sysOperate = (SysOperate) subject.getSession().getAttribute(BasicsConstantManual
+                .SESSION_ATTRIBUTE_KEY_OPERATOR);
 
         List<SysMenuBO> list = sysMenuService.findByPidAndId(pid, sysOperate.getId());
 
@@ -120,7 +120,7 @@ public class SysMenuController extends BaseController {
 
     }
 
-    @RequestMapping(value = "/allMenus")
+    @GetMapping(value = "/allMenus")
     @ResponseBody
     public List<SysMenuResp> allMenus(Long id, Long roleId) {
         if (id == null) {

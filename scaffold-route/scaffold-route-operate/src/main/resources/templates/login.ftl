@@ -20,6 +20,11 @@
 </div>
 
 <script type="text/javascript">
+    window.onload = function () {
+        if (window.parent.window !== window) {
+            window.top.location = "${base}/login";
+        }
+    };
     layui.use(['form', 'admin'], function () {
         var form = layui.form,
                 admin = layui.admin,

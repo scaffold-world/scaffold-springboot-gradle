@@ -1,17 +1,14 @@
 package com.cms.scaffold.sys.sys.service.impl;
 
+import com.cms.scaffold.common.asserts.Assert;
 import com.cms.scaffold.common.base.Builder;
-import com.cms.scaffold.common.exception.BaseResultCodeEnum;
-import com.cms.scaffold.common.exception.BusinessException;
 import com.cms.scaffold.common.util.StringUtil;
 import com.cms.scaffold.core.baseService.BaseServiceImpl;
-import com.cms.scaffold.core.util.BeanUtils;
 import com.cms.scaffold.sys.sys.ao.SysMenuAO;
 import com.cms.scaffold.sys.sys.bo.SysMenuBO;
+import com.cms.scaffold.sys.sys.dao.SysMenuMapper;
 import com.cms.scaffold.sys.sys.domain.SysMenu;
 import com.cms.scaffold.sys.sys.service.SysMenuService;
-import com.cms.scaffold.sys.sys.dao.SysMenuMapper;
-import com.cms.scaffold.common.asserts.Assert;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -83,14 +80,12 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenuAO
 
     @Override
     public void save(SysMenuAO sysMenuAO) {
-        Assert.notNull(sysMenuAO);
         Assert.notNull(sysMenuAO.getPid(), "pid");
         SysMenu sysMenu = Builder.build(sysMenuAO, SysMenu.class);
         SysMenu parentSysMenu = dao.selectById(sysMenu.getPid());
         sysMenuAO.setLevelId(parentSysMenu.getLevelId() + 1);
         //判断设置地址链接
         if (StringUtil.isNotBlank(sysMenu.getUrl())) {
-            System.out.println(sysMenuAO.getUrl().indexOf("/"));
             if (sysMenu.getUrl().indexOf("/") == 0) {
                 sysMenu.setCode(sysMenu.getUrl().
                         replaceFirst("/", "").
@@ -104,14 +99,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenuAO
         if (sysMenu.getId() == null) {
             dao.insert(sysMenu);
         } else {
-            SysMenu tempSysMenu = dao.selectById(sysMenu.getId());
-            if (!tempSysMenu.getPid().equals( sysMenu.getPid())) {
-                throw new BusinessException(BaseResultCodeEnum.FAIL);
-            }
-
-            BeanUtils.copyPropertiesByList(sysMenu, tempSysMenu, new String[]{
-                    "name", "pid", "url", "iconCls", "status", "sort", "code", "state", "resourceType"});
-            dao.update(tempSysMenu);
+            dao.update(sysMenu);
         }
 
     }

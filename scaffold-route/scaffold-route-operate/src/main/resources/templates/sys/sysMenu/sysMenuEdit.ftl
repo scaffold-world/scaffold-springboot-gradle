@@ -9,7 +9,7 @@
 <div class="weadmin-body">
     <form class="layui-form">
         <input type="hidden" name="pid" value="${sysMenu.pid}">
-        <input type="hidden" name="id"  value="${sysMenu.id!''}">
+        <input type="hidden" name="id" value="${sysMenu.id!''}">
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
                 <span class="we-red">*</span>菜单名称
@@ -33,6 +33,7 @@
                 <span class="we-red">*</span>状态
             </label>
             <div class="layui-input-inline">
+                <input type="hidden" id="slct_status" value="${sysMenu.status!''}">
                 <@th type="select" nid="basics_use_status" fieldName="status"></@th>
             </div>
         </div>
@@ -41,6 +42,7 @@
                 <span class="we-red">*</span>资源类别
             </label>
             <div class="layui-input-inline">
+                <input type="hidden" id="slct_resourceType" value="${sysMenu.resourceType!''}">
                 <@th type="select" nid="basics_sys_menu" fieldName="resourceType"></@th>
             </div>
         </div>
@@ -66,8 +68,17 @@
     layui.use(['form', 'layer'], function () {
         $ = layui.jquery;
         var form = layui.form,
-            layer = layui.layer;
+                layer = layui.layer;
 
+        var resourceTypeVal = $('#slct_resourceType').val();
+        if(resourceTypeVal){
+            $("select[name='resourceType'] option[value="+resourceTypeVal+"]").prop("selected",true);
+        }
+        var statusVal = $('#slct_status').val();
+        if(statusVal){
+            $("select[name='status'] option[value="+statusVal+"]").prop("selected",true);
+        }
+        form.render('select');
         //自定义验证规则
         form.verify({
             menuName: function (value) {

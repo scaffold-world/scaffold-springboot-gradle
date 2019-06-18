@@ -60,7 +60,7 @@
             , iconOpen: false//是否显示图标【默认显示】
             , isOpenDefault: false//节点默认是展开还是折叠【默认展开】
             , loading: true
-            , method: 'post'
+            , method: 'get'
             , isPage: false
             , cols: [[
                 {type: 'numbers'}
