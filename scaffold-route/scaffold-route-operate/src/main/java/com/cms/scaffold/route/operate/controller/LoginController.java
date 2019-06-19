@@ -4,6 +4,7 @@ import com.cms.scaffold.common.constant_manual.BasicsConstantManual;
 import com.cms.scaffold.route.operate.util.UserUtil;
 import com.cms.scaffold.sys.sys.domain.SysOperate;
 import com.cms.scaffold.sys.sys.service.SysOperateService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@Api(tags = "LoginController", description = "登陆跳转")
 public class LoginController extends BaseController {
 
     @Autowired

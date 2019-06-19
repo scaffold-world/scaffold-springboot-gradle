@@ -14,6 +14,7 @@ import com.cms.scaffold.job.jobManager.service.JobInfoService;
 import com.cms.scaffold.route.operate.controller.BaseController;
 import com.cms.scaffold.route.operate.job.utils.InvokeJobUtils;
 import com.cms.scaffold.route.operate.job.utils.JobTaskUtil;
+import io.swagger.annotations.Api;
 import org.quartz.SchedulerException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ import java.util.List;
  **/
 @Controller
 @RequestMapping("/job/jobManager")
+@Api(tags = "JobInfoController", description = "定时任务配置页面")
 public class JobInfoController extends BaseController {
 
     private static final String ftlPath = "/job/jobManager/";

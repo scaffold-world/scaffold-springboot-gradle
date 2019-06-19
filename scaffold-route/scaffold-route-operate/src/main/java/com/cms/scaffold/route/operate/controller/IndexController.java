@@ -7,6 +7,7 @@ import com.cms.scaffold.route.operate.response.sys.SysMenuResp;
 import com.cms.scaffold.sys.sys.bo.SysMenuBO;
 import com.cms.scaffold.sys.sys.domain.SysOperate;
 import com.cms.scaffold.sys.sys.service.SysMenuService;
+import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import java.util.List;
 
 /** Created by zhangjiahengpoping@gmail.com on 2018/3/16. */
 @Controller
+@Api(tags = "IndexController", description = "项目跳转")
 public class IndexController extends BaseController {
 
   @Autowired SysMenuService sysMenuService;

@@ -1,6 +1,5 @@
 package com.cms.scaffold.route.operate.controller.sys;
 
-
 import com.cms.scaffold.common.base.ResponseModel;
 import com.cms.scaffold.common.constant_manual.SysConstant;
 import com.cms.scaffold.common.util.DateUtil;
@@ -10,6 +9,7 @@ import com.cms.scaffold.sys.sys.bo.SysRoleMenuBO;
 import com.cms.scaffold.sys.sys.domain.SysRoleMenu;
 import com.cms.scaffold.sys.sys.service.SysMenuService;
 import com.cms.scaffold.sys.sys.service.SysRoleMenuService;
+import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.RealmSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,59 +23,57 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/sys/sysRoleMenu")
+@Api(tags = "SysRoleMenuController", description = "角色权限管理页面")
 public class SysRoleMenuController extends BaseController {
-    @Autowired
-    SysRoleMenuService sysRoleMenuService;
+  @Autowired SysRoleMenuService sysRoleMenuService;
 
-    @Autowired
-    SysMenuService sysMenuService;
+  @Autowired SysMenuService sysMenuService;
 
-    @RequestMapping(value = "/addRoleMenu")
-    @ResponseBody
-    public ResponseModel addRoleMenu(String  uuid, Long roleId){
-        List<SysRoleMenu> list = new ArrayList<>();
+  @RequestMapping(value = "/addRoleMenu")
+  @ResponseBody
+  public ResponseModel addRoleMenu(String uuid, Long roleId) {
+    List<SysRoleMenu> list = new ArrayList<>();
 
-        uuid = uuid.replaceAll("'","");
+    uuid = uuid.replaceAll("'", "");
 
-        String [] inputUuid = uuid.split(",");
+    String[] inputUuid = uuid.split(",");
 
-        for(String s:inputUuid){
-            SysRoleMenuBO exist = sysRoleMenuService.selectByRoleIdAndMenuId(roleId,Long.parseLong(s));
-            if(exist!=null){
-                continue;
-            }
-            SysRoleMenu roleMenu= new SysRoleMenu();
-            roleMenu.setRoleId(roleId);
-            roleMenu.setMenuId(Long.parseLong(s));
-            roleMenu.setAddTime(DateUtil.rollHour(new Date(),-1));
-            roleMenu.setUpdateTime(DateUtil.rollHour(new Date(),-1));
-            list.add(roleMenu);
-        }
-        if(list.size()==0){
-            return doneSuccess(SysConstant.EXISIST_MENU);
-        }
-        sysRoleMenuService.saveRoleMenu(list);
-
-        //刷新url拦截
-        //重新刷新shrio中的url
-        RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
-
-        MyShiroRealm realm = (MyShiroRealm)rsm.getRealms().iterator().next();
-
-        realm.clearCachedAuthorization();
-
-        return doneSuccess();
+    for (String s : inputUuid) {
+      SysRoleMenuBO exist = sysRoleMenuService.selectByRoleIdAndMenuId(roleId, Long.parseLong(s));
+      if (exist != null) {
+        continue;
+      }
+      SysRoleMenu roleMenu = new SysRoleMenu();
+      roleMenu.setRoleId(roleId);
+      roleMenu.setMenuId(Long.parseLong(s));
+      roleMenu.setAddTime(DateUtil.rollHour(new Date(), -1));
+      roleMenu.setUpdateTime(DateUtil.rollHour(new Date(), -1));
+      list.add(roleMenu);
     }
-
-
-    @RequestMapping(value = "/deleteMenu")
-    @ResponseBody
-    public ResponseModel deleteMenu(String  uuid, Long roleId){
-
-        uuid = uuid.replaceAll("'","");
-
-        sysRoleMenuService.deleteMenu(uuid,roleId);
-
-        return doneSuccess();
+    if (list.size() == 0) {
+      return doneSuccess(SysConstant.EXISIST_MENU);
     }
+    sysRoleMenuService.saveRoleMenu(list);
+
+    // 刷新url拦截
+    // 重新刷新shrio中的url
+    RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
+
+    MyShiroRealm realm = (MyShiroRealm) rsm.getRealms().iterator().next();
+
+    realm.clearCachedAuthorization();
+
+    return doneSuccess();
+  }
+
+  @RequestMapping(value = "/deleteMenu")
+  @ResponseBody
+  public ResponseModel deleteMenu(String uuid, Long roleId) {
+
+    uuid = uuid.replaceAll("'", "");
+
+    sysRoleMenuService.deleteMenu(uuid, roleId);
+
+    return doneSuccess();
+  }
 }

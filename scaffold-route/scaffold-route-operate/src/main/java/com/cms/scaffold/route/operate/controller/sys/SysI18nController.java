@@ -10,6 +10,7 @@ import com.cms.scaffold.route.operate.response.sys.SysI18nResp;
 import com.cms.scaffold.sys.sys.ao.SysI18nAO;
 import com.cms.scaffold.sys.sys.bo.SysI18nBO;
 import com.cms.scaffold.sys.sys.service.SysI18nService;
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import javax.annotation.Resource;
  **/
 @Controller
 @RequestMapping("/sys/sysI18n")
+@Api(tags = "SysI18nController", description = "国际化管理页面")
 public class SysI18nController extends BaseController {
 
 
