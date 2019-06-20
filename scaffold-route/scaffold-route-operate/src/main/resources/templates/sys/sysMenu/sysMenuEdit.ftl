@@ -105,13 +105,10 @@
                 url: _ctx + '/sys/sysMenu/sysMenuSave',
                 data: f,
                 success: function (data) {
-                    if (data.code !== 0) {
-                        layer.alert("操作失败：" + data.msg);
-                        return false;
-                    } else {
-                        window.parent.location.reload();
-                        //关闭当前frame
-                        parent.layer.close(index);
+                    if (data.code == 0) {
+                        layer.msg('已更新!', {
+                            time: 1000
+                        });
                     }
                 },
                 error: function (data) {
@@ -119,6 +116,9 @@
                     return false;
                 }
             });
+            //关闭当前frame
+            parent.layer.close(index);
+            window.parent.location.reload();
         });
 
     });

@@ -27,8 +27,7 @@
             <button class="layui-btn" onclick="addMenuDialog('添加菜单',_ctx + '/sys/sysMenu/sysMenuEdit?pid=',750,480)"><i
                         class="layui-icon"></i> 新增
             </button>
-            <button class="layui-btn layui-btn-warm" onclick="openAll()"> 展开全部
-            </button>
+            <button class="layui-btn layui-btn-warm" id="openAllBtn" onclick="openAll()">展开全部</button>
         </div>
     </div>
     <div style="height: 100%">
@@ -74,12 +73,13 @@
                 }
                 , {field: 'url', width: 200, title: '链接地址'}
                 , {field: 'sort', width: 80, title: '排序'}
+                , {field: 'levelId', width: 80, title: '层级'}
                 , {field: 'code', width: 200, title: '代码'}
                 , {
                     field: 'status', width: 80, title: '状态', templet: function (d) {
                         if (d.status === 1) {
                             return "启用";
-                        } else if (d.status === 0) {
+                        } else if (d.status === 2) {
                             return "停用";
                         }
                     }
@@ -123,6 +123,14 @@
         window.addMenuDialog = function (title, url, width, height) {
             var data = treeGrid.radioStatus(tableId);
             if (data.id) {
+                if (data.resourceType !== "menu") {
+                    layer.msg('只有菜单类型才可以新增窗口！', {
+                        icon: 1,
+                        time: 1500,
+                        shade: [0.5, '#000', true]
+                    });
+                    return;
+                }
                 WeAdminShow(title, url + data.id, width, height);
             } else {
                 layer.msg('请先选中父级菜单！', {
@@ -130,6 +138,13 @@
                     time: 1000
                 });
             }
+        }
+
+        window.openAll = function () {
+            var treedata = treeGrid.getDataTreeList(tableId);
+            var flag = !treedata[0][treeGrid.config.cols.isOpen];
+            treeGrid.treeOpenAll(tableId, flag);
+            $('#openAllBtn').text(flag?"收起全部":"展开全部");
         }
     });
 
@@ -179,12 +194,6 @@
         var map = treeGrid.getDataMap(tableId);
         var o = map['102'];
         treeGrid.treeNodeOpen(tableId, o, !o[treeGrid.config.cols.isOpen]);
-    }
-
-
-    function openAll() {
-        var treedata = treeGrid.getDataTreeList(tableId);
-        treeGrid.treeOpenAll(tableId, !treedata[0][treeGrid.config.cols.isOpen]);
     }
 
     function getCheckData() {

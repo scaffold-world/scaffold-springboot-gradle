@@ -1,5 +1,6 @@
 package com.cms.scaffold.route.operate.config;
 
+import com.cms.scaffold.route.operate.interceptor.PageViewExceptionInterceptor;
 import com.cms.scaffold.route.operate.interceptor.TraceIdInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +44,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(traceIdInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new PageViewExceptionInterceptor()).addPathPatterns("/**");
         super.addInterceptors(registry);
     }
 

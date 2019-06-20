@@ -9,6 +9,11 @@
 <body>
 <div class="weadmin-nav">
     <div class="dHead">
+        <span class="layui-breadcrumb">
+        <a href="javascript:void(0)">权限配置</a>
+        <a href="javascript:void(0)">操作员管理</a>
+        <#--<a><cite>资源管理</cite></a>-->
+      </span>
         <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float: right"
            href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">&#x1002;</i></a>
     </div>
@@ -62,15 +67,15 @@
         };
 
         form.on('submit(sreach)', function (data) {
-           var obj = data.field;
-           tableReload(obj);
-           return false;
+            var obj = data.field;
+            tableReload(obj);
+            return false;
         });
 
-        window.tableReload = function(searchData){
+        window.tableReload = function (searchData) {
 
             table.reload('operateTable', {
-                page:{
+                page: {
                     curr: 1
                 },
                 where: searchData

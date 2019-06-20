@@ -44,29 +44,29 @@ public class JobInfoController extends BaseController {
      * 任务管理页面
      * @return
      */
-    @RequestMapping("/taskManagePage")
-    public String taskManagePage(){
-        return ftlPath + "taskManagePage";
+    @RequestMapping("/jobManagePage")
+    public String jobManagePage(){
+        return ftlPath + "jobManagePage";
     }
 
     /**
      * 任务更新页面
      * @return
      */
-    @RequestMapping("/updateTaskPage")
-    public String updateTaskPage(Long id, Model model){
+    @RequestMapping("/updateJobPage")
+    public String updateJobPage(Long id, Model model){
         JobInfoBO jobInfoBO = jobInfoService.selectById(id);
         model.addAttribute("job", jobInfoBO);
-        return ftlPath + "updateTaskPage";
+        return ftlPath + "updateJobPage";
     }
 
     /**
      * 任务新增页面
      * @return
      */
-    @RequestMapping("/addTaskPage")
-    public String addTaskPage(){
-        return ftlPath + "addTaskPage";
+    @RequestMapping("/addJobPage")
+    public String addJobPage(){
+        return ftlPath + "addJobPage";
     }
 
     /**

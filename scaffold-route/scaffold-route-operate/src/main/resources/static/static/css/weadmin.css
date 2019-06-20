@@ -82,7 +82,7 @@ body {
 }
 .login-bg {
   /*background: #eeeeee 0 0 no-repeat;*/
-  background: url(../images/nml.jpg) no-repeat center;
+  background: url(../images/bg.jpg) no-repeat center;
   background-size: cover;
   overflow: hidden;
 }
