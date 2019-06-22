@@ -15,6 +15,8 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,12 +35,12 @@ public class SysOperateController extends BaseController {
 
   @Autowired private SysRoleOperateService sysRoleOperateService;
 
-  @RequestMapping(value = "sysOperateIndex")
+  @GetMapping(value = "sysOperateIndex")
   public String operateManage() {
     return ftlPath + "sysOperateIndex";
   }
 
-  @RequestMapping(value = "operateList")
+  @GetMapping(value = "operateList")
   @ResponseBody
   public ResponseListModel<SysOperate> operateList(SysOperate sysOperateReq) {
     ResponseListModel<SysOperate> list = sysOperateService.queryAllOperate(sysOperateReq);
@@ -48,7 +50,14 @@ public class SysOperateController extends BaseController {
     return respList;
   }
 
-  @RequestMapping(value = "addOperateIndex")
+  @ResponseBody
+  @PostMapping("/deleteOperate")
+  public ResponseModel deleteOperate(Long id){
+    sysOperateService.deleteById(id);
+    return doneSuccess();
+  }
+
+  @GetMapping(value = "addOperateIndex")
   public String addOperatePage(Model model) {
     List<SysRole> list = sysRoleService.queryAll();
     model.addAttribute("list", list);

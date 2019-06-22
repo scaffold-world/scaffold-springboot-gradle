@@ -11,8 +11,7 @@
     <div class="dHead">
         <span class="layui-breadcrumb">
         <a href="javascript:void(0)">权限配置</a>
-        <a href="javascript:void(0)">操作员管理</a>
-        <#--<a><cite>资源管理</cite></a>-->
+        <a href="javascript:void(0)">角色管理</a>
       </span>
         <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float: right"
            href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">&#x1002;</i></a>
@@ -21,7 +20,7 @@
 <div class="weadmin-body">
     <div class="layui-row">
         <form class="layui-form layui-col-md12 we-search">
-            操作员搜索：
+            角色搜索：
             <div class="layui-inline">
                 <@th type="select" nid="basics_use_status" fieldName="status"></@th>
             </div>
@@ -32,12 +31,12 @@
         </form>
     </div>
     <div class="weadmin-block">
-        <button class="layui-btn" onclick="WeAdminShow('添加用户',_ctx + '/sys/sysOperate/addOperateIndex',750,480)"><i
+        <button class="layui-btn" onclick="WeAdminShow('添加角色',_ctx + '/sys/sysRole/addOperateIndex',750,480)"><i
                     class="layui-icon"></i>添加
         </button>
     </div>
     <table class="layui-table"
-           lay-data="{height:315, url: _ctx + '/sys/sysOperate/operateList', page:true, id:'operateTable'}"
+           lay-data="{height:315, url: _ctx + '/sys/sysRole/operateList', page:true, id:'operateTable'}"
            lay-filter="operateTable">
         <thead>
         <tr>
@@ -95,7 +94,7 @@
             }
             layer.confirm(confirmTip, function () {
                 $.ajax({
-                    url: _ctx + "/sys/sysOperate/updateStatus",
+                    url: _ctx + "/sys/sysRole/updateStatus",
                     data: {
                         id: id,
                         status: status
@@ -122,7 +121,7 @@
             layer.confirm('确认要删除吗？', function(index) {
                 //发异步删除数据
                 $.ajax({
-                    url: _ctx + "/sys/sysOperate/deleteOperate",
+                    url: _ctx + "/sys/sysRole/deleteRole",
                     data: {
                         id: id
                     },

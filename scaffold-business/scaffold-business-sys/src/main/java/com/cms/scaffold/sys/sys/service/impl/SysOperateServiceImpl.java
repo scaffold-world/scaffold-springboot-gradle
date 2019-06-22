@@ -132,4 +132,10 @@ public class SysOperateServiceImpl extends BaseServiceImpl<SysOperateMapper, Sys
         }
     }
 
+    @Override
+    public int deleteById(Long id) {
+        Assert.notNull(id);
+        return dao.deleteById(id);
+    }
+
 }

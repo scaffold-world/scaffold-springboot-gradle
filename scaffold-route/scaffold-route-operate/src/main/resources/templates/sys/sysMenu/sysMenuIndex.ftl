@@ -32,6 +32,7 @@
     </div>
     <div style="height: 100%">
         <div class="dBody">
+            <!--树形表格使用开源的：https://gitee.com/beijiyi/tree_table_treegrid_based_on_layui-->
             <table class="layui-hidden" id="menuTable" lay-filter="menuTable"
             </table>
         </div>
@@ -159,7 +160,6 @@
                         id: id
                     },
                     success: function (data) {
-                        console.log("data.code " + data.code + " " + (data.code === 0));
                         if (data.code === 0) {
                             obj.del();
                             layer.close(index);

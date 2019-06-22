@@ -89,4 +89,11 @@ public interface SysOperateService  extends BaseService<SysOperate> {
      * @return
      */
     Map<String,String> findByIds(List<Long> addOperates);
+
+  /**
+   * 根据ID删除
+   * @param id
+   * @return
+   */
+  int deleteById(Long id);
 }
