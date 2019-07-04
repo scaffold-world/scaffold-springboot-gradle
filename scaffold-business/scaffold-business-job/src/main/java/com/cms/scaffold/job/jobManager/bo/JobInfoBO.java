@@ -20,6 +20,9 @@ public class JobInfoBO extends BaseBO {
     /** 任务分组**/
     private String jobGroup;
 
+    /** 配置在某种语言环境才可启动任务 all为全部 zh_CN en_US in_ID等**/
+    private String jobEnv;
+
     /** 任务描述**/
     private String jobDescription;
 

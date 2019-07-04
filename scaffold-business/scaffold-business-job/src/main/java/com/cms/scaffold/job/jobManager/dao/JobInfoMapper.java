@@ -1,7 +1,7 @@
 package com.cms.scaffold.job.jobManager.dao;
 
-import com.cms.scaffold.core.baseService.BaseMapper;
 import com.cms.scaffold.job.jobManager.domain.JobInfo;
+import com.cms.scaffold.core.baseService.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;

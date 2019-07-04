@@ -6,6 +6,7 @@
     <result column="job_name" jdbcType="VARCHAR" property="jobName" />
     <result column="job_group" jdbcType="VARCHAR" property="jobGroup" />
     <result column="job_description" jdbcType="VARCHAR" property="jobDescription" />
+    <result column="job_env" jdbcType="VARCHAR" property="jobEnv" />
     <result column="start_withrun" jdbcType="SMALLINT" property="startWithrun" />
     <result column="job_status" jdbcType="SMALLINT" property="jobStatus" />
     <result column="cron_expression" jdbcType="VARCHAR" property="cronExpression" />
@@ -17,7 +18,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="sql_columns">
-    id,job_name,job_group,job_description,start_withrun,job_status,cron_expression,bean_class,spring_id,method_name,param_json,is_concurrent,create_time
+    id,job_name,job_group,job_description,job_env,start_withrun,job_status,cron_expression,bean_class,spring_id,method_name,param_json,is_concurrent,create_time
   </sql>
   <sql id="sql_where">
     <where>
@@ -29,6 +30,7 @@
           <if test="null != jobName and '' != jobName">and job_name = #{jobName}</if>
           <if test="null != jobGroup and '' != jobGroup">and job_group = #{jobGroup}</if>
           <if test="null != jobDescription and '' != jobDescription">and job_description = #{jobDescription}</if>
+          <if test="null != jobEnv and '' != jobEnv">and job_env = #{jobEnv}</if>
           <if test="null != startWithrun and '' != startWithrun">and start_withrun = #{startWithrun}</if>
           <if test="null != jobStatus and '' != jobStatus">and job_status = #{jobStatus}</if>
           <if test="null != cronExpression and '' != cronExpression">and cron_expression = #{cronExpression}</if>
@@ -73,10 +75,11 @@
   </select>
   <sql id="sql_insert_columns">
     insert into job_info
-	 <trim prefix="(" suffix=")" suffixOverrides="," >
+	 <trim prefix="(" suffix=")" suffixOverrides=",">
 	  <if test="null != item.jobName"> job_name,</if>
 	  <if test="null != item.jobGroup"> job_group,</if>
 	  <if test="null != item.jobDescription"> job_description,</if>
+	  <if test="null != item.jobEnv"> job_env,</if>
 	  <if test="null != item.startWithrun"> start_withrun,</if>
 	  <if test="null != item.jobStatus"> job_status,</if>
 	  <if test="null != item.cronExpression"> cron_expression,</if>
@@ -89,10 +92,11 @@
 	</trim>
   </sql>
   <sql id="sql_insert_values">
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
 	  <if test="null != item.jobName"> #{item.jobName},</if>
 	  <if test="null != item.jobGroup"> #{item.jobGroup},</if>
 	  <if test="null != item.jobDescription"> #{item.jobDescription},</if>
+	  <if test="null != item.jobEnv"> #{item.jobEnv},</if>
 	  <if test="null != item.startWithrun"> #{item.startWithrun},</if>
 	  <if test="null != item.jobStatus"> #{item.jobStatus},</if>
 	  <if test="null != item.cronExpression"> #{item.cronExpression},</if>
@@ -108,7 +112,7 @@
     <include refid="sql_insert_columns" /><include refid="sql_insert_values" />
   </insert>
   <insert id="batchInsert">
-    <foreach collection="list" index="index" item="item" open="" separator=";" close="">
+    <foreach close="" collection="list" index="index" item="item" open="" separator=";">
 	  <include refid="sql_insert_columns" /><include refid="sql_insert_values" />
 	</foreach>
   </insert>
@@ -117,6 +121,7 @@
       <if test="null != item.jobName">, job_name = #{item.jobName}</if>
       <if test="null != item.jobGroup">, job_group = #{item.jobGroup}</if>
       <if test="null != item.jobDescription">, job_description = #{item.jobDescription}</if>
+      <if test="null != item.jobEnv">, job_env = #{item.jobEnv}</if>
       <if test="null != item.startWithrun">, start_withrun = #{item.startWithrun}</if>
       <if test="null != item.jobStatus">, job_status = #{item.jobStatus}</if>
       <if test="null != item.cronExpression">, cron_expression = #{item.cronExpression}</if>
@@ -133,6 +138,7 @@
 	  , job_name = #{item.jobName}
 	  , job_group = #{item.jobGroup}
 	  , job_description = #{item.jobDescription}
+	  , job_env = #{item.jobEnv}
 	  , start_withrun = #{item.startWithrun}
 	  , job_status = #{item.jobStatus}
 	  , cron_expression = #{item.cronExpression}
@@ -148,19 +154,20 @@
     <include refid="sql_update" />
   </update>
   <update id="batchUpdate">
-    <foreach collection="list" index="index" item="item" open="" separator=";" close="">
+    <foreach close="" collection="list" index="index" item="item" open="" separator=";">
 	  <include refid="sql_update" />
 	</foreach>
   </update>
   <update id="updateAll">
     <include refid="sql_update_all" />
   </update>
+  <update id="updateCompare" />
   <delete id="delArray">
     delete from job_info where id in
-	<foreach collection="array" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+	<foreach close=")" collection="array" index="index" item="item" open="(" separator=",">#{item}</foreach>
   </delete>
   <delete id="delList">
     delete from job_info where id in
-	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+	<foreach close=")" collection="list" index="index" item="item" open="(" separator=",">#{item}</foreach>
   </delete>
 </mapper>

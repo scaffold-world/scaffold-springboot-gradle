@@ -1,23 +1,23 @@
 package com.cms.scaffold.job.jobManager.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.cms.scaffold.job.jobManager.ao.JobInfoAO;
 import com.cms.scaffold.job.jobManager.bo.JobInfoBO;
+import com.cms.scaffold.job.jobManager.dao.JobInfoMapper;
+import com.cms.scaffold.job.jobManager.domain.JobInfo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.cms.scaffold.job.jobManager.service.JobInfoService;
 import com.cms.scaffold.common.base.ResponseListModel;
 import com.cms.scaffold.core.baseService.BaseServiceImpl;
-import com.cms.scaffold.job.jobManager.dao.JobInfoMapper;
-import com.cms.scaffold.job.jobManager.domain.JobInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class JobInfoServiceImpl extends BaseServiceImpl<JobInfoMapper,JobInfoAO,JobInfoBO, JobInfo> implements JobInfoService {
+public class JobInfoServiceImpl extends BaseServiceImpl<JobInfoMapper, JobInfoAO, JobInfoBO, JobInfo> implements JobInfoService {
     @Override
     public ResponseListModel<JobInfoBO> getJobPageList(JobInfoAO ao) {
-        PageHelper.startPage(ao.getPage(), ao.getLimit());
+        PageHelper.startPage(ao.getPage(), ao.getRows());
         List<JobInfoBO> jobInfoBOs = findList(ao);
         PageInfo<JobInfoBO> pageInfo = new PageInfo(jobInfoBOs);
         return new ResponseListModel<>(jobInfoBOs, pageInfo.getTotal());
