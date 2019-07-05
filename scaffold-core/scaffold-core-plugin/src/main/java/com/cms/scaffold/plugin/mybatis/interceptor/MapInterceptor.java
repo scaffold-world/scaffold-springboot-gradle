@@ -13,7 +13,7 @@ import java.util.*;
 
 /**
  * TODO:TODO
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2017-2-15
  */
 @Intercepts(@Signature(method="handleResultSets", type=ResultSetHandler.class, args={Statement.class}))
@@ -24,7 +24,7 @@ public class MapInterceptor implements Interceptor {
 	 * @param invocation
 	 * @return
 	 * @throws Throwable
-	 * @author yangdk yangdk@erongdu.com
+	 * @author zjh
 	 * @date 2017-2-15
 	 */
 	@Override
@@ -109,7 +109,7 @@ public class MapInterceptor implements Interceptor {
 	 * TODO：
 	 * @param target
 	 * @return   
-	 * @author yangdk yangdk@erongdu.com
+	 * @author zjh
 	 * @date 2017-2-15
 	 */
 	@Override
@@ -121,7 +121,7 @@ public class MapInterceptor implements Interceptor {
 	/**
 	 * TODO：
 	 * @param properties   
-	 * @author yangdk yangdk@erongdu.com
+	 * @author zjh
 	 * @date 2017-2-15
 	 */
 	@Override

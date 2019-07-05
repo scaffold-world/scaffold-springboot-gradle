@@ -2,7 +2,7 @@
  * @Title: CustomSqlSessionFactoryBean.java
  * @Package com.cms.scaffold.mybatis
  * TODO:TODO
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2017-6-22
  */
 package com.cms.scaffold.plugin.mybatis;
@@ -26,7 +26,7 @@ import java.util.Set;
 
 /**
  * TODO:Mybatis 自定义SqlSessionFactoryBean扫描通配符
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2017-6-22
  */
 public class CustomSqlSessionFactoryBean extends SqlSessionFactoryBean{

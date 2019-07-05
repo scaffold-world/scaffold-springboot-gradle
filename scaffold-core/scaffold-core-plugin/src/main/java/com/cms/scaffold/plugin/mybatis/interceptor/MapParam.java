@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * TODO:TODO
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2017-2-15
  */
 public class MapParam extends HashMap<String, Object> {

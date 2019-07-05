@@ -360,7 +360,7 @@ public class GenPlugin extends PluginAdapter {
         topLevelClass.addAnnotation("@Setter");
 
         if(topLevelClass.getSuperClass().getShortName().equals("BaseEntity")){
-            topLevelClass.addImportedType("TableName");
+            topLevelClass.addImportedType("com.cms.scaffold.common.annotation.TableName");
             //添加domain的注解
             topLevelClass.addAnnotation("@TableName(name = \""+tableName+"\")");
         }

@@ -69,7 +69,7 @@
         <!-- 生成实体类配置 -->
         <javaModelGenerator targetPackage="${generator.javaModelTargetPackage}"
                             targetProject="${generator.path}${generator.javaModelTargetProject}">
-            <property name="rootClass" value="com.cms.scaffold.common.base.BaseEntity"/>
+            <property name="rootClass" value="BaseEntity"/>
         </javaModelGenerator>
         <!-- 生成映射文件配置 -->
         <sqlMapGenerator targetPackage="${generator.sqlMapTargetPackage}"
@@ -168,7 +168,7 @@
         <!-- 生成实体类配置 -->
         <javaModelGenerator targetPackage="${generator.BO.javaModelTargetPackage}"
                             targetProject="${generator.path}${generator.javaModelTargetProject}">
-            <property name="rootClass" value="com.cms.scaffold.common.base.BaseBO"/>
+            <property name="rootClass" value="BaseBO"/>
         </javaModelGenerator>
 
         <!-- 选择一个table来生成相关文件，可以有一个或多个table，必须要有table元素
@@ -260,7 +260,7 @@
         <!-- 生成实体类配置 -->
         <javaModelGenerator targetPackage="${generator.AO.javaModelTargetPackage}"
                             targetProject="${generator.path}${generator.javaModelTargetProject}">
-            <property name="rootClass" value="com.cms.scaffold.common.base.BaseAO"/>
+            <property name="rootClass" value="BaseAO"/>
         </javaModelGenerator>
 
         <!-- 选择一个table来生成相关文件，可以有一个或多个table，必须要有table元素
