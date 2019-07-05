@@ -1,8 +1,8 @@
 package com.cms.scaffold.route.operate.aop;
 
 import com.alibaba.fastjson.JSON;
-import com.cms.scaffold.route.operate.util.UserUtil;
 import com.cms.scaffold.sys.sys.ao.SysOperateLogAO;
+import com.cms.scaffold.route.operate.util.UserUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * @Author zhangjiahengpoping@gmail.com
+ * @Author zhangjiaheng@gmail.com
  * @Description 拦截后台操纵数据库的请求 保存日志记录
  **/
 @Aspect
@@ -31,7 +31,7 @@ public class SysOperateLogAspect {
     /**
      * 只拦截operate后台的请求
      */
-    @Pointcut(value = "execution(* com.cms.scaffold.route.operate.controller.*.*(..)) || execution( * com.cms.scaffold.route.operate.controller.*.*.*(..))")
+    @Pointcut(value = "execution(* com.cms.scaffold.controller.*.*(..)) || execution( * com.cms.scaffold.controller.*.*.*(..))")
     public void pointcutOperate(){}
 
     @AfterReturning(pointcut="pointcutOperate()",returning = "retValue")

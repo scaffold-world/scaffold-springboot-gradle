@@ -1,19 +1,24 @@
 package com.cms.scaffold.core.config;
 
 import org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.interceptor.*;
 
+import javax.sql.DataSource;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @description:aop事务配置
- * @author: zhangjiahengpoping@gmail.com
+ * @author: zjh
  * @date: 2019-02-27 23:56
  **/
 @Configuration

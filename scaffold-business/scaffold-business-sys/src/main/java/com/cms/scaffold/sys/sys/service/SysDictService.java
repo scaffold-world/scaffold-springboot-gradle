@@ -1,10 +1,11 @@
 package com.cms.scaffold.sys.sys.service;
 
 
-import com.cms.scaffold.common.base.BaseServiceInterface;
 import com.cms.scaffold.sys.sys.ao.SysDictAO;
 import com.cms.scaffold.sys.sys.bo.SysDictBO;
 import com.cms.scaffold.sys.sys.domain.SysDict;
+import com.cms.scaffold.common.base.BaseServiceInterface;
+import com.cms.scaffold.common.base.BaseService;
 
 import java.util.List;
 

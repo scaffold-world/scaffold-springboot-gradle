@@ -1,20 +1,21 @@
 package com.cms.scaffold.route.operate.config;
 
-import com.cms.scaffold.route.operate.interceptor.PageViewExceptionInterceptor;
 import com.cms.scaffold.route.operate.interceptor.TraceIdInterceptor;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
+import javax.servlet.MultipartConfigElement;
+import java.io.File;
 import java.util.Locale;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/2/8.
+ * Created by zjh on 2018/2/8.
  */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -44,7 +45,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(traceIdInterceptor()).addPathPatterns("/**");
-        registry.addInterceptor(new PageViewExceptionInterceptor()).addPathPatterns("/**");
         super.addInterceptors(registry);
     }
 
@@ -53,16 +53,18 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("redirect:login");
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // 解决静态资源无法访问
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/");
-        // 解决swagger无法访问
-        registry.addResourceHandler("/swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        // 解决swagger的js文件无法访问
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    /**
+     * 文件上传临时路径
+     */
+    @Bean
+    MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        String location  = System.getProperty("user.dir") +"/home/tmp";
+        File tmpFile   =new File (location);
+        if(!tmpFile.exists()){
+            tmpFile.mkdirs();
+        }
+        factory.setLocation(location);
+        return factory.createMultipartConfig();
     }
 }

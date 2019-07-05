@@ -3,11 +3,11 @@ package com.cms.scaffold.route.operate.controller;
 import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.constant_manual.BasicsConstantManual;
 import com.cms.scaffold.common.constant_manual.SysConstant;
-import com.cms.scaffold.route.operate.response.sys.SysMenuResp;
+import com.cms.scaffold.core.I18nUtil.I18nTransformUtil;
+import com.cms.scaffold.route.operate.response.SysMenuResp;
 import com.cms.scaffold.sys.sys.bo.SysMenuBO;
 import com.cms.scaffold.sys.sys.domain.SysOperate;
 import com.cms.scaffold.sys.sys.service.SysMenuService;
-import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,106 +19,52 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/** Created by zhangjiahengpoping@gmail.com on 2018/3/16. */
+/**
+ * Created by zjh on 2018/3/16.
+ */
 @Controller
-@Api(tags = "IndexController", description = "项目跳转")
 public class IndexController extends BaseController {
 
-  @Autowired SysMenuService sysMenuService;
+    @Autowired
+    SysMenuService sysMenuService;
 
-  /**
-   * 首页展示
-   *
-   * @param request
-   * @return
-   */
-  @RequestMapping(value = "/index", method = RequestMethod.GET)
-  public String index(HttpServletRequest request) {
-    Subject subject = SecurityUtils.getSubject();
-    SysOperate sysOperate =
-        (SysOperate)
-            subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
-    if (null == sysOperate) {
-      return "login";
+
+    /**
+     * 首页展示
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(HttpServletRequest request) {
+
+        Subject subject = SecurityUtils.getSubject();
+
+
+        SysOperate sysOperate =(SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
+
+
+        List<SysMenuBO> list =sysMenuService.findByPidAndId(1L,sysOperate.getId());
+        I18nTransformUtil.transFormList(list, "name");
+        request.setAttribute("menus", Builder.buildList(list, SysMenuResp.class));
+
+        request.setAttribute("sysOperate",sysOperate);
+        return "index";
     }
-    List<SysMenuBO> list = sysMenuService.findByPidAndId(1L, sysOperate.getId());
-    StringBuilder menuList = new StringBuilder();
 
-    for (SysMenuBO bo : list) {
-      menuList
-          .append("<ul id='nav' class='nav-")
-          .append(bo.getId())
-          .append("'>")
-          .append(getChildTreeData(findByPidAndId(bo.getId(), sysOperate.getId()), request))
-          .append("</ul>");
+    /**
+     * 权限不足跳转
+     * @return
+     */
+
+    @RequestMapping(value = "/403")
+    @ResponseBody
+    public String authorized() {
+
+        return SysConstant.TIP_MESSAGE;
     }
-    request.setAttribute("menus", Builder.buildList(list, SysMenuResp.class));
-    request.setAttribute("menuList", menuList.toString());
-    request.setAttribute("sysOperate", sysOperate);
-    return "index";
-  }
 
-  /** 生成左侧树形菜单 递归 */
-  private String getChildTreeData(List<SysMenuBO> list, HttpServletRequest request) {
-    String html = "";
-    if (null == list) {
-      return html;
-    }
-    for (int j = 0; j < list.size(); j++) {
-      SysMenuBO menu = list.get(j);
-      if ("menu".equalsIgnoreCase(menu.getResourceType())) {
-        html =
-            html
-                + "<li><a href='javascript:;'><i class='iconfont'>"
-                + menu.getIconCls()
-                + "</i>"
-                + "<cite>"
-                + menu.getName()
-                + "</cite><i class='iconfont nav_right'>&#xe697;</i>"
-                + "</a><ul class='sub-menu'>"
-                + getChildTreeData(menu.getSysMenuBOList(), request)
-                + "</ul></li>";
-      } else if ("window".equalsIgnoreCase(menu.getResourceType())) {
-        html =
-            html
-                + "<li><a _href='"
-                + request.getContextPath()
-                + menu.getUrl()
-                + "'><i class='iconfont'>&#xe6a7;</i>"
-                + "<cite>"
-                + menu.getName()
-                + "</cite></a></li>";
-      }
-    }
-    return html;
-  }
 
-  /** 递归查询出所有菜单及子菜单 */
-  private List<SysMenuBO> findByPidAndId(Long pid, Long operateId) {
-    List<SysMenuBO> list = sysMenuService.findByPidAndId(pid, operateId);
-    for (SysMenuBO bo : list) {
-      if ("menu".equalsIgnoreCase(bo.getResourceType())) {
-        bo.setSysMenuBOList(findByPidAndId(bo.getId(), operateId));
-      }
-    }
-    return list;
-  }
 
-  /**
-   * 权限不足跳转
-   *
-   * @return
-   */
-  @RequestMapping(value = "/403")
-  @ResponseBody
-  public String authorized() {
 
-    return SysConstant.TIP_MESSAGE;
-  }
 
-  @RequestMapping(value = "/404")
-  public String notFound() {
-
-    return "404";
-  }
 }

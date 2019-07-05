@@ -1,7 +1,7 @@
 /**
  * @Title: CacheConstant.java
- * @Package com.cms.scaffold.p2p.common.constant
- * @author zhangjiahengpoping@gmail.com
+ * @Package com.gjj.p2p.common.constant
+ * @author zjh
  * @date 2017-6-28
  */
 package com.cms.scaffold.common.constant_manual;
@@ -9,7 +9,7 @@ package com.cms.scaffold.common.constant_manual;
 /**
  * 缓存常量类
  *
- * @author zhangjiahengpoping@gmail.com
+ * @author zjh
  * @date 2017-6-28
  */
 public class RedisConstant {
@@ -29,6 +29,9 @@ public class RedisConstant {
      * 参数配置
      */
     public static final String USER_LOGIN_TOKEN = "user:login:token:%s";
+
+    /** 国际化信息根据model.name缓存 **/
+    public static final String SYS_I18N_MODEL_NAME_MAP = "sys:i18n:model:name:%s";
 
 
 }

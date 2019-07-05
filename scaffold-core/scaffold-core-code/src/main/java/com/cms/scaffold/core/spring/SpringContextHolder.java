@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * 
  * ClassName: SpringContextHolder 
  * @Description: 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候取出ApplicaitonContext.
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2016-10-13
  */
 @Component

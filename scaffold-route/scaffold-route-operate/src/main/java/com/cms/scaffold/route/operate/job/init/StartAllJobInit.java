@@ -9,13 +9,14 @@ import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * @Author zhangjiahengpoping@gmail.com
+ * @Author zhangjiaheng@gmail.com
  * @Description 程序启动之后 开始执行所有的定时任务
  **/
 
@@ -30,12 +31,18 @@ public class StartAllJobInit implements CommandLineRunner {
     @Autowired
     JobTaskUtil jobTaskUtil;
 
+    @Value("${job.start.env}")
+    String jobEnv;
+
     @Override
     public void run(String... args) {
-        List<JobInfoBO> list = jobInfoService.findList(new JobInfoAO());
+        JobInfoAO jobInfoAO = new JobInfoAO();
+        jobInfoAO.setJobEnv(jobEnv);
+        jobInfoAO.setStartWithrun(1);
+        List<JobInfoBO> list = jobInfoService.findList(jobInfoAO);
         for (JobInfoBO jobinfo :list) {
             try {
-                if(0 == jobinfo.getStartWithrun()){
+                if("0".equals(jobinfo.getStartWithrun())){
                     logger.info("任务{}未设置自动启动。", jobinfo.getJobName());
                     jobInfoService.updateJobStatus(jobinfo.getId(), BasicsConstantManual.BASICS_SYS_JOB_STATUS_STOP);
                 }else{

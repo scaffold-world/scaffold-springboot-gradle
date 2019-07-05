@@ -12,7 +12,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2017/11/29.
+ * Created by zjh on 2017/11/29.
  */
 @Configuration
 @EnableCaching

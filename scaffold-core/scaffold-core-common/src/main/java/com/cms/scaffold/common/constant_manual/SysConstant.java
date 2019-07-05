@@ -47,4 +47,34 @@ public class SysConstant {
      */
     public static final String USER_DEVICE_PC = "PC";
 
+    /**
+     * 个人开户同步重定向地址
+     */
+    public static final String PERSONAL_REGISTER_REDIRETURL = "personal.register.redirectUrl";
+    /**
+     * 企业开户同步重定向地址
+     */
+    public static final String ENTERPRISE_REGISTER_REDIRETURL = "enterprise.register.redirectUrl";
+
+    /**
+     * 个人开户异步地址
+     */
+    public static final String PERSONAL_REGISTER_URL = "personal.register.url";
+
+    /**
+     * 个人信息披露地址
+     */
+    public static final String PERSONAL_INFORMATION_DISCLOSURE_URL = "personal.information.disclosure.url";
+
+
+    /**
+     * 网关还款同步重定向地址
+     */
+    public static final String GATEWAY_REPAY_REDIRETURL = "gateway.repay.redirectUrl";
+
+    /**
+     * 新网网关接口同步重定向地址
+     */
+    public static final String XINGWANG_GATEWAY_REDIRECTURL = "xinwang.gateway.redirectUrl";
+
 }

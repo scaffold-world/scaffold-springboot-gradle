@@ -1,8 +1,8 @@
 /**  
  * @Title: CacheUtils.java
- * @Package com.cms.scaffold.p2p.core.core.util
+ * @Package com.gjj.p2p.core.core.util
  * 
- * @author zhangjiahengpoping@gmail.com
+ * @author zjh
  * @date 2017-6-29
  */
 package com.cms.scaffold.core.util;
@@ -22,7 +22,7 @@ import java.util.Set;
 /**
  * 通用缓存工具类
  * 
- * @author zhangjiahengpoping@gmail.com
+ * @author zjh
  * @date 2017-6-29
  */
 public class CacheUtils {
@@ -460,6 +460,12 @@ public class CacheUtils {
 			cache.delMapField(key, field);
 		}
 	}
+	public static boolean setnx(String key, String value) {
+		if (cache != null) {
+			return cache.setnx(key, value, ExpireTime.NONE);
+		}
+		return false;
+	}
 
 	public static boolean setnx(String key, String value, ExpireTime cacheTime) {
 		if (cache != null) {
@@ -581,7 +587,7 @@ public class CacheUtils {
 	 * 当 key 不存在时，返回 -2 。 当 key 存在但没有设置剩余生存时间时，返回 -1 。 否则，以秒为单位，返回 key 的剩余生存时间。
 	 * @param key
 	 * @return   
-	 * @author zhangjiahengpoping@gmail.com
+	 * @author zjh
 	 * @date 2017-9-26
 	 */
 	public static Long ttl(String key){

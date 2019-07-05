@@ -9,7 +9,7 @@ import java.util.Locale;
 
 /**
  * @description:获取国际化信息服务类
- * @author: zhangjiahengpoping@gmail.com
+ * @author: zjh
  * @date: 2019-03-12 00:21
  **/
 @Component

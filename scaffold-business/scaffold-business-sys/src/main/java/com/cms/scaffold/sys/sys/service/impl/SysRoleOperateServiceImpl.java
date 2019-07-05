@@ -1,11 +1,11 @@
 package com.cms.scaffold.sys.sys.service.impl;
 
 import com.cms.scaffold.sys.BaseServiceImpl;
+import com.cms.scaffold.sys.sys.dao.SysRoleOperateMapper;
 import com.cms.scaffold.sys.sys.domain.SysOperate;
 import com.cms.scaffold.sys.sys.domain.SysRoleOperate;
 import com.cms.scaffold.sys.sys.service.SysOperateService;
 import com.cms.scaffold.sys.sys.service.SysRoleOperateService;
-import com.cms.scaffold.sys.sys.dao.SysRoleOperateMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

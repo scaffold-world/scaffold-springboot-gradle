@@ -2,7 +2,7 @@
  * @Title: BaseMapper.java
  * @Package com.cms.scaffold.common.mapper
  * TODO
- * @author zhangjiahengpoping@gmail.com
+ * @author zjh
  * @date 2017-6-27
  */
 package com.cms.scaffold.core.baseService;
@@ -11,12 +11,13 @@ import org.apache.ibatis.annotations.Param;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 
 /**
  * mapper的基类
  * 
- * @author zhangjiahengpoping@gmail.com
+ * @author zjh
  * @date 2017-6-27
  */
 public interface BaseMapper<T> {

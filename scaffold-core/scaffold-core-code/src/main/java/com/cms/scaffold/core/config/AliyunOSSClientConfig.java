@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2017/11/29.
+ * Created by zjh on 2017/11/29.
  */
 @Component
 @PropertySource(ignoreResourceNotFound=true,value="classpath:code.properties")

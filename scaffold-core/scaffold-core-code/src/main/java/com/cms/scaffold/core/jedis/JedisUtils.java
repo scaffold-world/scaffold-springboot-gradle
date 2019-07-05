@@ -1,8 +1,8 @@
 package com.cms.scaffold.core.jedis;
 
 
-import com.cms.scaffold.core.spring.SpringContextHolder;
 import com.cms.scaffold.common.util.StringUtil;
+import com.cms.scaffold.core.spring.SpringContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -1083,7 +1083,7 @@ public class JedisUtils {
 	 * 	当 key 不存在时，返回 -2 。 当 key 存在但没有设置剩余生存时间时，返回 -1 。 否则，以秒为单位，返回 key 的剩余生存时间。
 	 * @param key
 	 * @return   
-	 * @author zhangjiahengpoping@gmail.com
+	 * @author zjh
 	 * @date 2017-9-26
 	 */
 	public static long ttl(String key){
@@ -1324,5 +1324,55 @@ public class JedisUtils {
 			close(jedis);
 		}
 		return result;
+	}
+
+	/**
+	 * 对某个键的值自增
+	 * @author liboyi
+	 * @param key 键
+	 * @param cacheSeconds 超时时间，0为不超时
+	 * @return
+	 */
+	public static long setIncr(String key, int cacheSeconds) {
+		long result = 0;
+		Jedis jedis = null;
+		try {
+			jedis = jedisPool.getResource();
+			result =jedis.incr(key);
+			if (cacheSeconds != 0) {
+				jedis.expire(key, cacheSeconds);
+			}
+			LOGGER.debug("set "+ key + " = " + result);
+		} catch (Exception e) {
+			LOGGER.warn("set "+ key + " = " + result);
+		} finally {
+			jedisPool.close();
+		}
+		return result;
+	}
+
+	/**
+	 * 批量获取缓存
+	 * @param pattern
+	 * @return 值
+	 */
+	public static List<Object> batchGetObject(String pattern) {
+		Jedis jedis = null;
+		List<Object> list = new ArrayList<>();
+		try {
+			jedis = getResource();
+			Set<String> sets = jedis.keys(pattern+"*");
+			if(!CollectionUtils.isEmpty(sets)){
+				for(String key : sets){
+					Object result = toObject(jedis.get(getBytesKey(key)));
+					list.add(result);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.warn("get {} = {}", pattern, list, e);
+		} finally {
+			close(jedis);
+		}
+		return list;
 	}
 }

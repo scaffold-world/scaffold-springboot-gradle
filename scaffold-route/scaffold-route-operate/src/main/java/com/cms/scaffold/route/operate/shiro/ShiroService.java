@@ -7,7 +7,7 @@ import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.text.MessageFormat;
@@ -15,10 +15,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component
+@Service
 public class ShiroService {
 
-    public static final String PREMISSION_STRING = "perms[\"{0}\"]";
+    public static final String PREMISSION_STRING="perms[\"{0}\"]";
 
     @Autowired
     ShiroFilterFactoryBean shiroFilterFactoryBean;
@@ -30,23 +30,19 @@ public class ShiroService {
      * 初始化权限
      */
     public Map<String, String> loadFilterChainDefinitions() {
-        return loadFilterChainDefinitions(sysMenuService);
-    }
-
-    public static Map<String, String> loadFilterChainDefinitions(SysMenuService menuService) {
         // 权限控制map.从数据库获取
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        List<SysMenu> menuList = menuService.findAll();
+        List<SysMenu> menuList = sysMenuService.findAll();
 
-        if (menuList != null && !menuList.isEmpty()) {
-            for (SysMenu menu : menuList) {
-                if (!StringUtils.isEmpty(menu.getUrl())) {
-                    if (menu.getUrl().indexOf("/") == 0) {
+        if(menuList !=null && !menuList.isEmpty()){
+            for(SysMenu menu : menuList){
+                if(!StringUtils.isEmpty(menu.getUrl())){
+                    if(menu.getUrl().indexOf("/")==0){
                         filterChainDefinitionMap.put(menu.getUrl(),
-                                MessageFormat.format(PREMISSION_STRING, menu.getUrl().replaceFirst("/", "").replaceAll("/", ":")));
-                    } else {
+                                MessageFormat.format(PREMISSION_STRING,menu.getUrl().replaceFirst("/","").replaceAll("/",":")));
+                    }else{
                         filterChainDefinitionMap.put(menu.getUrl(),
-                                MessageFormat.format(PREMISSION_STRING, menu.getUrl().replaceAll("/", ":")));
+                                MessageFormat.format(PREMISSION_STRING,menu.getUrl().replaceAll("/",":")));
                     }
                 }
             }

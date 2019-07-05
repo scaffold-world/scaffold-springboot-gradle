@@ -1,9 +1,9 @@
 package com.cms.scaffold.route.operate.aop;
 
+import com.cms.scaffold.sys.sys.domain.SysOperate;
+import com.cms.scaffold.route.operate.util.UserUtil;
 import com.cms.scaffold.common.base.BaseEntity;
 import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.route.operate.util.UserUtil;
-import com.cms.scaffold.sys.sys.domain.SysOperate;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -13,7 +13,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/3/25.
+ * Created by zjh on 2018/3/25.
  */
 @Aspect
 @Component

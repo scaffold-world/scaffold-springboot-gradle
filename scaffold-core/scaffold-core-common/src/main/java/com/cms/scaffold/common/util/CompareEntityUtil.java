@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @description: 比较实体类工具
- * @author: zhangjiahengpoping@gmail.com
+ * @author: zjh
  * @date: 2019-02-28 00:55
  **/
 public class CompareEntityUtil {

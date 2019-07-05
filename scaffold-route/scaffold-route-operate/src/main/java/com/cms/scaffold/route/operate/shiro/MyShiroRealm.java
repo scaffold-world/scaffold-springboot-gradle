@@ -90,7 +90,7 @@ public class MyShiroRealm  extends AuthorizingRealm {
         SysOperate operator = sysOperateService.findByUserName(username);
 
         if(operator==null) throw new UnknownAccountException();
-        if (operator.getStatus()==null || operator.getStatus()==2) {
+        if (operator.getStatus()==null || operator.getStatus()==1) {
             throw new LockedAccountException(); // 帐号锁定
         }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(

@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync//异步执行
 public class RouteAppApplication {
     public static void main(String[] args) {
-        System.setProperty("projectName","scaffold-route-app");
+        System.setProperty("projectName","module-route-app");
         SpringApplication.run(RouteAppApplication.class, args);
     }
 }

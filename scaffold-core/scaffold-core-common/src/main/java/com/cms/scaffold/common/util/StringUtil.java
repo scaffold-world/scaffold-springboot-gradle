@@ -27,7 +27,7 @@ public class StringUtil extends StringUtils {
      * @return
      */
     public static String isNull(String str) {
-        if (str == null) {
+        if (str == null ||"null".equals(str)) {
             return "";
         }
         return str.trim();
@@ -76,6 +76,15 @@ public class StringUtil extends StringUtils {
         return !StringUtil.isNull(str).equals("");
     }
 
+    /**
+     * 检验是否非空字符串
+     *
+     * @param o
+     * @return
+     */
+    public static boolean isNotBlank(Object o) {
+        return !StringUtil.isNull(o).equals("");
+    }
     /**
      * 检验手机号
      *

@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * 自定义sessionId获取
- * Created by zhangjiahengpoping@gmail.com on 2018/4/12.
+ * Created by zjh on 2018/4/12.
  */
 public class MySessionManager extends DefaultWebSessionManager{
 

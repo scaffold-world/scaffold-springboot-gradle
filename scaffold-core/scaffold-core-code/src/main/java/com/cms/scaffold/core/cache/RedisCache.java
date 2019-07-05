@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * 
  * 
- * @author zhangjiahengpoping@gmail.com
+ * @author zjh
  * @date 2017-6-28
  */
 public class RedisCache implements CacheFactory {
@@ -272,7 +272,7 @@ public class RedisCache implements CacheFactory {
 	 * 
 	 * @param key
 	 * @return   
-	 * @author zhangjiahengpoping@gmail.com
+	 * @author zjh
 	 * @date 2017-9-26
 	 */
 	@Override

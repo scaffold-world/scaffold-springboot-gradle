@@ -7,7 +7,7 @@ import org.springframework.scheduling.quartz.AdaptableJobFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * @Author zhangjiahengpoping@gmail.com
+ * @Author zhangjiaheng@gmail.com
  * @Description 解决spring管理的Quartz job里面注入不了其他bean
  **/
 @Component

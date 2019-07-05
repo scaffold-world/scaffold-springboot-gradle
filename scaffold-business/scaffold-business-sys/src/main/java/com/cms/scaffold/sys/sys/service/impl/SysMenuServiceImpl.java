@@ -1,18 +1,20 @@
 package com.cms.scaffold.sys.sys.service.impl;
 
-import com.cms.scaffold.common.asserts.Assert;
-import com.cms.scaffold.common.base.Builder;
-import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.core.baseService.BaseServiceImpl;
 import com.cms.scaffold.sys.sys.ao.SysMenuAO;
 import com.cms.scaffold.sys.sys.bo.SysMenuBO;
 import com.cms.scaffold.sys.sys.dao.SysMenuMapper;
 import com.cms.scaffold.sys.sys.domain.SysMenu;
 import com.cms.scaffold.sys.sys.service.SysMenuService;
+import com.cms.scaffold.common.asserts.Assert;
+import com.cms.scaffold.common.base.Builder;
+import com.cms.scaffold.common.exception.BaseResultCodeEnum;
+import com.cms.scaffold.common.exception.BusinessException;
+import com.cms.scaffold.common.util.StringUtil;
+import com.cms.scaffold.core.baseService.BaseServiceImpl;
+import com.cms.scaffold.core.util.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenuAO, SysMenuBO, SysMenu> implements SysMenuService {
@@ -60,30 +62,14 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenuAO
         return Builder.buildList(dao.findByPid(pid),SysMenuBO.class);
     }
 
-    @Override
-    public List<SysMenuBO> findAllMenus(String name) {
-        SysMenu menu = new SysMenu();
-        menu.setName(name);
-        return Builder.buildList(dao.findList(menu),SysMenuBO.class);
-    }
-
-    @Override
-    public Integer deleteMenusById(Long id) {
-        List<SysMenu> list = dao.findByPid(id);
-        List<Long> listIds = list.stream().map(SysMenu::getId).collect(Collectors.toList());
-        for (Long cId : listIds) {
-            deleteMenusById(cId);
-        }
-        return dao.deleteById(id) + listIds.size();
-    }
-
 
     @Override
     public void save(SysMenuAO sysMenuAO) {
+        Assert.notNull(sysMenuAO);
         Assert.notNull(sysMenuAO.getPid(), "pid");
         SysMenu sysMenu = Builder.build(sysMenuAO, SysMenu.class);
         SysMenu parentSysMenu = dao.selectById(sysMenu.getPid());
-        sysMenuAO.setLevelId(parentSysMenu.getLevelId() + 1);
+        sysMenu.setLevelId(parentSysMenu.getLevelId() + 1);
         //判断设置地址链接
         if (StringUtil.isNotBlank(sysMenu.getUrl())) {
             if (sysMenu.getUrl().indexOf("/") == 0) {
@@ -99,7 +85,14 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenuAO
         if (sysMenu.getId() == null) {
             dao.insert(sysMenu);
         } else {
-            dao.update(sysMenu);
+            SysMenu tempSysMenu = dao.selectById(sysMenu.getId());
+            if (!tempSysMenu.getPid().equals( sysMenu.getPid())) {
+                throw new BusinessException(BaseResultCodeEnum.SYSTEM_MENU_PID_NOT_CHANGE);
+            }
+
+            BeanUtils.copyPropertiesByList(sysMenu, tempSysMenu, new String[]{
+                    "name", "pid", "url", "iconCls", "status", "sort", "code", "state", "resourceType"});
+            dao.update(tempSysMenu);
         }
 
     }

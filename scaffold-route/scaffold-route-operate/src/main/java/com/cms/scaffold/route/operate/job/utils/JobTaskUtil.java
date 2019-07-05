@@ -1,8 +1,9 @@
 package com.cms.scaffold.route.operate.job.utils;
 
+import com.cms.scaffold.route.operate.job.executer.TaskDisallowConcurrentExecutor;
+import com.cms.scaffold.route.operate.job.executer.TaskJobExecutor;
 import com.cms.scaffold.job.jobManager.ao.JobInfoAO;
 import com.cms.scaffold.job.jobManager.bo.JobInfoBO;
-import com.cms.scaffold.route.operate.job.executer.AbstractTaskExecutor;
 import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @Author zhangjiahengpoping@gmail.com
+ * @Author zhangjiaheng@gmail.com
  * @Description
  **/
 @Component
@@ -45,7 +46,8 @@ public class JobTaskUtil {
         CronTrigger trigger = (CronTrigger)scheduler.getTrigger(triggerKey);
         // 不存在，创建一个
         if(trigger == null){
-            Class<? extends Job> clazz = AbstractTaskExecutor.getExecutorClazz(IS_CONCURRENT.equals(job.getIsConcurrent().toString()));
+            Class clazz = IS_CONCURRENT.equals(job.getIsConcurrent()) ?
+                    TaskJobExecutor.class : TaskDisallowConcurrentExecutor.class;
 
             JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(job.getJobName(), job.getJobGroup()).build();
 

@@ -3,7 +3,7 @@ package com.cms.scaffold.core.dict;
 /**
  * 
  * 失效时间枚举类
- * @author zhangjiahengpoping@gmail.com
+ * @author zjh
  * @date 2017-6-28
  */
 public enum ExpireTime {

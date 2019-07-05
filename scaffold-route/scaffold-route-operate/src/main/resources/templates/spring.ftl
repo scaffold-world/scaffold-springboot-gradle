@@ -21,62 +21,62 @@
  -->
 
 <#--
- * msg
+ * message
  *
- * Macro to translate a msg code into a msg.
+ * Macro to translate a message code into a message.
  -->
-<#macro msg code>${springMacroRequestContext.getMessage(code)}</#macro>
+<#macro message code>${springMacroRequestContext.getMessage(code)}</#macro>
 
 <#--
  * messageText
  *
- * Macro to translate a msg code into a msg,
- * using the given default text if no msg found.
+ * Macro to translate a message code into a message,
+ * using the given default text if no message found.
  -->
 <#macro messageText code, text>${springMacroRequestContext.getMessage(code, text)}</#macro>
 
 <#--
  * messageArgs
  *
- * Macro to translate a msg code with arguments into a msg.
+ * Macro to translate a message code with arguments into a message.
  -->
 <#macro messageArgs code, args>${springMacroRequestContext.getMessage(code, args)}</#macro>
 
 <#--
  * messageArgsText
  *
- * Macro to translate a msg code with arguments into a msg,
- * using the given default text if no msg found.
+ * Macro to translate a message code with arguments into a message,
+ * using the given default text if no message found.
  -->
 <#macro messageArgsText code, args, text>${springMacroRequestContext.getMessage(code, args, text)}</#macro>
 
 <#--
  * theme
  *
- * Macro to translate a theme msg code into a msg.
+ * Macro to translate a theme message code into a message.
  -->
 <#macro theme code>${springMacroRequestContext.getThemeMessage(code)}</#macro>
 
 <#--
  * themeText
  *
- * Macro to translate a theme msg code into a msg,
- * using the given default text if no msg found.
+ * Macro to translate a theme message code into a message,
+ * using the given default text if no message found.
  -->
 <#macro themeText code, text>${springMacroRequestContext.getThemeMessage(code, text)}</#macro>
 
 <#--
  * themeArgs
  *
- * Macro to translate a theme msg code with arguments into a msg.
+ * Macro to translate a theme message code with arguments into a message.
  -->
 <#macro themeArgs code, args>${springMacroRequestContext.getThemeMessage(code, args)}</#macro>
 
 <#--
  * themeArgsText
  *
- * Macro to translate a theme msg code with arguments into a msg,
- * using the given default text if no msg found.
+ * Macro to translate a theme message code with arguments into a message,
+ * using the given default text if no message found.
  -->
 <#macro themeArgsText code, args, text>${springMacroRequestContext.getThemeMessage(code, args, text)}</#macro>
 

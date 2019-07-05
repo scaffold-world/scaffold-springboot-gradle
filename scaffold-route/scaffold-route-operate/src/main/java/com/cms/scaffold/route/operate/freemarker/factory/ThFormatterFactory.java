@@ -1,14 +1,14 @@
 package com.cms.scaffold.route.operate.freemarker.factory;
 
+import com.cms.scaffold.route.operate.freemarker.impl.ThFormatterDict;
 import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.route.operate.freemarker.impl.ThFormatterTemplet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 /**
  * 表头格式工厂类
- * Created by zhangjiahengpoping@gmail.com on 2018/7/2.
+ * Created by zjh on 2018/7/2.
  */
 public class ThFormatterFactory {
 
@@ -16,7 +16,7 @@ public class ThFormatterFactory {
 
     public static ThFormatterInterface createThFormatter(String type){
         if(StringUtils.isEmpty(type)){
-            return  new ThFormatterTemplet();
+            return  new ThFormatterDict();
         }
         //文件名
         String fileName = "ThFormatter" + StringUtil.firstCharUpperCase(type);

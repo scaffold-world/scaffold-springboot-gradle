@@ -5,15 +5,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @description:
- * @author: zhangjiahengpoping@gmail.com
- * @date: 2019-03-12 23:15
- **/
-@Setter
+* 
+* @author: Mybatis Generator
+* @date: 2019-03-28 19:25:53
+*/
 @Getter
-public class SysMenuAO extends BaseAO{
+@Setter
+public class SysMenuAO extends BaseAO {
     /** 菜单名称**/
     private String name;
+
+    /** 中文对应的国际化标识ID**/
+    private String i18nNid;
 
     /** 父级ID**/
     private Long pid;

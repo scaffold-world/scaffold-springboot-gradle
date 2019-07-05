@@ -1,5 +1,6 @@
 package com.cms.scaffold.route.operate.controller.job;
 
+import com.cms.scaffold.route.operate.controller.BaseController;
 import com.cms.scaffold.common.asserts.Assert;
 import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.base.ResponseListModel;
@@ -11,10 +12,8 @@ import com.cms.scaffold.core.spring.SpringContextHolder;
 import com.cms.scaffold.job.jobManager.ao.JobInfoAO;
 import com.cms.scaffold.job.jobManager.bo.JobInfoBO;
 import com.cms.scaffold.job.jobManager.service.JobInfoService;
-import com.cms.scaffold.route.operate.controller.BaseController;
 import com.cms.scaffold.route.operate.job.utils.InvokeJobUtils;
 import com.cms.scaffold.route.operate.job.utils.JobTaskUtil;
-import io.swagger.annotations.Api;
 import org.quartz.SchedulerException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,12 +24,11 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @Author zhangjiahengpoping@gmail.com
+ * @Author zhangjiaheng@gmail.com
  * @Description
  **/
 @Controller
 @RequestMapping("/job/jobManager")
-@Api(tags = "JobInfoController", description = "定时任务配置页面")
 public class JobInfoController extends BaseController {
 
     private static final String ftlPath = "/job/jobManager/";
@@ -44,29 +42,29 @@ public class JobInfoController extends BaseController {
      * 任务管理页面
      * @return
      */
-    @RequestMapping("/jobManagePage")
-    public String jobManagePage(){
-        return ftlPath + "jobManagePage";
+    @RequestMapping("/taskManagePage")
+    public String taskManagePage(){
+        return ftlPath + "taskManagePage";
     }
 
     /**
      * 任务更新页面
      * @return
      */
-    @RequestMapping("/updateJobPage")
-    public String updateJobPage(Long id, Model model){
+    @RequestMapping("/updateTaskPage")
+    public String updateTaskPage(Long id, Model model){
         JobInfoBO jobInfoBO = jobInfoService.selectById(id);
         model.addAttribute("job", jobInfoBO);
-        return ftlPath + "updateJobPage";
+        return ftlPath + "updateTaskPage";
     }
 
     /**
      * 任务新增页面
      * @return
      */
-    @RequestMapping("/addJobPage")
-    public String addJobPage(){
-        return ftlPath + "addJobPage";
+    @RequestMapping("/addTaskPage")
+    public String addTaskPage(){
+        return ftlPath + "addTaskPage";
     }
 
     /**
@@ -83,6 +81,7 @@ public class JobInfoController extends BaseController {
 
     /**
      * 新增定时任务并启动
+     * @param jobInfoReq
      * @return
      */
     @RequestMapping("/addJob")
@@ -145,6 +144,7 @@ public class JobInfoController extends BaseController {
 
     /**
      * 更新任务执行频率cron
+     * @param jobInfoReq
      * @return
      */
     @RequestMapping("/updateJob")
@@ -242,6 +242,7 @@ public class JobInfoController extends BaseController {
 
     /**
      * 测试调用一次远程方法
+     * @param jobInfoReq
      */
     @RequestMapping("/testExecuteTheMethod")
     @ResponseBody

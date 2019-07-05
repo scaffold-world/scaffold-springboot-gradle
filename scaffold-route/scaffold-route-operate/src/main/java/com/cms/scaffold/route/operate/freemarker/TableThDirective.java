@@ -1,5 +1,7 @@
 package com.cms.scaffold.route.operate.freemarker;
 
+import com.cms.scaffold.common.util.StringUtil;
+import com.cms.scaffold.core.I18nUtil.I18nTransformUtil;
 import com.cms.scaffold.route.operate.freemarker.factory.ThFormatterFactory;
 import com.cms.scaffold.route.operate.freemarker.factory.ThFormatterInterface;
 import com.cms.scaffold.route.operate.tag.TableThTag;
@@ -18,7 +20,7 @@ import java.io.Writer;
 import java.util.Map;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/4/16.
+ * Created by zjh on 2018/4/16.
  */
 
 @Component
@@ -28,39 +30,65 @@ public class TableThDirective implements TemplateDirectiveModel {
     Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     /**
-     * FreeMarker自定义指令
+     * select下拉框FreeMarker自定义指令
+     * @param environment
+     * @param map
+     * @param templateModels
+     * @param templateDirectiveBody
+     * @throws TemplateException
+     * @throws IOException
      */
     @Override
     public void execute(Environment environment, Map map, TemplateModel[] templateModels,
-                        TemplateDirectiveBody templateDirectiveBody) throws TemplateException, IOException {
+                        TemplateDirectiveBody templateDirectiveBody) throws TemplateException, IOException{
         TableThTag tableThTag = new TableThTag();
+
         //校验参数
         try {
-            //  用来将一些 key-value 的值（例如 hashmap）映射到 bean 中的属性
-            BeanUtils.populate(tableThTag, map);
-            if (StringUtils.isEmpty(tableThTag.getNid()) || StringUtils.isEmpty(tableThTag.getType())) {
-                throw new IllegalArgumentException("nid,type不能为空");
+            BeanUtils.populate(tableThTag,map);
+            if(StringUtils.isEmpty(tableThTag.getNid()) && StringUtils.isEmpty(tableThTag.getType())){
+                throw new IllegalArgumentException("nid,type必须有一个不为空");
             }
         } catch (Exception e) {
-            logger.error("数据转化异常", e);
+            logger.error("数据转化异常",e);
         }
-        StringBuilder html = new StringBuilder();
-        // 根据类型创建不同的HTML生成器
+
+
+        StringBuilder html  =  new StringBuilder();
+        String title = tableThTag.getTitle();
+        String i18n = tableThTag.getI18n();
+        if(StringUtil.isNotBlank(i18n)){
+            String tmpTitle = I18nTransformUtil.transFormString(i18n);
+            if(StringUtil.isNotBlank(tmpTitle)){
+                title = tmpTitle;
+            }
+        }
+        html.append("\t\t\t\t\t<th data-options=\"field:'"+tableThTag.getField()+"'"+",title:'"+title+"',");
+        if(!StringUtils.isEmpty(tableThTag.getWidth())){
+            html.append("width:'"+tableThTag.getWidth()+"',");
+        }
+
         ThFormatterInterface thFormatterInterface = ThFormatterFactory.createThFormatter(tableThTag.getType());
-        if (thFormatterInterface != null) {
-            String dictHtml = thFormatterInterface.buildFormatterHtml(tableThTag.getNid(), tableThTag.getFieldName());
+        if(thFormatterInterface != null){
+            html.append("dict:'"+tableThTag.getNid()+"',");
+            String dictHtml = thFormatterInterface.buildFormatterHtml(tableThTag.getNid());
             html.append(dictHtml);
         }
+
+        html.append("\"></th>\n");
         // 执行真正指令的执行部分:
         Writer out = environment.getOut();
         out.write(html.toString());
-        if (templateDirectiveBody != null) {
+
+        //environment.setVariable("th", getBeansWrapper().wrap(html.toString()));
+        if(templateDirectiveBody !=null){
             templateDirectiveBody.render(environment.getOut());
         }
 
     }
 
-    public static BeansWrapper getBeansWrapper() {
+
+    public static BeansWrapper getBeansWrapper(){
         BeansWrapper beansWrapper =
                 new BeansWrapperBuilder(Configuration.VERSION_2_3_21).build();
         return beansWrapper;

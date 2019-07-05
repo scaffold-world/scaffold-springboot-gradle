@@ -10,6 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
     </dependencies>
 
     <artifactId>scaffold-route-app</artifactId>

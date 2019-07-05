@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @description:
- * @author: zhangjiahengpoping@gmail.com
+ * @author: zjh
  * @date: 2019-03-12 19:27
  **/
 public class ResponseListModelUtils {
@@ -32,6 +32,6 @@ public class ResponseListModelUtils {
      * @return
      */
     public static ResponseListModel transform(ResponseListModel data, Class clazz){
-        return new ResponseListModel<>(Builder.buildList(data.getData(),clazz), data.getCount());
+        return new ResponseListModel<>(Builder.buildList(data.getRows(),clazz), data.getTotal());
     }
 }

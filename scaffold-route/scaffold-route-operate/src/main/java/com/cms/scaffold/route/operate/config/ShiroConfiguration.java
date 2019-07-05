@@ -1,7 +1,7 @@
 package com.cms.scaffold.route.operate.config;
 
 import com.cms.scaffold.route.operate.shiro.MyShiroRealm;
-import com.cms.scaffold.route.operate.shiro.ShiroService;
+import com.cms.scaffold.sys.sys.domain.SysMenu;
 import com.cms.scaffold.sys.sys.service.SysMenuService;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -9,34 +9,49 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.Cookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.Filter;
+import java.text.MessageFormat;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/2/8.
+ * Created by zjh on 2018/2/8.
  * Apache Shiro 核心通过 Filter 来实现，就好像SpringMvc 通过DispachServlet 来主控制一样。
  * 既然是使用 Filter 一般也就能猜到，是通过URL规则来进行过滤和权限校验，所以我们需要定义一系列关于URL的规则和访问权限。
  */
 @Configuration
-@ConditionalOnMissingBean(name = {"sysMenuService"})
+@ConditionalOnMissingBean(name = "sysMenuService")
 // 这个注解是为了保证flywaydb执行在ShiroConfiguration查询数据库之前
 @DependsOn("flywayInitializer")
+@Component
 public class ShiroConfiguration {
 
     @Autowired
     SysMenuService sysMenuService;
 
+    @Value("${server.session.timeout:30000}")
+    Long  sessionTimeOut;
+
     /**
      * 默认premission字符串
      */
-    public static final String PREMISSION_STRING="perms[\"{0}\"]";
+    public static final String PREMISSION_STRING = "perms[\"{0}\"]";
+
+    //系统环境
+    @Value("${spring.profiles.active:prod}")
+    private String profile;
 
     /**
      * LifecycleBeanPostProcessor，这是个DestructionAwareBeanPostProcessor的子类，
@@ -48,6 +63,15 @@ public class ShiroConfiguration {
         return new LifecycleBeanPostProcessor();
     }
 
+    @Bean
+    public DefaultWebSessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setGlobalSessionTimeout(sessionTimeOut * 1000L);
+        Cookie cookie = sessionManager.getSessionIdCookie();
+        cookie.setName(profile + "SessionId");
+        return sessionManager;
+    }
+
 
     /**
      * HashedCredentialsMatcher，这个类是为了对密码进行编码的，
@@ -55,13 +79,14 @@ public class ShiroConfiguration {
      * 这个类也负责对form里输入的密码进行编码。
      */
     public Md5CredentialsMatcher md5CredentialsMatcher() {
+        Md5CredentialsMatcher md5CredentialsMatcher = new Md5CredentialsMatcher();
 
-        return new Md5CredentialsMatcher();
+        return md5CredentialsMatcher;
     }
 
 
     @Bean
-    public MyShiroRealm myShiroRealm(){
+    public MyShiroRealm myShiroRealm() {
         MyShiroRealm myShiroRealm = new MyShiroRealm();
         myShiroRealm.setCredentialsMatcher(md5CredentialsMatcher());
         return myShiroRealm;
@@ -74,11 +99,9 @@ public class ShiroConfiguration {
     public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(myShiroRealm());
-//        securityManager.setRememberMeManager(cookieRememberMeManager());
-//        securityManager.setCacheManager(ehCacheManager());
+        securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
-
 
 
     /**
@@ -94,20 +117,40 @@ public class ShiroConfiguration {
         Map<String, Filter> filters = new LinkedHashMap<>();
         LogoutFilter logoutFilter = new LogoutFilter();
         logoutFilter.setRedirectUrl("/home");
+//        filters.put("logout",null);
         shiroFilterFactoryBean.setFilters(filters);
 
-        Map<String, String> filterChainDefinitionManager = ShiroService.loadFilterChainDefinitions(sysMenuService);
+        Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
+        List<SysMenu> menuList = sysMenuService.findAll();
+
+        if (menuList != null && !menuList.isEmpty()) {
+            for (SysMenu menu : menuList) {
+                if (!StringUtils.isEmpty(menu.getUrl())) {
+                    if (menu.getUrl().indexOf("/") == 0) {
+                        filterChainDefinitionManager.put(menu.getUrl(),
+                                MessageFormat.format(PREMISSION_STRING, menu.getUrl().replaceFirst("/", "").replaceAll("/", ":")));
+                    } else {
+                        filterChainDefinitionManager.put(menu.getUrl(),
+                                MessageFormat.format(PREMISSION_STRING, menu.getUrl().replaceAll("/", ":")));
+                    }
+                }
+            }
+        }
         filterChainDefinitionManager.put("/login/check", "anon");
         filterChainDefinitionManager.put("/logout", "logout");
         filterChainDefinitionManager.put("/login", "anon");
-        filterChainDefinitionManager.put("/static/**","anon");
-        filterChainDefinitionManager.put("/lang/**","anon");
+        filterChainDefinitionManager.put("/dingLogin/check", "anon");
+        filterChainDefinitionManager.put("/static/**", "anon");
+        filterChainDefinitionManager.put("/notify/**", "anon");
+        filterChainDefinitionManager.put("/lang/**", "anon");
+
         filterChainDefinitionManager.put("/*/login/check", "anon");
         filterChainDefinitionManager.put("/*/logout", "logout");
         filterChainDefinitionManager.put("/*/login", "anon");
-        filterChainDefinitionManager.put("/*/static/**","anon");
-        filterChainDefinitionManager.put("/*/notify/**","anon");
-        filterChainDefinitionManager.put("/*/lang/**","anon");
+        filterChainDefinitionManager.put("/*/dingLogin/check", "anon");
+        filterChainDefinitionManager.put("/*/static/**", "anon");
+        filterChainDefinitionManager.put("/*/notify/**", "anon");
+        filterChainDefinitionManager.put("/*/lang/**", "anon");
 
         filterChainDefinitionManager.put("/**", "user");
 
@@ -145,13 +188,14 @@ public class ShiroConfiguration {
 //    }
 
     /**
-     *  开启shiro aop注解支持.
-     *  使用代理方式;所以需要开启代码支持;
+     * 开启shiro aop注解支持.
+     * 使用代理方式;所以需要开启代码支持;
+     *
      * @param securityManager
      * @return
      */
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;

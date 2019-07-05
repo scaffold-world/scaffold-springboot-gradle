@@ -51,6 +51,12 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
     public static final String DATEFORMAT_STR_004 = "HH:mm:ss";
 
     /**
+     * 格式 ：yyyy-MM-dd HH
+     */
+    public static final String DATEFORMAT_STR_005 = "yyyy-MM-dd HH";
+
+
+    /**
      * 格式 ：yyyyMMddHHmmss
      */
     public static final String DATEFORMAT_STR_011 = "yyyyMMddHHmmss";
@@ -258,7 +264,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
      *
      * @param date
      * @return
-     * @author yangdk yangdk@erongdu.com
+     * @author zjh
      * @date 2017-6-2
      */
     public static String dateStr9(Date date) {
@@ -393,7 +399,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
      * @param d
      * @param hour
      * @return
-     * @author zhangjiahengpoping@gmail.com
+     * @author zjh
      * @date 2017-9-20
      */
     public static Date rollHour(Date d,int hour){
@@ -648,6 +654,21 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
         } else {
             return 1 - dayOfWeek;
         }
+    }
+
+    /**
+     * 获取当前日期是星期几<br>
+     * 0-6 为周日到周一
+     * @param date
+     * @return 当前日期是星期几
+     */
+    public static int getWeekOfDate(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return w;
     }
 
     // 获得本周一的日期
@@ -1023,7 +1044,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
      * TODO：判断当前时间是否为今天
      * @param date
      * @return
-     * @author yangdk yangdk@erongdu.com
+     * @author zjh
      * @date 2017-9-8
      */
     public static boolean isToDay(Date date){

@@ -11,7 +11,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 /**
  * json格式序列化
- * Created by zhangjiahengpoping@gmail.com on 2018/8/21.
+ * Created by zjh on 2018/8/21.
  */
 public class JsonSerializerUtils {
 

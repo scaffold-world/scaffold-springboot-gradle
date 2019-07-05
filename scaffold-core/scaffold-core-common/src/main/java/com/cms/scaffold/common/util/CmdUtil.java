@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/6/18.
+ * Created by zjh on 2018/6/18.
  */
 public class CmdUtil {
 
@@ -53,11 +53,11 @@ public class CmdUtil {
         //查询数据
         String sql = "select * from rd_user;";
 
-        String file = "/Users/zhangjiahengpoping@gmail.com/Desktop/user.xls";
+        String file = "/Users/zjh/Desktop/user.xls";
 
-        String shellMysql = "mysql -h localhost -u root -proot -e 'use p2p;select * from rd_user' >/Users/zhangjiahengpoping@gmail.com/Desktop/user.xls;";
+        String shellMysql = "mysql -h localhost -u root -proot -e 'use p2p;select * from rd_user' >/Users/zjh/Desktop/user.xls;";
 
-        String convertFile = "iconv -f utf-8 -t GBK /Users/zhangjiahengpoping@gmail.com/Desktop/user.xls > /Users/zhangjiahengpoping@gmail.com/Desktop/user1.xls;";
+        String convertFile = "iconv -f utf-8 -t GBK /Users/zjh/Desktop/user.xls > /Users/zjh/Desktop/user1.xls;";
         String shell =  MessageFormat.format(shellMysql,file);
 
         List<String> commands = new ArrayList<>();

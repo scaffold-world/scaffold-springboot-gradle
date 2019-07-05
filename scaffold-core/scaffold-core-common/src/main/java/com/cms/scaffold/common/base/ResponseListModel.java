@@ -1,42 +1,63 @@
 package com.cms.scaffold.common.base;
 
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * @Description: 分页查询返回结果类
- * @Author: zhangjiahengpoping@gmail.com
+ * @Author: chenweilin
  * @Date: 2018/3/21 20:08
  **/
-@Data
 public class ResponseListModel<T> implements Serializable {
 
-    /**
-     * 返回状态 0=成功
-     */
-    private Integer code;
 
-    /**
-     * 返回提示信息
-     */
-    private String msg;
     /**
      * 展示的数据列表
      */
-    private List<T> data;
+    private List<T> rows;
 
     /**
      * 总记录数
      */
-    private Long count;
+    private Long total;
+
+    /**
+     * 展示的数据列表
+     */
+    private List<T> footer;
 
     public ResponseListModel(List<T> data, Long total) {
-        this.code = ResponseModel.CODE_SUCCESS;
-        this.data = data;
-        this.count = total;
-        this.msg = ResponseModel.MSG_SUCCESS;
+        this.rows = data;
+        this.total = total;
+    }
+    public ResponseListModel(List<T> data, List<T> footer,Long total) {
+        this.rows = data;
+        this.total = total;
+        this.footer = footer;
+    }
+
+    public List<T> getRows() {
+        return rows;
+    }
+
+    public void setRows(List<T> rows) {
+        this.rows = rows;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
+
+    public List<T> getFooter() {
+        return footer;
+    }
+
+    public void setFooter(List<T> footer) {
+        this.footer = footer;
     }
 
 

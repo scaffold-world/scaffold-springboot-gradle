@@ -2,7 +2,7 @@
  * @Title: BaseService.java
  * @Package com.cms.scaffold.common.service
  * TODO:TODO
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2017-6-24
  */
 package com.cms.scaffold.common.base;
@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * TODO:Service支持类实现
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2017-6-24
  */
 public interface BaseService<T extends BaseEntity> {

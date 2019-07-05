@@ -3,7 +3,6 @@ package com.cms.scaffold.common.asserts;
 import com.cms.scaffold.common.exception.BaseResultCodeEnum;
 import com.cms.scaffold.common.exception.BusinessException;
 import com.cms.scaffold.common.exception.IllegalParamException;
-import com.cms.scaffold.common.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -28,7 +27,7 @@ public class Assert {
     }
 
     public static void notEMPTY(Object object,String param){
-        if (object == null || StringUtil.isBlank(object)) {
+        if (object == null) {
             throw new IllegalParamException(BaseResultCodeEnum.PARAM_EMPTY_ERROR,param);
         }
     }

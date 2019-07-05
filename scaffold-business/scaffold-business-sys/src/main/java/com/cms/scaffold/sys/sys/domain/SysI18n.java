@@ -24,11 +24,11 @@ public class SysI18n extends BaseEntity {
     private String text;
 
     /** 中文内容**/
-    private String zhCh;
+    private String zhCn;
 
     /** 英文内容**/
     private String enUs;
 
     /** 印尼内容**/
-    private String idId;
+    private String inId;
 }

@@ -1,14 +1,16 @@
 package com.cms.scaffold.route.operate.util;
 
-import com.cms.scaffold.sys.sys.domain.SysOperate;
 import com.cms.scaffold.common.constant_manual.BasicsConstantManual;
+import com.cms.scaffold.sys.sys.domain.SysOperate;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ThreadContext;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/2/13.
+ * Created by zjh on 2018/2/13.
  */
 public class UserUtil {
 
@@ -22,6 +24,11 @@ public class UserUtil {
 
     public static Session getSession(){
         try{
+            SecurityManager securityManager = ThreadContext.getSecurityManager();
+            if(securityManager == null){
+                return null;
+            }
+
             Subject subject = SecurityUtils.getSubject();
             Session session = subject.getSession(false);
             if (session == null){
@@ -42,8 +49,12 @@ public class UserUtil {
      * @return
      */
     public static SysOperate getOperatorFromSession() {
-        Object attribute = getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
-        return attribute == null ? null : (SysOperate) attribute;
+        if(getSession() != null){
+            Object attribute = getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
+            return attribute == null ? null : (SysOperate) attribute;
+        }
+
+        return  null;
     }
 
 

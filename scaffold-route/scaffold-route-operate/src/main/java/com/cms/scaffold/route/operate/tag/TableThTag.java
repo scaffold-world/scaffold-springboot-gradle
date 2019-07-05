@@ -4,17 +4,25 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/4/16.
+ * Created by zjh on 2018/4/16.
  */
 @Getter
 @Setter
 public class TableThTag {
     /**
-     * 对象属性名【需要进行对象属性获取】
+     * 列
      */
-    private String fieldName;
+    private String field;
     /**
-     * 字典标识
+     * 标题
+     */
+    private String title;
+    /**
+     * 宽度
+     */
+    private String width;
+    /**
+     * 字段分类
      */
     private String nid;
 
@@ -22,5 +30,10 @@ public class TableThTag {
      * 类型
      */
     private String type;
+
+    /**
+    * 国际化对应的标识 如 sys.name
+    * */
+    private String i18n;
 }
 

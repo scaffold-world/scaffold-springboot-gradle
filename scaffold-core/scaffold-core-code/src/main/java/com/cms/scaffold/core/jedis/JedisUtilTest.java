@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.exceptions.JedisException;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/3/23.
+ * Created by zjh on 2018/3/23.
  */
 public class JedisUtilTest {
 

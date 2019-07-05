@@ -27,7 +27,7 @@ import java.net.URL;
 
 /**
  * @Description: http客户端
- * @Author: zhangjiahengpoping@gmail.com
+ * @Author: chenweilin
  * @Date: 2018/3/28 17:04
  **/
 public class HttpClientUtil {
@@ -143,7 +143,7 @@ public class HttpClientUtil {
 
     /**
      * @param data 发送的报文
-     * @Author: zhangjiahengpoping@gmail.com
+     * @Author: chenweilin
      * @Description: 发送post请求
      * @Date: 2018/3/28 17:32
      */
@@ -154,7 +154,7 @@ public class HttpClientUtil {
     /**
      * @param data        发送的报文
      * @param contentType 请求方式
-     * @Author: zhangjiahengpoping@gmail.com
+     * @Author: chenweilin
      * @Description: 发送post请求
      * @Date: 2018/3/28 17:32
      */
@@ -166,7 +166,7 @@ public class HttpClientUtil {
      * @param data        发送的报文
      * @param contentType 请求方式
      * @param encode      编码格式
-     * @Author: zhangjiahengpoping@gmail.com
+     * @Author: chenweilin
      * @Description: 发送post请求
      * @Date: 2018/3/28 17:28
      */
@@ -184,7 +184,7 @@ public class HttpClientUtil {
     }
 
     /**
-     * @Author: zhangjiahengpoping@gmail.com
+     * @Author: chenweilin
      * @Description: 创建http连接
      * @Date: 2018/3/28 19:11
      */
@@ -205,7 +205,7 @@ public class HttpClientUtil {
     }
 
     /**
-     * @Author: zhangjiahengpoping@gmail.com
+     * @Author: chenweilin
      * @Description: 获取返回结果
      * @Date: 2018/3/28 19:52
      */

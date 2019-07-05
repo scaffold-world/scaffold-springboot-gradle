@@ -14,7 +14,7 @@ import java.util.Properties;
 
 /**
  * @description:
- * @author: zhangjiahengpoping@gmail.com
+ * @author: zjh
  * @date: 2019-02-27 11:21
  **/
 @Intercepts({@Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),

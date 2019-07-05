@@ -9,6 +9,10 @@ public class BasicsConstantManual {
      * session KEY:操作人Id
      */
     public static String SESSION_ATTRIBUTE_KEY_OPERATOR_ID = "operatorId";
+    /**
+     * session KEY:语言
+     */
+    public static String SESSION_ATTRIBUTE_KEY_LANGUAGE = "language";
 
 
     /**

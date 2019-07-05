@@ -4,19 +4,19 @@ import com.cms.scaffold.common.base.BaseBO;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 /**
- * @description:
- * @author: zhangjiahengpoping@gmail.com
- * @date: 2019-03-12 23:22
- **/
-@Setter
+* 
+* @author: Mybatis Generator
+* @date: 2019-03-28 19:25:53
+*/
 @Getter
-public class SysMenuBO extends BaseBO{
-
+@Setter
+public class SysMenuBO extends BaseBO {
     /** 菜单名称**/
     private String name;
+
+    /** 中文对应的国际化标识ID**/
+    private String i18nNid;
 
     /** 父级ID**/
     private Long pid;
@@ -53,9 +53,4 @@ public class SysMenuBO extends BaseBO{
 
     /** 备注**/
     private String remark;
-
-    /**
-     * 将子菜单查出来
-     */
-    private List<SysMenuBO> sysMenuBOList;
 }

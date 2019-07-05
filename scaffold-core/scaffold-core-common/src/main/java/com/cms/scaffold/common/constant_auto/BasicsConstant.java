@@ -45,6 +45,16 @@ public class BasicsConstant {
     */
     public static final String BASICS_JAVA_TYPE_BOOLEAN = "Boolean";
     /*********************** java类型end **************************************/
+    /*********************** 上架状态start **************************************/
+    /**
+    * 上架
+    */
+    public static final Integer BASIS_ONSHELF_STATUS_ON_SHELF = 1;
+    /**
+    * 下架
+    */
+    public static final Integer BASIS_ONSHELF_STATUS_LOWER_SHELF = 0;
+    /*********************** 上架状态end **************************************/
     /*********************** 字典类型start **************************************/
     /**
     * 目录

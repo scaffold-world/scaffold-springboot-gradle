@@ -1,9 +1,9 @@
 package com.cms.scaffold.sys.sys.service;
 
-import com.cms.scaffold.common.base.BaseServiceInterface;
 import com.cms.scaffold.sys.sys.ao.SysMenuAO;
 import com.cms.scaffold.sys.sys.bo.SysMenuBO;
 import com.cms.scaffold.sys.sys.domain.SysMenu;
+import com.cms.scaffold.common.base.BaseServiceInterface;
 
 import java.util.List;
 
@@ -48,17 +48,4 @@ public interface SysMenuService extends BaseServiceInterface<SysMenuAO, SysMenuB
      *得到全部
      */
     List<SysMenuBO>  findByPid(Long pid);
-
-    /**
-     * 查找所有菜单
-     * @param name
-     */
-    List<SysMenuBO> findAllMenus(String name);
-
-    /**
-     * 根据ID 递归删除
-     * @param id
-     * @return
-     */
-    Integer deleteMenusById(Long id);
 }

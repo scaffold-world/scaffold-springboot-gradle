@@ -2,14 +2,14 @@
  * @Title: CamelCaseUtils.java
  * @Package com.rd.p2p.common.util
  * TODO:TODO
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2017-5-13
  */
 package com.cms.scaffold.common.util;
 
 /**
  * TODO:驼峰命名法(CamelCase)和下划线风格(UnderScoreCase)字符串之间的转换工具类
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2017-5-13
  */
 public class CamelCaseUtils {

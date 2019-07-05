@@ -1,128 +1,92 @@
-<!DOCTYPE html>
-<html>
+<#import "../../spring.ftl" as spring/>
+<div data-toggle="topjui-layout" data-options="fit:true">
+    <div class="topjui-fluid">
+        <div class="topjui-row" style="padding-top: 20px">
+            <div class="topjui-col-sm6">
+                <label class="topjui-form-label"><@spring.message "sys.parent"/></label>
+                <div class="topjui-input-block">
+                    <input type="hidden" name="id" value="${sysMenu.id!''}">
+                    <input type="text" name="pid" data-toggle="topjui-combotreegrid" value="${sysMenu.pid!''}" readonly="readonly"
+                           data-options="required:true,expandAll:false,
+                           prompt:'<@spring.message "sys.parent"/>',idField:'id',treeField:'name',
+                          panelHeight:250,fitColumns:true,
+                           columns:[[
+                               {field:'name',title:'<@spring.message "sys.name"/>',width:100}
+                           ]],
+                           url: _ctx+'/sys/sysMenu/findSysMenuByPid?parentId=0',
+                           expandUrl: _ctx+'/sys/sysMenu/findSysMenuByPid?parentId={id}',
+                           getFatherIdsUrl: _ctx+'/sys/sysMenu/findFatherIds?id={id}'">
+                </div>
+            </div>
+            <div class="topjui-col-sm6">
+                <label class="topjui-form-label"><@spring.message "sys.resourcetype"/></label>
+                <div class="topjui-input-block">
+                    <input type="text" name="resourceType" data-toggle="topjui-combobox" value="${sysMenu.resourceType!''}"
+                           data-options="required:true,prompt:'<@spring.message "sys.resourcetype"/>',panelHeight:150,
+                            textField:'text',
+                            valueField:'value',
+                            data: [{text: '<@spring.message "sys.menu"/>',value: 'menu'},
+                                {text: '<@spring.message "sys.window"/>',value: 'window'},
+                                {text: '<@spring.message "sys.button"/>',alue: 'button'},
+                                {text: '<@spring.message "sys.url"/>',value: 'url'}]"/>
+                </div>
+            </div>
+        </div>
+        <div class="topjui-row">
+            <div class="topjui-col-sm6">
+                <label class="topjui-form-label"><@spring.message "sys.name"/></label>
+                <div class="topjui-input-block">
+                    <input type="text" name="name" data-toggle="topjui-textbox" value="${sysMenu.name!''}"
+                           data-options="required:true,prompt:'<@spring.message "sys.name"/>'">
+                </div>
+            </div>
+            <div class="topjui-col-sm6">
+                <label class="topjui-form-label"><@spring.message "sys.openorclose"/></label>
+                <div class="topjui-input-block">
+                    <input type="text" name="state"
+                           data-toggle="topjui-combobox"
+                           value="${sysMenu.state!''}"
+                           data-options="required:true,textField:'text',valueField:'value',prompt:'<@spring.message "sys.openorclose"/>',panelHeight:100,
+                            data: [{text: '<@spring.message "sys.open"/>',value: 'closed'},{text: '<@spring.message "sys.close"/>',value: 'open'}]">
+                </div>
+            </div>
+        </div>
+        <div class="topjui-row">
+            <div class="topjui-col-sm6">
+                <label class="topjui-form-label"><@spring.message "sys.status"/></label>
+                <div class="topjui-input-block">
+                    <input type="text" name="status"
+                           data-toggle="topjui-combobox"
+                           value="${sysMenu.status!''}"
+                           data-options="required:true,textField:'text',valueField:'value',prompt:'<@spring.message "sys.status"/>',panelHeight:100,
+                            data: [{text: '<@spring.message "sys.enable"/>',value: '1'},{text: '<@spring.message "sys.disable"/>',value: '0'}]">
+                </div>
+            </div>
+            <div class="topjui-col-sm6">
+                <label class="topjui-form-label"><@spring.message "sys.icon"/></label>
+                <div class="topjui-input-block">
+                    <input type="text" name="iconCls" data-toggle="topjui-textbox" value="${sysMenu.iconCls!''}"
+                           data-options="prompt:'<@spring.message "sys.icon"/>'">
+                </div>
+            </div>
+        </div>
+        <div class="topjui-row">
+            <div class="topjui-col-sm8">
+                <label class="topjui-form-label"><@spring.message "sys.url"/></label>
+                <div class="topjui-input-block">
+                    <input type="text" name="url" data-toggle="topjui-textbox" value="${sysMenu.url!''}"
+                           data-options="prompt:'<@spring.message "sys.url"/>'">
+                </div>
+            </div>
+            <div class="topjui-col-sm4">
+                <label class="topjui-form-label"><@spring.message "sys.sort"/></label>
+                <div class="topjui-input-block">
+                    <input type="text" name="sort" data-toggle="topjui-numberspinner" value="${sysMenu.sort!''}"
+                           data-options="required:true,prompt:'<@spring.message "sys.sort"/>'">
+                </div>
+            </div>
+        </div>
 
-<head>
-    <#include "../../head.ftl">
-</head>
 
-<body>
-<div class="weadmin-body">
-    <form class="layui-form">
-        <input type="hidden" name="pid" value="${sysMenu.pid}">
-        <input type="hidden" name="id" value="${sysMenu.id!''}">
-        <div class="layui-form-item">
-            <label for="L_username" class="layui-form-label">
-                <span class="we-red">*</span>菜单名称
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" value="${sysMenu.name!''}" name="name" lay-verify="required|menuName"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="L_username" class="layui-form-label">
-                <span class="we-red">*</span>链接地址
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" name="url" value="${sysMenu.url!''}" autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="L_username" class="layui-form-label">
-                <span class="we-red">*</span>状态
-            </label>
-            <div class="layui-input-inline">
-                <input type="hidden" id="slct_status" value="${sysMenu.status!''}">
-                <@th type="select" nid="basics_use_status" fieldName="status"></@th>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="L_username" class="layui-form-label">
-                <span class="we-red">*</span>资源类别
-            </label>
-            <div class="layui-input-inline">
-                <input type="hidden" id="slct_resourceType" value="${sysMenu.resourceType!''}">
-                <@th type="select" nid="basics_sys_menu" fieldName="resourceType"></@th>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="L_username" class="layui-form-label">
-                <span class="we-red">*</span>排序
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" name="sort" value="${sysMenu.sort!''}" lay-verify="required" autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="L_repass" class="layui-form-label">
-            </label>
-            <button class="layui-btn" lay-filter="edit" lay-submit="">
-                提交
-            </button>
-        </div>
-    </form>
+    </div>
 </div>
-<script>
-    layui.use(['form', 'layer'], function () {
-        $ = layui.jquery;
-        var form = layui.form,
-                layer = layui.layer;
-
-        var resourceTypeVal = $('#slct_resourceType').val();
-        if(resourceTypeVal){
-            $("select[name='resourceType'] option[value="+resourceTypeVal+"]").prop("selected",true);
-        }
-        var statusVal = $('#slct_status').val();
-        if(statusVal){
-            $("select[name='status'] option[value="+statusVal+"]").prop("selected",true);
-        }
-        form.render('select');
-        //自定义验证规则
-        form.verify({
-            menuName: function (value) {
-                if (value.length < 2) {
-                    return '昵称至少得2个字符';
-                }
-            },
-            pass: [/(.+){6,12}$/, '密码必须6到12位'],
-            repass: function (value) {
-                if ($('#L_pass').val() != $('#L_repass').val()) {
-                    return '两次密码不一致';
-                }
-            }
-        });
-
-        //监听提交
-        form.on('submit(edit)', function (obj) {
-            var f = obj.field;
-            // 获得frame索引
-            var index = parent.layer.getFrameIndex(window.name);
-            //发异步，把数据提交给php
-            $.ajax({
-                type: 'POST',
-                url: _ctx + '/sys/sysMenu/sysMenuSave',
-                data: f,
-                success: function (data) {
-                    if (data.code == 0) {
-                        layer.msg('已更新!', {
-                            time: 1000
-                        });
-                    }
-                },
-                error: function (data) {
-                    layer.alert("操作失败：" + data.msg);
-                    return false;
-                }
-            });
-            //关闭当前frame
-            parent.layer.close(index);
-            window.parent.location.reload();
-        });
-
-    });
-</script>
-</body>
-
-</html>

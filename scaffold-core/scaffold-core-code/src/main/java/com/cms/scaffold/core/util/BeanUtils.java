@@ -2,7 +2,7 @@
  * @Title: BeanUtils.java
  * @Package com.rd.common.util
  * TODO:TODO
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2016-11-2
  */
 package com.cms.scaffold.core.util;
@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * TODO:TODO
- * @author yangdk yangdk@erongdu.com
+ * @author zjh
  * @date 2016-11-2
  */
 public class BeanUtils extends org.springframework.beans.BeanUtils{
@@ -36,7 +36,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 	 * @param target 目标类
 	 * @param copyFields 需拷贝的字段
 	 * @throws BeansException
-	 * @author zhangjiahengpoping@gmail.com
+	 * @author zjh
 	 * @date 2016-11-2
 	 */
 	public static void copyPropertiesByList(Object source, Object target, String[] copyFields)
@@ -75,19 +75,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 			}
 		}
 	}
-	/**
-	 * 
-	 * TODO：拷贝源类不为空的内容
-	 * @param source 源类
-	 * @param target 目标类
-	 * @throws BeansException
-	 * @author zhangjiahengpoping@gmail.com
-	 * @date 2016-11-8
-	 */
-	public static void copyPropertiesNotNull(Object source, Object target)
-			throws BeansException {
-		copyPropertiesNotNull(source, target, null);
-	}
+
 	/**
 	 * 
 	 * TODO：拷贝源类不为空的内容
@@ -95,7 +83,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 	 * @param target 目标类
 	 * @param ignoreProperties 不需拷贝的字段
 	 * @throws BeansException
-	 * @author zhangjiahengpoping@gmail.com
+	 * @author zjh
 	 * @date 2016-11-8
 	 */
 	public static void copyPropertiesNotNull(Object source, Object target,String... ignoreProperties)
@@ -143,7 +131,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 	 * @param source 源类
 	 * @param target 目标类
 	 * @throws BeansException
-	 * @author zhangjiahengpoping@gmail.com
+	 * @author zjh
 	 * @date 2016-11-8
 	 */
 	public static void copyPropertiesConver(Object source, Object target)
@@ -157,10 +145,10 @@ public class BeanUtils extends org.springframework.beans.BeanUtils{
 	 * @param target 目标类
 	 * @param ignoreProperties 不需拷贝的字段
 	 * @throws BeansException
-	 * @author zhangjiahengpoping@gmail.com
+	 * @author zjh
 	 * @date 2017-6-26
 	 */
-	public static void copyPropertiesConver(Object source, Object target,String... ignoreProperties)
+	public static void copyPropertiesConver(Object source, Object target,String[] ignoreProperties)
 			throws BeansException {
 		Assert.notNull(source, "Source must not be null");
 		Assert.notNull(target, "Target must not be null");

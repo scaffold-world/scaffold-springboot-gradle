@@ -1,15 +1,15 @@
 package com.cms.scaffold.sys.sys.service.impl;
 
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.cms.scaffold.sys.BaseServiceImpl;
+import com.cms.scaffold.sys.sys.dao.SysOperateMapper;
 import com.cms.scaffold.sys.sys.domain.SysOperate;
 import com.cms.scaffold.sys.sys.domain.SysRoleOperate;
 import com.cms.scaffold.sys.sys.service.SysOperateService;
 import com.cms.scaffold.sys.sys.service.SysRoleOperateService;
 import com.cms.scaffold.sys.sys.service.SysRoleService;
-import com.cms.scaffold.sys.sys.dao.SysOperateMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.cms.scaffold.common.asserts.Assert;
 import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.base.ResponseListModel;
@@ -36,7 +36,7 @@ public class SysOperateServiceImpl extends BaseServiceImpl<SysOperateMapper, Sys
 
     @Override
     public ResponseListModel<SysOperate> queryAllOperate(SysOperate sysOperateModel) {
-        PageHelper.startPage(sysOperateModel.getPage(), sysOperateModel.getLimit());
+        PageHelper.startPage(sysOperateModel.getPage(), sysOperateModel.getRows());
         List<SysOperate> list = dao.queryAllOperate(sysOperateModel);
         for (SysOperate sysOperate : list) {
             SysRoleOperate sysRoleOperate = sysRoleOperateService.selectByOperateId(sysOperate.getId());
@@ -130,12 +130,6 @@ public class SysOperateServiceImpl extends BaseServiceImpl<SysOperateMapper, Sys
             }
             return map;
         }
-    }
-
-    @Override
-    public int deleteById(Long id) {
-        Assert.notNull(id);
-        return dao.deleteById(id);
     }
 
 }

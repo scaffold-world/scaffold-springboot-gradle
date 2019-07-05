@@ -7,9 +7,9 @@
 
         select * from sys_operate
         <where>
-            <if test="null!=userName">and user_name like concat('%',#{userName},'%')</if>
+            <if test="null!=partnerId"> and  partner_id = #{partnerId}</if>
 
-            <if test="null!=status">and status = #{status}</if>
+            <if test="null!=status"> and status = #{status}</if>
 
         </where>
 
@@ -18,24 +18,24 @@
     <insert id="saveOperate">
         insert into sys_operate
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="null != userName">user_name,</if>
-            <if test="null != pwd">pwd,</if>
-            <if test="null != addTime">add_time,</if>
-            <if test="null != updateTime">update_time,</if>
-            <if test="null != status">status,</if>
-            <if test="null != partnerId">partner_id,</if>
-            <if test="null != mobilePhone">mobile_phone,</if>
-            <if test="null != realName">real_name,</if>
+        <if test="null != userName"> user_name,</if>
+        <if test="null != pwd"> pwd,</if>
+        <if test="null != addTime"> add_time,</if>
+        <if test="null != updateTime"> update_time,</if>
+        <if test="null != status"> status,</if>
+        <if test="null != partnerId"> partner_id,</if>
+        <if test="null != mobilePhone"> mobile_phone,</if>
+        <if test="null != realName"> real_name,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="null !=userName">#{userName},</if>
-            <if test="null != pwd">#{pwd},</if>
-            <if test="null != addTime">#{addTime},</if>
-            <if test="null != updateTime">#{updateTime},</if>
-            <if test="null != status">#{status},</if>
-            <if test="null != partnerId">#{partnerId},</if>
-            <if test="null != mobilePhone">#{mobilePhone},</if>
-            <if test="null != realName">#{realName},</if>
+        <if test="null !=userName">#{userName},</if>
+        <if test="null != pwd"> #{pwd},</if>
+        <if test="null != addTime"> #{addTime},</if>
+        <if test="null != updateTime"> #{updateTime},</if>
+        <if test="null != status"> #{status},</if>
+        <if test="null != partnerId"> #{partnerId},</if>
+        <if test="null != mobilePhone"> #{mobilePhone},</if>
+        <if test="null != realName"> #{realName},</if>
         </trim>
     </insert>
 

@@ -1,152 +1,143 @@
-<#assign base=request.contextPath />
-<!doctype html>
-<html lang="en">
-
-<head>
-    <#include "../../head.ftl">
-</head>
-
+<!DOCTYPE html>
+<html>
+<#include "../../public/head_index.ftl"/>
 <body>
-<div class="weadmin-nav">
-    <div class="dHead">
-        <span class="layui-breadcrumb">
-        <a href="javascript:void(0)">权限配置</a>
-        <a href="javascript:void(0)">操作员管理</a>
-        <#--<a><cite>资源管理</cite></a>-->
-      </span>
-        <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float: right"
-           href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">&#x1002;</i></a>
+<div data-toggle="topjui-layout" data-options="fit:true">
+    <div  data-options="region:'center',iconCls:'icon-reload',title:'',fit:false,split:true,border:false,bodyCls:'border_left_right'">
+        <table data-toggle="topjui-datagrid"
+               data-options="id:'userDatagridId',
+                             singleSelect:true,
+                             url: _ctx+'/sys/sysOperate/operateList'">
+            <thead>
+            <tr>
+                <th data-options="field:'id',checkbox:true"></th>
+                <th data-options="field:'userName',title:'<@spring.message "sys.username"/>'"></th>
+                <th data-options="field:'realName',title:'<@spring.message "sys.realname"/>'"></th>
+                <th data-options="field:'mobilePhone',title:'<@spring.message "sys.mobilephone"/>'"></th>
+                <th data-options="field:'roleName',title:'<@spring.message "sys.role"/>'"></th>
+                <th data-options="field:'status',title:'<@spring.message "sys.status"/>',
+                formatter:function(value,row,index){
+                    if (value == '0') {
+                        return '<@spring.message "sys.enable"/>';
+                    } else if (value == '1') {
+                        return '<@spring.message "sys.disable"/>';
+                    }
+                }"></th>
+
+            </tr>
+            </thead>
+        </table>
     </div>
 </div>
-<div class="weadmin-body">
-    <div class="layui-row">
-        <form class="layui-form layui-col-md12 we-search">
-            操作员搜索：
-            <div class="layui-inline">
-                <@th type="select" nid="basics_use_status" fieldName="status"></@th>
-            </div>
-            <div class="layui-inline">
-                <input type="text" name="userName" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-            </div>
-            <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
-    </div>
-    <div class="weadmin-block">
-        <button class="layui-btn" onclick="WeAdminShow('添加用户',_ctx + '/sys/sysOperate/addOperateIndex',750,480)"><i
-                    class="layui-icon"></i>添加
-        </button>
-    </div>
-    <table class="layui-table"
-           lay-data="{height:315, url: _ctx + '/sys/sysOperate/operateList', page:true, id:'operateTable'}"
-           lay-filter="operateTable">
-        <thead>
-        <tr>
-            <th lay-data="{field:'id', sort: true}">ID</th>
-            <th lay-data="{field:'userName'}">用户名</th>
-            <th lay-data="{field:'realName'}">真实姓名</th>
-            <th lay-data="{field:'mobilePhone'}">手机号</th>
-            <th lay-data="{field:'status',<@th type="templet" nid="basics_use_status" fieldName="status"></@th>}">状态
-            </th>
-            <th lay-data="{field:'roleName'}">角色</th>
-            <th lay-data="{field:'operate', templet:function(d){return operateTemplate(d);}}">操作</th>
-        </tr>
-        </thead>
-    </table>
+
+<!--表格工具栏 &ndash;&gt;-->
+<div id="userDatagridId-toolbar"
+     data-options="grid:{
+        type:'datagrid',
+        id:'userDatagridId'
+     }" class="topjui-toolbar">
+    <a href="javascript:void(0)"
+       data-toggle="topjui-menubutton"
+       data-options="method:'openDialog',
+           extend: '#userDatagridId-toolbar',
+           iconCls: 'fa fa-plus',
+           btnCls: 'topjui-btn-green',
+           dialog:{
+               title:'<@spring.message "sys.add"/>',
+               id:'articleAddDialog',
+               href:_ctx+'/sys/sysOperate/addOperatePage',
+               width:700,
+               height:500,
+               maximizable:false,
+               buttonsGroup:[
+                   {text:'<@spring.message "sys.save"/>',url: _ctx+'/sys/sysOperate/saveOperate',iconCls:'fa fa-plus',handler:'ajaxForm'}
+               ]
+       }"><@spring.message "sys.add"/></a>
+
+    <a href="javascript:void(0)"
+       data-toggle="topjui-menubutton"
+       data-options="method: 'openDialog',
+            extend: '#userDatagridId-toolbar',
+            iconCls: 'fa fa-pencil',
+            btnCls: 'topjui-btn-red',
+            grid: {
+                type: 'datagrid',
+                id: 'userDatagridId'
+            },
+            dialog: {
+                title:'<@spring.message "sys.edit"/>',
+                href: _ctx+'/sys/sysOperate/editOperatePage?operateId={id}',
+                width:700,
+                height:500,
+                buttonsGroup: [
+                    {
+                        text: '<@spring.message "sys.update"/>',
+                        url: _ctx+'/sys/sysOperate/updateOperate',
+                        iconCls: 'fa fa-save',
+                        handler: 'ajaxForm',
+                        btnCls: 'topjui-btn-green'
+                    }
+                ]
+            }"><@spring.message "sys.edit"/></a>
+
+    <a href="javascript:void(0)"
+       data-toggle="topjui-menubutton"
+       data-options="method: 'openDialog',
+            extend: '#userDatagridId-toolbar',
+            iconCls: 'fa fa-pencil',
+            btnCls: 'topjui-btn-purple',
+            grid: {
+                type: 'datagrid',
+                id: 'userDatagridId'
+            },
+            dialog: {
+                title:'<@spring.message "sys.editpassword"/>',
+                href: _ctx+'/sys/sysOperate/editOperatePwdPage?operateId={id}',
+                width:700,
+                height:500,
+                buttonsGroup: [
+                    {
+                        text: '<@spring.message "sys.update"/>',
+                        url: _ctx+'/sys/sysOperate/updateOperatePwd',
+                        iconCls: 'fa fa-save',
+                        handler: 'ajaxForm',
+                        btnCls: 'topjui-btn-green'
+                    }
+                ]
+            }"><@spring.message "sys.editpassword"/></a>
+
+    <a href="javascript:void(0)"
+       data-toggle="topjui-menubutton"
+       data-options="method:'doAjax',
+       extend: '#userDatagridId-toolbar',
+       btnCls:'topjui-btn-brown',
+       iconCls:'fa fa-trash',
+       url: _ctx+'/sys/sysOperate/resetPwd',
+       grid: {uncheckedMsg:'<@spring.message "sys.pleasecheckrow"/>',param:'operateId:id'}"><@spring.message "sys.reset"/></a>
+
+    <!--查询条件表单&ndash;&gt;-->
+    <form id="queryForm" class="search-box">
+        <input type="text" name="status" data-toggle="topjui-combobox"
+               data-options="id:'status',prompt:'<@spring.message "sys.status"/>',width:100,panelHeight:100,
+                     data:[{text: '<@spring.message "sys.enable"/>',value: '0' },{text: '<@spring.message "sys.disable"/>',value: '1'}],
+                     icons:[{
+                        iconCls:'icon-remove',
+                        handler: function(e){
+                            $(e.data.target).iCombobox('clear');
+                        }
+                     }]">
+        <a href="javascript:void(0)"
+           data-toggle="topjui-menubutton"
+           data-options="method:'query',
+           iconCls:'fa fa-search',
+           btnCls:'topjui-btn-blue',
+           form:{id:'queryForm'},
+           grid:{type:'datagrid','id':'userDatagridId'}"><@spring.message "sys.search"/></a>
+    </form>
 </div>
+</body>
+</html>
 <script type="text/javascript">
-    layui.use(['laydate', 'jquery', 'admin', 'table', 'form'], function () {
-        var laydate = layui.laydate, $ = layui.jquery, admin = layui.admin, table = layui.table, form = layui.form;
 
-        window.operateTemplate = function (d) {
-            var status = d.status;
-            var html = "";
-            if (status === 1) {
-                html +=  "<button class='layui-btn layui-btn-xs layui-btn-radius' onclick='member_stop(" + d.id + ",2)'>停用</button>";
-            } else {
-                html +=  "<button class='layui-btn layui-btn-xs layui-btn-radius' onclick='member_stop(" + d.id + ",1)'>启用</button>";
-            }
-            html +=  "<button class='layui-btn layui-btn-xs layui-btn-normal' onclick='member_del(this," + d.id + ")'>删除</button>";
-            return html;
-        };
-
-        form.on('submit(sreach)', function (data) {
-            var obj = data.field;
-            tableReload(obj);
-            return false;
-        });
-
-        window.tableReload = function (searchData) {
-
-            table.reload('operateTable', {
-                page: {
-                    curr: 1
-                },
-                where: searchData
-            });
-        };
-
-        /*用户-停用*/
-        window.member_stop = function (id, status) {
-            var confirmTip;
-            if (status === 2) {
-                confirmTip = '确认要停用吗？';
-            } else {
-                confirmTip = '确认要启用吗？';
-            }
-            layer.confirm(confirmTip, function () {
-                $.ajax({
-                    url: _ctx + "/sys/sysOperate/updateStatus",
-                    data: {
-                        id: id,
-                        status: status
-                    },
-                    type: "POST",
-                    success: function (data) {
-                        if (data.code === 0) {
-                            layer.msg('已更新!', {
-                                time: 1000
-                            });
-                            tableReload(null);
-                        } else {
-                            layer.msg('错误：' + data.msg, {
-                                icon: 5,
-                                time: 1000
-                            });
-                        }
-                    }
-                });
-            });
-        }
-
-        window.member_del = function (obj, id) {
-            layer.confirm('确认要删除吗？', function(index) {
-                //发异步删除数据
-                $.ajax({
-                    url: _ctx + "/sys/sysOperate/deleteOperate",
-                    data: {
-                        id: id
-                    },
-                    type: "POST",
-                    success: function (data) {
-                        if (data.code === 0) {
-                            $(obj).parents("tr").remove();
-                            layer.msg('已删除!', {
-                                icon: 1,
-                                time: 1000
-                            });
-                        } else {
-                            layer.msg('错误：' + data.msg, {
-                                icon: 5,
-                                time: 1000
-                            });
-                        }
-                    }
-                });
-            });
-        }
-    });
 
 </script>
-</body>
-
-</html>

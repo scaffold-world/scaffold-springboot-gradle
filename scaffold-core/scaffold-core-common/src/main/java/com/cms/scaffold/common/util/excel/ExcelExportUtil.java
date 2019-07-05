@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/5/1.
+ * Created by zjh on 2018/5/1.
  */
 public class ExcelExportUtil {
 
@@ -41,7 +41,7 @@ public class ExcelExportUtil {
             return;
         }
         long beginTime = System.currentTimeMillis();
-        String excelTitle = title + "_" + com.cms.scaffold.common.util.DateUtil.dateStr3(com.cms.scaffold.common.util.DateUtil.getNow());
+        String excelTitle = title + "_" + DateUtil.dateStr3(DateUtil.getNow());
         TableData tableData = null;
         logger.info("数据处理");
         tableData = ExcelUtils.createTableData(list, ExcelUtils.createTableHeader(hearders), fields);
@@ -68,7 +68,7 @@ public class ExcelExportUtil {
      */
     public static void exportSXSSFExcel(HttpServletResponse response, List<Object> list, String title,
                                         String[] hearders, String[] fields,Map convertorMap) throws Exception {
-        String excelTitle = title + "_" + com.cms.scaffold.common.util.DateUtil.dateStr3(com.cms.scaffold.common.util.DateUtil.getNow());
+        String excelTitle = title + "_" + DateUtil.dateStr3(DateUtil.getNow());
         TableData tableData = null;
         tableData = ExcelUtils.createTableData(list, ExcelUtils.createTableHeader(hearders), fields,convertorMap);
         SXSSFWorkbook workbook = new SXSSFWorkbook(1000);
@@ -98,7 +98,7 @@ public class ExcelExportUtil {
     public static void exportSXSSFExcel(OutputStream out, List<Object> list, String title,
                                         String[] hearders, String[] fields) throws Exception {
         long beginTime = System.currentTimeMillis();
-        String excelTitle = title + "_" + com.cms.scaffold.common.util.DateUtil.dateStr3(DateUtil.getNow());
+        String excelTitle = title + "_" + DateUtil.dateStr3(DateUtil.getNow());
         TableData tableData = null;
         logger.info("数据处理");
         tableData = ExcelUtils.createTableData(list, ExcelUtils.createTableHeader(hearders), fields);

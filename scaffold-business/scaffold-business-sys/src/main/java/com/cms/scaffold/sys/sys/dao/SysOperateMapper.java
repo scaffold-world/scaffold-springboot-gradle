@@ -2,7 +2,6 @@ package com.cms.scaffold.sys.sys.dao;
 
 import com.cms.scaffold.sys.BaseMapper;
 import com.cms.scaffold.sys.sys.domain.SysOperate;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -32,7 +31,4 @@ public interface SysOperateMapper  extends BaseMapper<SysOperate> {
     void updateOpenidById(@Param("id") Long id, @Param("openid") String openid);
 
     List<SysOperate> findByIds(@Param("ids")List<Long> ids);
-
-    @Delete("delete from sys_operate where id = #{id}")
-    int deleteById(@Param("id") Long id);
 }

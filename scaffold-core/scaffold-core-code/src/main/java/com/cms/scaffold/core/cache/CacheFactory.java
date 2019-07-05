@@ -219,7 +219,7 @@ public interface CacheFactory {
 	 * 	如果是-1则表示永远有效
 	 * @param key
 	 * @return
-	 * @author zhangjiahengpoping@gmail.com
+	 * @author zjh
 	 * @date 2017-9-26
 	 */
 	Long ttl(String key);

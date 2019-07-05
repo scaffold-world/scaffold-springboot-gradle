@@ -1,13 +1,14 @@
 package com.cms.scaffold.route.operate.controller.sys;
 
+import com.alibaba.fastjson.JSON;
+import com.cms.scaffold.route.operate.controller.BaseController;
 import com.cms.scaffold.common.base.Builder;
-import com.cms.scaffold.common.base.ResponseListModel;
 import com.cms.scaffold.common.base.ResponseModel;
 import com.cms.scaffold.common.constant_manual.BasicsConstantManual;
 import com.cms.scaffold.common.constant_manual.SysConstant;
-import com.cms.scaffold.route.operate.controller.BaseController;
+import com.cms.scaffold.core.I18nUtil.I18nTransformUtil;
 import com.cms.scaffold.route.operate.request.sys.SysMenuReq;
-import com.cms.scaffold.route.operate.response.sys.SysMenuResp;
+import com.cms.scaffold.route.operate.response.SysMenuResp;
 import com.cms.scaffold.route.operate.shiro.ShiroService;
 import com.cms.scaffold.sys.sys.ao.SysMenuAO;
 import com.cms.scaffold.sys.sys.bo.SysMenuBO;
@@ -18,122 +19,194 @@ import com.cms.scaffold.sys.sys.service.SysMenuService;
 import com.cms.scaffold.sys.sys.service.SysRoleMenuService;
 import com.cms.scaffold.sys.sys.service.SysRoleOperateService;
 import com.cms.scaffold.sys.sys.service.SysRoleService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 商户资源管理菜单Controller Created by zhangjiahengpoping@gmail.com on 2018/3/17. */
+/**
+ * 商户资源管理菜单Controller
+ * Created by zjh on 2018/3/17.
+ */
 @Controller
 @RequestMapping("/sys/sysMenu")
-@Api(tags = "SysMenuController", description = "系统菜单配置")
 public class SysMenuController extends BaseController {
-  public static final String ftlPath = "/sys/sysMenu/";
+    public static final String ftlPath = "/sys/sysMenu/";
 
-  @Autowired SysMenuService sysMenuService;
-  @Autowired SysRoleService sysRoleService;
-  @Autowired SysRoleOperateService sysRoleOperateService;
-  @Autowired SysRoleMenuService sysRoleMenuService;
-  @Resource ShiroService shiroService;
 
-  @GetMapping("/sysMenuIndex")
-  public String sysMenuIndex() {
-    return ftlPath + "sysMenuIndex";
-  }
+    @Autowired
+    SysMenuService sysMenuService;
 
-  @GetMapping("/sysMenuEdit")
-  public String sysMenuEdit(Model model, Long id, Long pid) {
-    SysMenuBO menu;
-    if (null == id) {
-      menu = new SysMenuBO();
-      menu.setPid(pid);
-    } else {
-      menu = sysMenuService.selectById(id);
-    }
-    model.addAttribute("sysMenu", menu);
-    return ftlPath + "sysMenuEdit";
-  }
+    @Autowired
+    SysRoleService sysRoleService;
 
-  @PostMapping("/deleteMenusById")
-  @ApiOperation(value = "根据id递归删除菜单及子菜单")
-  @ResponseBody
-  public ResponseModel deleteMenusById(@RequestParam(name = "id") Long id) {
-    sysMenuService.deleteMenusById(id);
-    return doneSuccess();
-  }
+    @Autowired
+    SysRoleOperateService sysRoleOperateService;
 
-  @PostMapping("/sysMenuSave")
-  @ResponseBody
-  @ApiOperation("保存新增或者修改的菜单")
-  public ResponseModel sysMenuSaveValid(SysMenuReq sysMenu) {
-    sysMenuService.save(Builder.build(sysMenu, SysMenuAO.class));
-    shiroService.updatePermission();
-    return doneSuccess();
-  }
+    @Autowired
+    SysRoleMenuService sysRoleMenuService;
 
-  @GetMapping("/findAllMenus")
-  @ResponseBody
-  @ApiOperation(value = "根据父id查询菜单记录")
-  public ResponseListModel<SysMenuBO> findAllMenus(String name) {
-    List<SysMenuBO> sysMenus = sysMenuService.findAllMenus(name);
-    return new ResponseListModel<>(sysMenus, (long) sysMenus.size());
-  }
+    @Resource
+    ShiroService shiroService;
 
-  @GetMapping("/findFatherIds")
-  @ResponseBody
-  public String findFatherIds(Long id) {
-    return sysMenuService.findFatherIds(id);
-  }
+    /**
+     * 初始化
+     *
+     * @return
+     */
+    @RequestMapping("/sysMenuIndex")
+    public String sysMenuIndex() {
 
-  @GetMapping(value = "/rightMenus")
-  @ResponseBody
-  @ApiOperation("根据pid获取到当前登陆用户所有的权限菜单")
-  public List<SysMenuResp> right(Long pid) {
-
-    Subject subject = SecurityUtils.getSubject();
-
-    SysOperate sysOperate =
-        (SysOperate)
-            subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
-
-    List<SysMenuBO> list = sysMenuService.findByPidAndId(pid, sysOperate.getId());
-
-    return Builder.buildList(list, SysMenuResp.class);
-  }
-
-  @GetMapping(value = "/allMenus")
-  @ResponseBody
-  public List<SysMenuResp> allMenus(Long id, Long roleId) {
-    if (id == null) {
-      id = 0L;
-    }
-    List<SysMenuBO> voList = sysMenuService.findByPid(id);
-
-    List<SysMenuResp> sysMenuRespList = Builder.buildList(voList, SysMenuResp.class);
-    if (roleId == null) {
-      return new ArrayList<>();
+        return ftlPath + "sysMenuIndex";
     }
 
-    SysRole sysRole = sysRoleService.findById(roleId);
+    /**
+     * 编辑页面
+     *
+     * @return
+     */
+    @RequestMapping("/sysMenuEdit")
+    public String sysMenuEdit(Model model, SysMenuReq sysMenu) {
+        SysMenuResp tempSysMenu = null;
 
-    for (SysMenuResp sysMenu : sysMenuRespList) {
-      SysRoleMenuBO sysRoleMenu =
-          sysRoleMenuService.selectByRoleIdAndMenuId(sysRole.getId(), sysMenu.getId());
-      if (sysRoleMenu != null) {
-        sysMenu.setAutoStatus(SysConstant.MENU_STATUS_OPEN);
-      } else {
-        sysMenu.setAutoStatus(SysConstant.MENU_STATUS_COLOSE);
-      }
+        if (sysMenu.getId() == null) {
+            tempSysMenu = Builder.build(sysMenu,SysMenuResp.class);
+        } else {
+            tempSysMenu =  Builder.build(sysMenuService.selectById(sysMenu.getId()), SysMenuResp.class);
+        }
+        I18nTransformUtil.transForm(tempSysMenu, "name");
+        model.addAttribute("sysMenu", tempSysMenu);
+
+        Subject subject = SecurityUtils.getSubject();
+
+
+        SysOperate sysOperate =(SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
+
+        shiroService.updatePermission();
+
+
+
+        return ftlPath + "sysMenuEdit";
     }
 
-    return sysMenuRespList;
-  }
+    /**
+     * 保存菜单记录
+     *
+     * @param sysMenu
+     * @return
+     */
+    @RequestMapping("/sysMenuSave")
+    @ResponseBody
+    public ResponseModel sysMenuSaveValid(SysMenuReq sysMenu) {
+        sysMenuService.save(Builder.build(sysMenu, SysMenuAO.class));
+        Subject subject = SecurityUtils.getSubject();
+
+
+        SysOperate sysOperate =(SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
+
+        shiroService.updatePermission();
+
+
+        return doneSuccess();
+    }
+
+    /**
+     * 根据父id查询菜单记录
+     *
+     * @param parentId
+     * @return
+     */
+    @RequestMapping("/findSysMenuByPid")
+    @ResponseBody
+    public List<SysMenuResp> findSysMenuByPid(Long parentId) {
+        List<SysMenuBO> sysMenus = sysMenuService.findByPid(parentId);
+        I18nTransformUtil.transFormList(sysMenus, "name");
+        return Builder.buildList(sysMenus,SysMenuResp.class);
+    }
+
+    /**
+     * 根据id查询所有父类id
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findFatherIds")
+    @ResponseBody
+    public String findFatherIds(Long id) {
+        String ids = sysMenuService.findFatherIds(id);
+
+        return ids;
+    }
+
+
+    /**
+     * 用户授权菜单展示
+     * @param model
+     * @param pid
+     * @return
+     */
+    @RequestMapping(value = "/rightMenus")
+    @ResponseBody
+    public String right(Model model,Long pid) {
+
+        Subject subject = SecurityUtils.getSubject();
+
+        SysOperate sysOperate = (SysOperate) subject.getSession().getAttribute(BasicsConstantManual.SESSION_ATTRIBUTE_KEY_OPERATOR);
+
+        List<SysMenuBO> list = sysMenuService.findByPidAndId(pid, sysOperate.getId());
+        I18nTransformUtil.transFormList(list, "name");
+
+
+        return JSON.toJSONString(Builder.buildList(list,SysMenuResp.class));
+
+    }
+
+    /**
+     * 查找全部菜单
+     * @param roleId
+     * @return
+     */
+    @RequestMapping(value = "/allMenus")
+    @ResponseBody
+    public List<SysMenuResp> allMenus(Long id,Long roleId) {
+        logger.info("allMenus id:{},ruleId:{}",id,roleId);
+        if(id ==null){
+            id = 0L;
+        }
+        List<SysMenuResp> list=new ArrayList<>();
+        List<SysMenuBO> voList = sysMenuService.findByPid(id);
+
+        List<SysMenuResp> sysMenuRespList = Builder.buildList(voList,SysMenuResp.class);
+        logger.info("allMenus size:",list.size());
+        if(roleId == null){
+            list = new ArrayList<>();
+            return list;
+        }
+
+        SysRole sysRole = sysRoleService.findById(roleId);
+
+        for(SysMenuResp sysMenu :sysMenuRespList){
+            SysRoleMenuBO sysRoleMenu= sysRoleMenuService.selectByRoleIdAndMenuId(sysRole.getId(),sysMenu.getId());
+            if(sysRoleMenu!=null){
+                sysMenu.setAutoStatus(SysConstant.MENU_STATUS_OPEN);
+            }else{
+                sysMenu.setAutoStatus(SysConstant.MENU_STATUS_COLOSE);
+            }
+        }
+        I18nTransformUtil.transFormList(sysMenuRespList, "name");
+
+        return sysMenuRespList;
+    }
+
+
+
+
+
 }

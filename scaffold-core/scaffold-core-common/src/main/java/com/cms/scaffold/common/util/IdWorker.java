@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by zhangjiahengpoping@gmail.com on 2018/4/14.
+ * Created by zjh on 2018/4/14.
  */
 public class IdWorker {
     // 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）

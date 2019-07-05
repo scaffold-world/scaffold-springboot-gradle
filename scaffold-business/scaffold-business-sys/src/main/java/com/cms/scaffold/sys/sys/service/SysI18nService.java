@@ -1,13 +1,13 @@
 package com.cms.scaffold.sys.sys.service;
 
-import com.cms.scaffold.common.base.BaseServiceInterface;
-import com.cms.scaffold.common.base.ResponseListModel;
 import com.cms.scaffold.sys.sys.ao.SysI18nAO;
 import com.cms.scaffold.sys.sys.bo.SysI18nBO;
+import com.cms.scaffold.common.base.BaseServiceInterface;
+import com.cms.scaffold.common.base.ResponseListModel;
 
 /**
  * @description:
- * @author: zhangjiahengpoping@gmail.com
+ * @author: zjh
  * @date: 2019-03-12 19:05
  **/
 public interface SysI18nService extends BaseServiceInterface<SysI18nAO, SysI18nBO>{
@@ -17,7 +17,7 @@ public interface SysI18nService extends BaseServiceInterface<SysI18nAO, SysI18nB
      * @param sysI18nAO
      * @return
      */
-    ResponseListModel<SysI18nBO> findPageList(SysI18nAO sysI18nAO);
+    ResponseListModel findPageList(SysI18nAO sysI18nAO);
 
     /**
      * 保存数据

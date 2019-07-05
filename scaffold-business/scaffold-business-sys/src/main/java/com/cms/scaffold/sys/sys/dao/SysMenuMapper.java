@@ -2,7 +2,6 @@ package com.cms.scaffold.sys.sys.dao;
 
 import com.cms.scaffold.core.baseService.BaseMapper;
 import com.cms.scaffold.sys.sys.domain.SysMenu;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -25,7 +24,4 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
     @Select("select * from sys_menu")
     List<SysMenu> findAll();
-
-    @Delete("delete from sys_menu where id = #{id}")
-    Integer deleteById(@Param("id") Long id);
 }

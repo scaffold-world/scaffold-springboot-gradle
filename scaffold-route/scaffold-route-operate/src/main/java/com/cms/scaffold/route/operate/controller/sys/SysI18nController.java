@@ -1,16 +1,16 @@
 package com.cms.scaffold.route.operate.controller.sys;
 
+import com.cms.scaffold.route.operate.controller.BaseController;
 import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.base.ResponseListModel;
 import com.cms.scaffold.common.base.ResponseModel;
 import com.cms.scaffold.core.util.ResponseListModelUtils;
-import com.cms.scaffold.route.operate.controller.BaseController;
 import com.cms.scaffold.route.operate.request.sys.SysI18nReq;
-import com.cms.scaffold.route.operate.response.sys.SysI18nResp;
+import com.cms.scaffold.route.operate.response.SysI18nResp;
 import com.cms.scaffold.sys.sys.ao.SysI18nAO;
 import com.cms.scaffold.sys.sys.bo.SysI18nBO;
+import com.cms.scaffold.sys.sys.service.MyMessageSourceService;
 import com.cms.scaffold.sys.sys.service.SysI18nService;
-import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +20,11 @@ import javax.annotation.Resource;
 
 /**
  * @description: 国际化Controller
- * @author: zhangjiahengpoping@gmail.com
+ * @author: zjh
  * @date: 2019-03-12 17:50
  **/
 @Controller
 @RequestMapping("/sys/sysI18n")
-@Api(tags = "SysI18nController", description = "国际化管理页面")
 public class SysI18nController extends BaseController {
 
 
@@ -33,6 +32,9 @@ public class SysI18nController extends BaseController {
 
     @Resource
     private SysI18nService sysI18nService;
+
+    @Resource
+    private MyMessageSourceService messageSource;
 
     /**
      * 初始化
@@ -80,7 +82,8 @@ public class SysI18nController extends BaseController {
     public ResponseModel sysI18nSave(SysI18nReq sysI18nReq) {
 
         sysI18nService.save(Builder.build(sysI18nReq, SysI18nAO.class));
-
+        // 重新加载国际化配置
+        messageSource.reload();
         return doneSuccess();
     }
 }

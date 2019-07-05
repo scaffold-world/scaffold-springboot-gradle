@@ -4,11 +4,11 @@ package com.cms.scaffold.common.base;
 import com.alibaba.fastjson.JSONObject;
 import com.cms.scaffold.common.annotation.CustomAdvanceFilter;
 import com.cms.scaffold.common.annotation.TableName;
+import com.cms.scaffold.common.util.Reflections;
+import com.cms.scaffold.common.util.StringUtil;
 import com.cms.scaffold.common.constant_manual.AdvanceFilterOpConstantManual;
 import com.cms.scaffold.common.util.CamelCaseUtils;
 import com.cms.scaffold.common.util.DateUtil;
-import com.cms.scaffold.common.util.Reflections;
-import com.cms.scaffold.common.util.StringUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 支持类
  *
- * @author zhangjiahengpoping@gmail.com
+ * @author zjh
  * @date 2017-6-22
  */
 public class BaseEntity extends ToString {
@@ -51,7 +51,7 @@ public class BaseEntity extends ToString {
     /**
      * 行数
      */
-    private Integer limit = 20;
+    private Integer rows = 20;
 
     /**
      * 商户id
@@ -100,6 +100,10 @@ public class BaseEntity extends ToString {
      * 排序规则
      */
     private String orderStr;
+    /**
+     * 排序内容
+     */
+    private String orderBy;
 
     private List<OrderFilter> orders = new ArrayList<>();
 
@@ -147,12 +151,12 @@ public class BaseEntity extends ToString {
         this.page = page;
     }
 
-    public Integer getLimit() {
-        return limit;
+    public Integer getRows() {
+        return rows;
     }
 
-    public void setLimit(Integer limit) {
-        this.limit = limit;
+    public void setRows(Integer rows) {
+        this.rows = rows;
     }
 
     public void preInsert() {
@@ -421,29 +425,11 @@ public class BaseEntity extends ToString {
         this.orderStr = orderStr;
     }
 
-    public String getOrderByStr(){
-        StringBuilder builder = new StringBuilder();
+    public String getOrderBy() {
+        return orderBy;
+    }
 
-        if(StringUtil.isBlank(getSortStr()) || StringUtil.isBlank(getOrderStr())){
-            return null;
-        }
-
-        String[] sortStrs = getSortStr().split(",");
-        String[] orderStrs = getOrderStr().split(",");
-
-        if(sortStrs.length != orderStrs.length){
-            return null;
-        }
-
-        for (int i = 0;i<sortStrs.length;i++){
-            builder.append(StringUtil.toUnderline(sortStrs[i]));
-            builder.append(" ");
-            builder.append(orderStrs[i]);
-            if(i != sortStrs.length -1){
-                builder.append(",");
-            }
-        }
-
-        return builder.toString();
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
     }
 }

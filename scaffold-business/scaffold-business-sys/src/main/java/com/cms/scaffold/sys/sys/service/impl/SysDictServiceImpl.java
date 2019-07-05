@@ -1,26 +1,27 @@
 package com.cms.scaffold.sys.sys.service.impl;
 
-import com.cms.scaffold.common.base.Builder;
-import com.cms.scaffold.common.constant_auto.BasicsConstant;
-import com.cms.scaffold.common.constant_manual.RedisConstant;
-import com.cms.scaffold.common.exception.BaseResultCodeEnum;
-import com.cms.scaffold.common.exception.BusinessException;
-import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.core.baseService.BaseServiceImpl;
-import com.cms.scaffold.core.util.BeanUtils;
 import com.cms.scaffold.sys.sys.ao.SysDictAO;
 import com.cms.scaffold.sys.sys.bo.SysDictBO;
 import com.cms.scaffold.sys.sys.dao.SysDictMapper;
 import com.cms.scaffold.sys.sys.domain.SysDict;
 import com.cms.scaffold.sys.sys.service.SysDictService;
 import com.cms.scaffold.common.asserts.Assert;
+import com.cms.scaffold.common.base.Builder;
+import com.cms.scaffold.common.constant_auto.BasicsConstant;
+import com.cms.scaffold.common.constant_manual.RedisConstant;
+import com.cms.scaffold.common.exception.BaseResultCodeEnum;
+import com.cms.scaffold.common.exception.BusinessException;
+import com.cms.scaffold.common.util.StringUtil;
+import com.cms.scaffold.core.I18nUtil.I18nTransformUtil;
+import com.cms.scaffold.core.baseService.BaseServiceImpl;
 import com.cms.scaffold.core.jedis.JedisUtils;
+import com.cms.scaffold.core.util.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class SysDictServiceImpl extends BaseServiceImpl<SysDictMapper,SysDictAO,SysDictBO,SysDict> implements SysDictService {
+public class SysDictServiceImpl extends BaseServiceImpl<SysDictMapper, SysDictAO, SysDictBO, SysDict> implements SysDictService {
 
 
     /**
@@ -57,7 +58,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<SysDictMapper,SysDictAO,
      */
     @Override
     public List<SysDictBO> findByPartnerNid(String nid) {
-        List<SysDict> list;
+        List<SysDict> list = new ArrayList<>();
         Object obj = JedisUtils.getObjectMapField(RedisConstant.SYS_DICT_NID, nid);
         if (obj == null) {
             list = dao.findByPartnerNid(nid);
@@ -67,6 +68,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<SysDictMapper,SysDictAO,
         } else {
             list = (List<SysDict>) obj;
         }
+        I18nTransformUtil.transFormList(list, "name");
 
         return Builder.buildList(list,SysDictBO.class);
 
@@ -163,7 +165,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<SysDictMapper,SysDictAO,
         Assert.notNull(partnerDict, "父字典");
         Assert.notEMPTY(partnerDict.getNid(), "父字典nid");
 
-        if (BasicsConstant.BASICS_DICT_TYPE_FOLDER == dict.getType()) {
+        if (BasicsConstant.BASICS_DICT_TYPE_FOLDER == dict.getType().intValue()) {
             if (StringUtil.isBlank(partnerDict.getNid())) {
                 dict.setNid(dict.getNid());
             } else {
@@ -178,7 +180,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<SysDictMapper,SysDictAO,
         } else {
             SysDict tempSysDict = dao.selectById(dict.getId());
             if (!tempSysDict.getPid().equals(dict.getPid())) {
-                throw new BusinessException(BaseResultCodeEnum.FAIL);
+                throw new BusinessException(BaseResultCodeEnum.SYSTEM_MENU_PID_NOT_CHANGE);
             }
 
             BeanUtils.copyPropertiesByList(dict, tempSysDict, new String[]{

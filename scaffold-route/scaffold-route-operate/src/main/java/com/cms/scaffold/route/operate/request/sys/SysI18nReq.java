@@ -6,7 +6,7 @@ import lombok.Setter;
 
 /**
  * @description:
- * @author: zhangjiahengpoping@gmail.com
+ * @author: zjh
  * @date: 2019-03-12 19:00
  **/
 @Setter
@@ -22,12 +22,12 @@ public class SysI18nReq extends BaseAO {
     private String text;
 
     /** 中文内容**/
-    private String zhCh;
+    private String zhCn;
 
     /** 英文内容**/
     private String enUs;
 
     /** 印尼内容**/
-    private String idId;
+    private String inId;
 
 }

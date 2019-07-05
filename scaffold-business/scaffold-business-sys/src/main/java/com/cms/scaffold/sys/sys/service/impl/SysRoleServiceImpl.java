@@ -1,11 +1,11 @@
 package com.cms.scaffold.sys.sys.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.cms.scaffold.sys.BaseServiceImpl;
+import com.cms.scaffold.sys.sys.dao.SysRoleMapper;
 import com.cms.scaffold.sys.sys.domain.SysRole;
 import com.cms.scaffold.sys.sys.service.SysRoleService;
-import com.cms.scaffold.sys.sys.dao.SysRoleMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.cms.scaffold.common.base.ResponseListModel;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRole> 
 
     @Override
     public ResponseListModel<SysRole> findAll(SysRole sysRole) {
-        PageHelper.startPage(sysRole.getPage(), sysRole.getLimit());
+        PageHelper.startPage(sysRole.getPage(), sysRole.getRows());
         List list = dao.listAll(sysRole);
         PageInfo<SysRole> pageInfo = new PageInfo<>(list);
         ResponseListModel<SysRole> sysRoleResponseListModel = new ResponseListModel<SysRole>(list, pageInfo.getTotal());

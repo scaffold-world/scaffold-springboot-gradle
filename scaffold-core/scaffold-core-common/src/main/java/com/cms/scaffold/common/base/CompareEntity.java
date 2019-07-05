@@ -5,7 +5,7 @@ import lombok.Setter;
 
 /**
  * @description:比较实体类
- * @author: zhangjiahengpoping@gmail.com
+ * @author: zjh
  * @date: 2019-02-28 00:58
  **/
 @Getter
