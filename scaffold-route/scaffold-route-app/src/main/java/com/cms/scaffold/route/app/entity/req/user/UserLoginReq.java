@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * Created with IDEA
  *
- * @author:JHX Date:2019/2/22
+ *  Date:2019/2/22
  * Time:15:21
  */
 @Getter

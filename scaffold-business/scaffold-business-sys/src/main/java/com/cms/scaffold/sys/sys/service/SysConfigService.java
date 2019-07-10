@@ -7,7 +7,7 @@ import com.cms.scaffold.common.base.BaseServiceInterface;
 /**
  * Created with IDEA
  *
- * @author:JHX Date:2019/3/1
+ *  Date:2019/3/1
  * Time:14:38
  */
 public interface SysConfigService extends BaseServiceInterface<SysConfigAO, SysConfigBO> {

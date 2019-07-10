@@ -3,7 +3,7 @@ package com.cms.scaffold.common.constant_manual;
 /**
  * Created with IDEA
  *
- * @author:JHX Date:2019/2/22
+ *  Date:2019/2/22
  * Time:15:13
  */
 public class UserConstant {

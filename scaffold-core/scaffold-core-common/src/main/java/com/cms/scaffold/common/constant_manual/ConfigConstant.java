@@ -3,7 +3,7 @@ package com.cms.scaffold.common.constant_manual;
 /**
  * Created with IDEA
  *
- * @author:JHX Date:2019/3/1
+ *  Date:2019/3/1
  * Time:14:56
  */
 public class ConfigConstant {
