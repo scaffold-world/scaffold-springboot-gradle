@@ -29,12 +29,12 @@
                         return value;
                     }
 			    }"></th>
-        <th data-options="field:'url',title:'<@spring.message "sys.url"/>',width:100"></th>
-        <th data-options="field:'pid',title:'<@spring.message "sys.parent"/>',width:100"></th>
-        <th data-options="field:'levelId',title:'<@spring.message "sys.level"/>',width:100"></th>
-        <th data-options="field:'sort',title:'<@spring.message "sys.sort"/>',width:100"></th>
-        <th data-options="field:'code',title:'<@spring.message "sys.code"/>',width:100"></th>
-        <th data-options="field:'status',title:'<@spring.message "sys.status"/>',width:100,
+        <th data-options="field:'url',title:'<@spring.message "sys.url"/>'"></th>
+        <th data-options="field:'pid',title:'<@spring.message "sys.parent"/>'"></th>
+        <th data-options="field:'levelId',title:'<@spring.message "sys.level"/>'"></th>
+        <th data-options="field:'sort',title:'<@spring.message "sys.sort"/>'"></th>
+        <th data-options="field:'code',title:'<@spring.message "sys.code"/>'"></th>
+        <th data-options="field:'status',title:'<@spring.message "sys.status"/>',
                     formatter: function(value,row,index){
 						if (value == 1){
 							return '<span style=\'color:green\'><@spring.message "sys.enable"/></span>';

@@ -14,9 +14,12 @@
 - MyBatis
 - MySQL
 - Redis
+- flyway-db
 
 ### 项目结构
 - scaffold-business: 业务模块。service和dao层所在模块，主要业务代码都集中在这个模块
+    - scaffold-business-sys： \scaffold\scaffold-business\scaffold-business-sys\src\main\resources\db\migration目录下存放数据库脚本文件
+    - scaffold-business-job: 定时任务模块 主要是定时任务的启动核心配置类
 - scaffold-core: 核心代码包。其中该模块主要负责一些工具类、核心配置类、aop切面等的代码以及自动代码生成插件的编写
 - scaffold-route: 路由包。主要负责接口的编写，分为app和operate两个模块即前端接口和后台管理系统
 

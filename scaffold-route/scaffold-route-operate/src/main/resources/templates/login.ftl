@@ -48,8 +48,8 @@
                            data-options="iconCls:'fa fa-language'" onclick="changeLanguage('zh_CN')" >中文</a>
                         <a href="javascript:void(0)"  data-toggle="topjui-menubutton" class="btn btn-sm"
                            data-options="iconCls:'fa fa-language'" onclick="changeLanguage('en_US')" >English</a>
-                        <a href="javascript:void(0)"  data-toggle="topjui-menubutton" class="btn btn-sm"
-                           data-options="iconCls:'fa fa-language'" onclick="changeLanguage('in_ID')" >印尼</a>
+                        <#--<a href="javascript:void(0)"  data-toggle="topjui-menubutton" class="btn btn-sm"
+                           data-options="iconCls:'fa fa-language'" onclick="changeLanguage('in_ID')" >印尼</a>-->
                     </div>
                 </form>
             </div>
