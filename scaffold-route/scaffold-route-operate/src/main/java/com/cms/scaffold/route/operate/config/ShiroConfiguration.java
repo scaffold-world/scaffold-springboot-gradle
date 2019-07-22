@@ -4,6 +4,7 @@ import com.cms.scaffold.route.operate.shiro.MyShiroRealm;
 import com.cms.scaffold.sys.sys.domain.SysMenu;
 import com.cms.scaffold.sys.sys.service.SysMenuService;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -27,8 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by zjh on 2018/2/8.
- * Apache Shiro 核心通过 Filter 来实现，就好像SpringMvc 通过DispachServlet 来主控制一样。
+ * Created by zjh on 2018/2/8. Apache Shiro 核心通过 Filter 来实现，就好像SpringMvc 通过DispachServlet 来主控制一样。
  * 既然是使用 Filter 一般也就能猜到，是通过URL规则来进行过滤和权限校验，所以我们需要定义一系列关于URL的规则和访问权限。
  */
 @Configuration
@@ -38,169 +38,134 @@ import java.util.Map;
 @Component
 public class ShiroConfiguration {
 
-    @Autowired
-    SysMenuService sysMenuService;
+  @Autowired SysMenuService sysMenuService;
 
-    @Value("${server.session.timeout:30000}")
-    Long  sessionTimeOut;
+  @Value("${server.session.timeout:30000}")
+  Long sessionTimeOut;
 
-    /**
-     * 默认premission字符串
-     */
-    public static final String PREMISSION_STRING = "perms[\"{0}\"]";
+  /** 默认premission字符串 */
+  public static final String PREMISSION_STRING = "perms[\"{0}\"]";
 
-    //系统环境
-    @Value("${spring.profiles.active:prod}")
-    private String profile;
+  /** 系统环境 */
+  @Value("${spring.profiles.active:prod}")
+  private String profile;
 
-    /**
-     * LifecycleBeanPostProcessor，这是个DestructionAwareBeanPostProcessor的子类，
-     * 负责org.apache.shiro.util.Initializable类型bean的生命周期的，初始化和销毁。
-     * 主要是AuthorizingRealm类的子类，以及EhCacheManager类。
-     */
-    @Bean
-    public static LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor();
-    }
+  @Autowired
+  SessionDAO sessionDAO;
 
-    @Bean
-    public DefaultWebSessionManager sessionManager() {
-        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-        sessionManager.setGlobalSessionTimeout(sessionTimeOut * 1000L);
-        Cookie cookie = sessionManager.getSessionIdCookie();
-        cookie.setName(profile + "SessionId");
-        return sessionManager;
-    }
+  /**
+   * LifecycleBeanPostProcessor，这是个DestructionAwareBeanPostProcessor的子类，
+   * 负责org.apache.shiro.util.Initializable类型bean的生命周期的，初始化和销毁。
+   * 主要是AuthorizingRealm类的子类，以及EhCacheManager类。
+   */
+  @Bean
+  public static LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
+    return new LifecycleBeanPostProcessor();
+  }
 
+  @Bean
+  public DefaultWebSessionManager sessionManager() {
+    DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+    sessionManager.setSessionDAO(sessionDAO);
+    sessionManager.setGlobalSessionTimeout(sessionTimeOut * 1000L);
+    Cookie cookie = sessionManager.getSessionIdCookie();
+    cookie.setName(profile + "SessionId");
+    return sessionManager;
+  }
 
-    /**
-     * HashedCredentialsMatcher，这个类是为了对密码进行编码的，
-     * 防止密码在数据库里明码保存，当然在登陆认证的时候，
-     * 这个类也负责对form里输入的密码进行编码。
-     */
-    public Md5CredentialsMatcher md5CredentialsMatcher() {
-        Md5CredentialsMatcher md5CredentialsMatcher = new Md5CredentialsMatcher();
+  /** HashedCredentialsMatcher，这个类是为了对密码进行编码的， 防止密码在数据库里明码保存，当然在登陆认证的时候， 这个类也负责对form里输入的密码进行编码。 */
+  public Md5CredentialsMatcher md5CredentialsMatcher() {
+    return new Md5CredentialsMatcher();
+  }
 
-        return md5CredentialsMatcher;
-    }
+  @Bean
+  public MyShiroRealm myShiroRealm() {
+    MyShiroRealm myShiroRealm = new MyShiroRealm();
+    myShiroRealm.setCredentialsMatcher(md5CredentialsMatcher());
+    return myShiroRealm;
+  }
 
+  /** SecurityManager，权限管理，这个类组合了登陆，登出，权限，session的处理，是个比较重要的类。 */
+  @Bean
+  public DefaultWebSecurityManager securityManager() {
+    DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+    securityManager.setRealm(myShiroRealm());
+    securityManager.setSessionManager(sessionManager());
+    return securityManager;
+  }
 
-    @Bean
-    public MyShiroRealm myShiroRealm() {
-        MyShiroRealm myShiroRealm = new MyShiroRealm();
-        myShiroRealm.setCredentialsMatcher(md5CredentialsMatcher());
-        return myShiroRealm;
-    }
+  /**
+   * 安全认证过滤器 主要保持了三项数据，securityManager，filters，filterChainDefinitionManager。
+   *
+   * @return
+   */
+  @Bean
+  public ShiroFilterFactoryBean shirFilter(DefaultWebSecurityManager securityManager) {
+    ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+    shiroFilterFactoryBean.setSecurityManager(securityManager());
 
-    /**
-     * SecurityManager，权限管理，这个类组合了登陆，登出，权限，session的处理，是个比较重要的类。
-     */
-    @Bean
-    public DefaultWebSecurityManager securityManager() {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(myShiroRealm());
-        securityManager.setSessionManager(sessionManager());
-        return securityManager;
-    }
+    Map<String, Filter> filters = new LinkedHashMap<>();
+    LogoutFilter logoutFilter = new LogoutFilter();
+    logoutFilter.setRedirectUrl("/home");
+    shiroFilterFactoryBean.setFilters(filters);
 
+    Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
+    List<SysMenu> menuList = sysMenuService.findAll();
 
-    /**
-     * 安全认证过滤器 主要保持了三项数据，securityManager，filters，filterChainDefinitionManager。
-     *
-     * @return
-     */
-    @Bean
-    public ShiroFilterFactoryBean shirFilter(DefaultWebSecurityManager securityManager) {
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager());
-
-        Map<String, Filter> filters = new LinkedHashMap<>();
-        LogoutFilter logoutFilter = new LogoutFilter();
-        logoutFilter.setRedirectUrl("/home");
-//        filters.put("logout",null);
-        shiroFilterFactoryBean.setFilters(filters);
-
-        Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
-        List<SysMenu> menuList = sysMenuService.findAll();
-
-        if (menuList != null && !menuList.isEmpty()) {
-            for (SysMenu menu : menuList) {
-                if (!StringUtils.isEmpty(menu.getUrl())) {
-                    if (menu.getUrl().indexOf("/") == 0) {
-                        filterChainDefinitionManager.put(menu.getUrl(),
-                                MessageFormat.format(PREMISSION_STRING, menu.getUrl().replaceFirst("/", "").replaceAll("/", ":")));
-                    } else {
-                        filterChainDefinitionManager.put(menu.getUrl(),
-                                MessageFormat.format(PREMISSION_STRING, menu.getUrl().replaceAll("/", ":")));
-                    }
-                }
-            }
+    if (menuList != null && !menuList.isEmpty()) {
+      for (SysMenu menu : menuList) {
+        if (!StringUtils.isEmpty(menu.getUrl())) {
+          if (menu.getUrl().indexOf("/") == 0) {
+            filterChainDefinitionManager.put(
+                menu.getUrl(),
+                MessageFormat.format(
+                    PREMISSION_STRING, menu.getUrl().replaceFirst("/", "").replaceAll("/", ":")));
+          } else {
+            filterChainDefinitionManager.put(
+                menu.getUrl(),
+                MessageFormat.format(PREMISSION_STRING, menu.getUrl().replaceAll("/", ":")));
+          }
         }
-        filterChainDefinitionManager.put("/login/check", "anon");
-        filterChainDefinitionManager.put("/logout", "logout");
-        filterChainDefinitionManager.put("/login", "anon");
-        filterChainDefinitionManager.put("/dingLogin/check", "anon");
-        filterChainDefinitionManager.put("/static/**", "anon");
-        filterChainDefinitionManager.put("/notify/**", "anon");
-        filterChainDefinitionManager.put("/lang/**", "anon");
-
-        filterChainDefinitionManager.put("/*/login/check", "anon");
-        filterChainDefinitionManager.put("/*/logout", "logout");
-        filterChainDefinitionManager.put("/*/login", "anon");
-        filterChainDefinitionManager.put("/*/dingLogin/check", "anon");
-        filterChainDefinitionManager.put("/*/static/**", "anon");
-        filterChainDefinitionManager.put("/*/notify/**", "anon");
-        filterChainDefinitionManager.put("/*/lang/**", "anon");
-
-        filterChainDefinitionManager.put("/**", "user");
-
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
-
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-        return shiroFilterFactoryBean;
+      }
     }
+    filterChainDefinitionManager.put("/login/check", "anon");
+    filterChainDefinitionManager.put("/logout", "logout");
+    filterChainDefinitionManager.put("/login", "anon");
+    filterChainDefinitionManager.put("/dingLogin/check", "anon");
+    filterChainDefinitionManager.put("/static/**", "anon");
+    filterChainDefinitionManager.put("/notify/**", "anon");
+    filterChainDefinitionManager.put("/lang/**", "anon");
 
-    /**
-     * rememberMe管理器  cipherKey是加密rememberMe Cookie的密钥；默认AES算法；
-     * @return
-     */
-//    @Bean
-//    public CookieRememberMeManager cookieRememberMeManager(){
-//        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
-//        cookieRememberMeManager.setCookie(simpleCookie());
-//        cookieRememberMeManager.setCipherKey(Base64.decode("123456"));
-//
-//        return  cookieRememberMeManager;
-//    }
+    filterChainDefinitionManager.put("/*/login/check", "anon");
+    filterChainDefinitionManager.put("/*/logout", "logout");
+    filterChainDefinitionManager.put("/*/login", "anon");
+    filterChainDefinitionManager.put("/*/dingLogin/check", "anon");
+    filterChainDefinitionManager.put("/*/static/**", "anon");
+    filterChainDefinitionManager.put("/*/notify/**", "anon");
+    filterChainDefinitionManager.put("/*/lang/**", "anon");
 
-    /**
-     * rememberMeCookie：即记住我的Cookie，保存时长30天;
-     * @return
-     */
-//    @Bean
-//    public SimpleCookie simpleCookie(){
-//        SimpleCookie simpleCookie = new SimpleCookie();
-//        simpleCookie.setMaxAge(2592000); //30天
-//        simpleCookie.setHttpOnly(true);
-//        return  simpleCookie;
-//    }
+    filterChainDefinitionManager.put("/**", "user");
 
-    /**
-     * 开启shiro aop注解支持.
-     * 使用代理方式;所以需要开启代码支持;
-     *
-     * @param securityManager
-     * @return
-     */
-    @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
-        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-        return authorizationAttributeSourceAdvisor;
-    }
+    shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
+    shiroFilterFactoryBean.setLoginUrl("/login");
+    shiroFilterFactoryBean.setSuccessUrl("/index");
+    shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+    return shiroFilterFactoryBean;
+  }
+
+  /**
+   * 开启shiro aop注解支持. 使用代理方式;所以需要开启代码支持;
+   *
+   * @param securityManager
+   * @return
+   */
+  @Bean
+  public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(
+      SecurityManager securityManager) {
+    AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor =
+        new AuthorizationAttributeSourceAdvisor();
+    authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+    return authorizationAttributeSourceAdvisor;
+  }
 }
-
-
