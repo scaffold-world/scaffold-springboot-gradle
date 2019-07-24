@@ -18,15 +18,15 @@ import java.util.regex.Pattern;
  * @version 2.0
  * @since 2014年1月28日
  */
-public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
+public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
 
     public static final long ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000;
 
-    private static final String[] WEEK_NAMES = { "", "周日", "周一", "周二", "周三",
-            "周四", "周五", "周六" };
+    private static final String[] WEEK_NAMES = {"", "周日", "周一", "周二", "周三",
+            "周四", "周五", "周六"};
 
-    private static final String[] WEEK_NAMESS = { "", "星期日", "星期一", "星期二", "星期三",
-            "星期四", "星期五", "星期六" };
+    private static final String[] WEEK_NAMESS = {"", "星期日", "星期一", "星期二", "星期三",
+            "星期四", "星期五", "星期六"};
 
 
     private static String[] parsePatterns = {
@@ -55,6 +55,10 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
      */
     public static final String DATEFORMAT_STR_005 = "yyyy-MM-dd HH";
 
+    /**
+     * 格式：HHmmssSSS
+     */
+    public static final String DATEFORMAT_STR_010 = "HHmmssSSS";
 
     /**
      * 格式 ：yyyyMMddHHmmss
@@ -83,68 +87,43 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
     public static final String DATEFORMAT_STR_024 = "MMddyyyy";
 
 
-    public enum EDateFormatPattern
-    {
+    public enum EDateFormatPattern {
         yyyy("yyyy"), yyyy_MM("yyyy-MM"), yyyyMMdd("yyyyMMdd"), yyyy_MM_dd("yyyy-MM-dd"), HH_mm_ss("HH_mm_ss"), yyyy_MM_dd_HH("yyyy-MM-dd HH"), yyyy_MM_dd_HH_mm(
-            "yyyy-MM-dd HH-mm"), yyyy_MM_dd_HH_mm_ss("yyyy-MM-dd HH:mm:ss"), MMdd("MMdd"), MM_dd_HH_mm_ss(
-            "MM-dd HH:mm:ss"), yyyyMMddhhmmss("yyyyMMddhhmmss");
+                "yyyy-MM-dd HH-mm"), yyyy_MM_dd_HH_mm_ss("yyyy-MM-dd HH:mm:ss"), MMdd("MMdd"), MM_dd_HH_mm_ss(
+                "MM-dd HH:mm:ss"), yyyyMMddhhmmss("yyyyMMddhhmmss");
 
         private final String pattern;
 
-        public String getPattern()
-        {
+        public String getPattern() {
             return this.pattern;
         }
 
-        private EDateFormatPattern(String pattern)
-        {
+        private EDateFormatPattern(String pattern) {
             this.pattern = pattern;
         }
 
-        public static EDateFormatPattern getPattern(String pattern)
-        {
-            if (yyyy.getPattern().equals(pattern))
-            {
+        public static EDateFormatPattern getPattern(String pattern) {
+            if (yyyy.getPattern().equals(pattern)) {
                 return yyyy;
-            }
-            else if (yyyy_MM.getPattern().equals(pattern))
-            {
+            } else if (yyyy_MM.getPattern().equals(pattern)) {
                 return yyyy_MM;
-            }
-            else if (yyyyMMdd.getPattern().equals(pattern))
-            {
+            } else if (yyyyMMdd.getPattern().equals(pattern)) {
                 return yyyyMMdd;
-            }
-            else if (HH_mm_ss.getPattern().equals(pattern))
-            {
+            } else if (HH_mm_ss.getPattern().equals(pattern)) {
                 return HH_mm_ss;
-            }
-            else if (yyyy_MM_dd_HH.getPattern().equals(pattern))
-            {
+            } else if (yyyy_MM_dd_HH.getPattern().equals(pattern)) {
                 return yyyy_MM_dd_HH;
-            }
-            else if (yyyy_MM_dd_HH.getPattern().equals(pattern))
-            {
+            } else if (yyyy_MM_dd_HH.getPattern().equals(pattern)) {
                 return yyyy_MM_dd_HH;
-            }
-            else if (yyyy_MM_dd_HH_mm.getPattern().equals(pattern))
-            {
+            } else if (yyyy_MM_dd_HH_mm.getPattern().equals(pattern)) {
                 return yyyy_MM_dd_HH_mm;
-            }
-            else if (yyyy_MM_dd_HH_mm_ss.getPattern().equals(pattern))
-            {
+            } else if (yyyy_MM_dd_HH_mm_ss.getPattern().equals(pattern)) {
                 return yyyy_MM_dd_HH_mm_ss;
-            }
-            else if (MMdd.getPattern().equals(pattern))
-            {
+            } else if (MMdd.getPattern().equals(pattern)) {
                 return MMdd;
-            }
-            else if (MM_dd_HH_mm_ss.getPattern().equals(pattern))
-            {
+            } else if (MM_dd_HH_mm_ss.getPattern().equals(pattern)) {
                 return MM_dd_HH_mm_ss;
-            }
-            else
-            {
+            } else {
                 throw new RuntimeException("日期格式不支持");
             }
         }
@@ -278,6 +257,14 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
     }
 
     /**
+     * @param date
+     * @return 格式：HHmmssSSS 时分秒加毫秒
+     */
+    public static String dateStr10(Date date) {
+        return dateStr(date, DATEFORMAT_STR_010);
+    }
+
+    /**
      * 将时间戳转换为Date
      *
      * @param times
@@ -394,15 +381,15 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
     }
 
     /**
-     *
      * 前/后?小时
+     *
      * @param d
      * @param hour
      * @return
      * @author zjh
      * @date 2017-9-20
      */
-    public static Date rollHour(Date d,int hour){
+    public static Date rollHour(Date d, int hour) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(d);
         cal.add(Calendar.HOUR_OF_DAY, hour);
@@ -594,12 +581,13 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
             calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND,0);
+            calendar.set(Calendar.MILLISECOND, 0);
             return calendar.getTime();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
     /**
      * 获得本天的结束时间，即yyyy-MM-dd HH:mm:ss
      *
@@ -625,7 +613,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
      */
     public static String getCurrentDayStartTime(Date now) {
         try {
-            return (new SimpleDateFormat(DATEFORMAT_STR_002)).format(now)+" 00:00:00";
+            return (new SimpleDateFormat(DATEFORMAT_STR_002)).format(now) + " 00:00:00";
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -638,7 +626,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
      */
     public static String getCurrentDayEndTime(Date now) {
         try {
-            return (new SimpleDateFormat(DATEFORMAT_STR_002)).format(now)+" 23:59:59";
+            return (new SimpleDateFormat(DATEFORMAT_STR_002)).format(now) + " 23:59:59";
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -659,6 +647,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
     /**
      * 获取当前日期是星期几<br>
      * 0-6 为周日到周一
+     *
      * @param date
      * @return 当前日期是星期几
      */
@@ -837,7 +826,7 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
     public static Date rollDayEndTime(Date d, int day) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(d);
-        cal.set(Calendar.MILLISECOND,0);
+        cal.set(Calendar.MILLISECOND, 0);
         cal.add(Calendar.DAY_OF_MONTH, day);
         cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE), 23, 59, 59);
         return cal.getTime();
@@ -888,13 +877,15 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 获取过去的分钟
+     *
      * @param date
      * @return
      */
     public static long pastMinutes(Date date) {
-        long t = new Date().getTime()-date.getTime();
-        return t/(60*1000);
+        long t = new Date().getTime() - date.getTime();
+        return t / (60 * 1000);
     }
+
     /**
      * 获取19位的格式时间
      *
@@ -993,29 +984,31 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
         long min = diff / 1000;
         return min;
     }
+
     /**
      * 获取日期的开始时间
      */
-    public static String getBeginOfDate(Date date){
+    public static String getBeginOfDate(Date date) {
         String timeStr = dateStr2(date);
-        return timeStr+" 00:00:00";
+        return timeStr + " 00:00:00";
     }
+
     /**
      * 获取日期的结束时间
      */
-    public static String getEndOfDate(Date date){
+    public static String getEndOfDate(Date date) {
         String timeStr = dateStr2(date);
-        return timeStr+" 23:59:59";
+        return timeStr + " 23:59:59";
     }
 
     /**
      * 日期型字符串转化为日期 格式
      * { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm",
-     *   "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm",
-     *   "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm" }
+     * "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm",
+     * "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm" }
      */
     public static Date parseDate(Object str) {
-        if (str == null){
+        if (str == null) {
             return null;
         }
         try {
@@ -1032,27 +1025,27 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
      * @param pattern
      * @return
      */
-    public static String getGiveDay(Date date, EDateFormatPattern pattern, int amount)
-    {
+    public static String getGiveDay(Date date, EDateFormatPattern pattern, int amount) {
         return DateFormatUtils.format(
                 org.apache.commons.lang3.time.DateUtils.addDays(date == null ? new Date() : date, amount),
                 pattern.getPattern());
     }
 
     /**
-     *
      * TODO：判断当前时间是否为今天
+     *
      * @param date
      * @return
      * @author zjh
      * @date 2017-9-8
      */
-    public static boolean isToDay(Date date){
+    public static boolean isToDay(Date date) {
         return dateStr2(date).equals(dateStr2(DateUtil.getNow()));
     }
 
     /**
      * 将date时间 扩展成一天或一个月范围
+     *
      * @param date
      * @return
      */
@@ -1076,21 +1069,21 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils{
                     case 8:
                     case 10:
                     case 12:
-                        endTime = ""+year+"-" +(month>9?"":"0")+ month + "-31 23:59:59";
+                        endTime = "" + year + "-" + (month > 9 ? "" : "0") + month + "-31 23:59:59";
                         break;
                     case 2:
-                        if((year%4==0&&year%100!=0)||year%400==0){
-                            endTime = ""+year+"-" +(month>9?"":"0")+ month + "-29 23:59:59";
-                        }else{
-                            endTime = ""+year+"-" +(month>9?"":"0")+ month + "-28 23:59:59";
+                        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                            endTime = "" + year + "-" + (month > 9 ? "" : "0") + month + "-29 23:59:59";
+                        } else {
+                            endTime = "" + year + "-" + (month > 9 ? "" : "0") + month + "-28 23:59:59";
                         }
                         break;
                     default:
-                        endTime = ""+year+"-" +(month>9?"":"0")+ month + "-30 23:59:59";
+                        endTime = "" + year + "-" + (month > 9 ? "" : "0") + month + "-30 23:59:59";
                         break;
                 }
             }
-        }else{
+        } else {
             startTime = date + " 00:00:00";
             endTime = date + " 23:59:59";
         }
