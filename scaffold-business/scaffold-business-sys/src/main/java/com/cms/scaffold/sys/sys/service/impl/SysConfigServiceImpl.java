@@ -6,9 +6,9 @@ import com.cms.scaffold.sys.sys.dao.SysConfigMapper;
 import com.cms.scaffold.sys.sys.domain.SysConfig;
 import com.cms.scaffold.sys.sys.service.SysConfigService;
 import com.cms.scaffold.common.constant_manual.RedisConstant;
-import com.cms.scaffold.core.baseService.BaseServiceImpl;
-import com.cms.scaffold.core.dict.ExpireTime;
-import com.cms.scaffold.core.util.CacheUtils;
+import com.cms.scaffold.code.baseService.BaseServiceImpl;
+import com.cms.scaffold.code.dict.ExpireTime;
+import com.cms.scaffold.code.util.CacheUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

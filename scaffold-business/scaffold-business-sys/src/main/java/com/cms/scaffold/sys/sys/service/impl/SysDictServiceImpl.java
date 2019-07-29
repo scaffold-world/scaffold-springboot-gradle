@@ -12,10 +12,10 @@ import com.cms.scaffold.common.constant_manual.RedisConstant;
 import com.cms.scaffold.common.exception.BaseResultCodeEnum;
 import com.cms.scaffold.common.exception.BusinessException;
 import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.core.I18nUtil.I18nTransformUtil;
-import com.cms.scaffold.core.baseService.BaseServiceImpl;
-import com.cms.scaffold.core.jedis.JedisUtils;
-import com.cms.scaffold.core.util.BeanUtils;
+import com.cms.scaffold.code.I18nUtil.I18nTransformUtil;
+import com.cms.scaffold.code.baseService.BaseServiceImpl;
+import com.cms.scaffold.code.jedis.JedisUtils;
+import com.cms.scaffold.code.util.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

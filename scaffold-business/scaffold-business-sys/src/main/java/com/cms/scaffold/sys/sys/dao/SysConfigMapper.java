@@ -2,7 +2,7 @@ package com.cms.scaffold.sys.sys.dao;
 
 
 import com.cms.scaffold.sys.sys.domain.SysConfig;
-import com.cms.scaffold.core.baseService.BaseMapper;
+import com.cms.scaffold.code.baseService.BaseMapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

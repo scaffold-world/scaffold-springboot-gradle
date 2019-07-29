@@ -5,7 +5,7 @@ import com.cms.scaffold.sys.sys.bo.SysOperateLogBO;
 import com.cms.scaffold.sys.sys.dao.SysOperateLogMapper;
 import com.cms.scaffold.sys.sys.domain.SysOperateLog;
 import com.cms.scaffold.sys.sys.service.SysOperateLogService;
-import com.cms.scaffold.core.baseService.BaseServiceImpl;
+import com.cms.scaffold.code.baseService.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service

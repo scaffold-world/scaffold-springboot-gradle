@@ -3,7 +3,7 @@ package com.cms.scaffold.route.operate.freemarker.impl;
 import com.cms.scaffold.route.operate.freemarker.factory.ThFormatterInterface;
 import com.cms.scaffold.sys.sys.bo.SysDictBO;
 import com.cms.scaffold.sys.sys.service.SysDictService;
-import com.cms.scaffold.core.spring.SpringContextHolder;
+import com.cms.scaffold.code.spring.SpringContextHolder;
 
 import java.util.List;
 

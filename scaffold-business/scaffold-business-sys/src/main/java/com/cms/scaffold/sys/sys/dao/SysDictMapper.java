@@ -1,6 +1,6 @@
 package com.cms.scaffold.sys.sys.dao;
 
-import com.cms.scaffold.core.baseService.BaseMapper;
+import com.cms.scaffold.code.baseService.BaseMapper;
 import com.cms.scaffold.sys.sys.domain.SysDict;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

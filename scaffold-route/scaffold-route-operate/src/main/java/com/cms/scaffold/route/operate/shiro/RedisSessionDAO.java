@@ -1,7 +1,7 @@
 package com.cms.scaffold.route.operate.shiro;
 
 import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.core.jedis.JedisUtils;
+import com.cms.scaffold.code.jedis.JedisUtils;
 import com.cms.scaffold.route.operate.util.Servlets;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;

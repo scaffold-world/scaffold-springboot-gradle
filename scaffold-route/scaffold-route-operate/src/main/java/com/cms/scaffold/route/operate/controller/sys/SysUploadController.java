@@ -1,7 +1,7 @@
 package com.cms.scaffold.route.operate.controller.sys;
 
 import com.cms.scaffold.route.operate.controller.BaseController;
-import com.cms.scaffold.core.util.AliyunOSSClientUtil;
+import com.cms.scaffold.code.util.AliyunOSSClientUtil;
 import com.cms.scaffold.route.operate.response.UploadResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

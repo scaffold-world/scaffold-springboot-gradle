@@ -1,7 +1,7 @@
 package com.cms.scaffold.route.operate.freemarker;
 
 import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.core.I18nUtil.I18nTransformUtil;
+import com.cms.scaffold.code.I18nUtil.I18nTransformUtil;
 import com.cms.scaffold.route.operate.freemarker.factory.ThFormatterFactory;
 import com.cms.scaffold.route.operate.freemarker.factory.ThFormatterInterface;
 import com.cms.scaffold.route.operate.tag.TableThTag;

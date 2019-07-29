@@ -10,8 +10,8 @@ import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.exception.BaseResultCodeEnum;
 import com.cms.scaffold.common.exception.BusinessException;
 import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.core.baseService.BaseServiceImpl;
-import com.cms.scaffold.core.util.BeanUtils;
+import com.cms.scaffold.code.baseService.BaseServiceImpl;
+import com.cms.scaffold.code.util.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

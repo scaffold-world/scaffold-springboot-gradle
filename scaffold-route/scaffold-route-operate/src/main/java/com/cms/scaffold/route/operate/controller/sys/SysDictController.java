@@ -7,7 +7,7 @@ import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.base.ResponseModel;
 import com.cms.scaffold.common.exception.BusinessException;
 import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.core.I18nUtil.I18nTransformUtil;
+import com.cms.scaffold.code.I18nUtil.I18nTransformUtil;
 import com.cms.scaffold.route.operate.request.sys.SysDictReq;
 import com.cms.scaffold.route.operate.response.SysDictResp;
 import com.cms.scaffold.sys.sys.ao.SysDictAO;

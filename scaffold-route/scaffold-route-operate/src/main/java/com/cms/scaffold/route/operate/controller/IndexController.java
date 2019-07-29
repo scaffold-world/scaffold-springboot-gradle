@@ -3,7 +3,7 @@ package com.cms.scaffold.route.operate.controller;
 import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.constant_manual.BasicsConstantManual;
 import com.cms.scaffold.common.constant_manual.SysConstant;
-import com.cms.scaffold.core.I18nUtil.I18nTransformUtil;
+import com.cms.scaffold.code.I18nUtil.I18nTransformUtil;
 import com.cms.scaffold.route.operate.response.SysMenuResp;
 import com.cms.scaffold.sys.sys.bo.SysMenuBO;
 import com.cms.scaffold.sys.sys.domain.SysOperate;

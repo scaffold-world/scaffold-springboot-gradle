@@ -8,7 +8,7 @@ import com.cms.scaffold.common.base.ResponseModel;
 import com.cms.scaffold.common.constant_manual.BasicsConstantManual;
 import com.cms.scaffold.common.exception.BusinessException;
 import com.cms.scaffold.common.exception.SystemException;
-import com.cms.scaffold.core.spring.SpringContextHolder;
+import com.cms.scaffold.code.spring.SpringContextHolder;
 import com.cms.scaffold.job.jobManager.ao.JobInfoAO;
 import com.cms.scaffold.job.jobManager.bo.JobInfoBO;
 import com.cms.scaffold.job.jobManager.service.JobInfoService;

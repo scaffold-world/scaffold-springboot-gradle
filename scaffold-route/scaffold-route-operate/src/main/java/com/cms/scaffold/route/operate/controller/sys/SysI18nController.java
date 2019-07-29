@@ -4,7 +4,7 @@ import com.cms.scaffold.route.operate.controller.BaseController;
 import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.base.ResponseListModel;
 import com.cms.scaffold.common.base.ResponseModel;
-import com.cms.scaffold.core.util.ResponseListModelUtils;
+import com.cms.scaffold.code.util.ResponseListModelUtils;
 import com.cms.scaffold.route.operate.request.sys.SysI18nReq;
 import com.cms.scaffold.route.operate.response.SysI18nResp;
 import com.cms.scaffold.sys.sys.ao.SysI18nAO;

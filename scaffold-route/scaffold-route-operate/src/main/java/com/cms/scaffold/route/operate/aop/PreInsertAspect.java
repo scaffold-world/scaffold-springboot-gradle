@@ -25,7 +25,7 @@ public class PreInsertAspect {
     public Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Before("execution(* com.cms.scaffold.*.*.dao.*.insert*(..)) || execution( * com.cms.scaffold.sys.BaseMapper.insert*(..)) " +
-            "|| execution( * com.cms.scaffold.core.baseService.BaseMapper.insert*(..))")
+            "|| execution( * com.cms.scaffold.code.baseService.BaseMapper.insert*(..))")
     public void insert(JoinPoint joinPoint){
 
         BaseEntity baseEntity = null;

@@ -9,8 +9,8 @@ import com.github.pagehelper.PageHelper;
 import com.cms.scaffold.common.asserts.Assert;
 import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.base.ResponseListModel;
-import com.cms.scaffold.core.baseService.BaseServiceImpl;
-import com.cms.scaffold.core.util.ResponseListModelUtils;
+import com.cms.scaffold.code.baseService.BaseServiceImpl;
+import com.cms.scaffold.code.util.ResponseListModelUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

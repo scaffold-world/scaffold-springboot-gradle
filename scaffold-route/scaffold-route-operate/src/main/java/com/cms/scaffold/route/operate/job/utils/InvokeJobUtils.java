@@ -1,7 +1,7 @@
 package com.cms.scaffold.route.operate.job.utils;
 
 import com.cms.scaffold.common.util.StringUtil;
-import com.cms.scaffold.core.spring.SpringContextHolder;
+import com.cms.scaffold.code.spring.SpringContextHolder;
 import com.cms.scaffold.job.jobManager.bo.JobInfoBO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

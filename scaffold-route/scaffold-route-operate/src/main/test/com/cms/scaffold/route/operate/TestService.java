@@ -1,7 +1,7 @@
 package com.cms.scaffold.route.operate;
 
 import com.alibaba.fastjson.JSON;
-import com.cms.scaffold.core.util.GenerateUniqueNoUtil;
+import com.cms.scaffold.code.util.GenerateUniqueNoUtil;
 import com.cms.scaffold.sys.sys.bo.SysMenuBO;
 import com.cms.scaffold.sys.sys.service.SysMenuService;
 import org.junit.Assert;

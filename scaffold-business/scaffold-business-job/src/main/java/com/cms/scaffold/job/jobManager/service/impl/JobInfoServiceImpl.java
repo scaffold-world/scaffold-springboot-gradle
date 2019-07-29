@@ -8,7 +8,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.cms.scaffold.job.jobManager.service.JobInfoService;
 import com.cms.scaffold.common.base.ResponseListModel;
-import com.cms.scaffold.core.baseService.BaseServiceImpl;
+import com.cms.scaffold.code.baseService.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

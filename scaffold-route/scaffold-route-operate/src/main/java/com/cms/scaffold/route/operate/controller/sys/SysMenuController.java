@@ -6,7 +6,7 @@ import com.cms.scaffold.common.base.Builder;
 import com.cms.scaffold.common.base.ResponseModel;
 import com.cms.scaffold.common.constant_manual.BasicsConstantManual;
 import com.cms.scaffold.common.constant_manual.SysConstant;
-import com.cms.scaffold.core.I18nUtil.I18nTransformUtil;
+import com.cms.scaffold.code.I18nUtil.I18nTransformUtil;
 import com.cms.scaffold.route.operate.request.sys.SysMenuReq;
 import com.cms.scaffold.route.operate.response.SysMenuResp;
 import com.cms.scaffold.route.operate.shiro.ShiroService;
