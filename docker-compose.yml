@@ -1,0 +1,51 @@
+version: "3.7"
+
+services:
+  dev:
+    image: gradle:5.6.3-jdk11
+    working_dir: /app
+    volumes:
+      - .:/app
+      - gradle-cache:/home/gradle/.gradle
+    networks:
+      - app_net
+    env_file:
+      - docker.env
+    ports:
+      - 8080:8080
+      - 5005:5005
+    command: gradle bootRun
+    depends_on:
+      - postgres_base
+
+  test:
+    image: gradle:5.6.3-jdk11
+    working_dir: /app
+    volumes:
+      - .:/app
+      - gradle-cache:/home/gradle/.gradle
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - app_net
+    command: gradle clean check
+
+  postgres_base:
+    image: postgres:11.5
+    restart: always
+    environment:
+      POSTGRES_USER: scaffold_admin
+      POSTGRES_PASSWORD: password10
+      POSTGRES_DB: scaffold_db
+    networks:
+      - app_net
+    volumes:
+      - db-cache:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+networks:
+  app_net:
+
+volumes:
+  gradle-cache:
+  db-cache:

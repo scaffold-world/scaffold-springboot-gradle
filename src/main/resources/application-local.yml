@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/scaffold_db
+    username: scaffold_admin
+    password: password10
+  jpa:
+    show-sql: true
+server:
+  port: 8080

@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+cd $(dirname $0)/..
+
+docker-compose run --rm --no-deps test
