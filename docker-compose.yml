@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  dev:
+  app:
     image: gradle:5.6.3-jdk11
     working_dir: /app
     volumes:
@@ -29,7 +29,7 @@ services:
       - app_net
     command: gradle clean check
 
-  postgres_base:
+  db:
     image: postgres:11.5
     restart: always
     environment:

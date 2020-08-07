@@ -2,5 +2,5 @@
 
 cd $(dirname $0)/..
 
-docker-compose up turnstile
+docker-compose up app
 docker-compose down --remove-orphans
