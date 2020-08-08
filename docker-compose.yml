@@ -16,7 +16,7 @@ services:
       - 5005:5005
     command: gradle bootRun
     depends_on:
-      - postgres_base
+      - db
 
   test:
     image: gradle:5.6.3-jdk11
