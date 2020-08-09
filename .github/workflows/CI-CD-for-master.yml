@@ -17,4 +17,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: 🛫 Start to deploy the project.
-        run: echo 'I'm ready to be deploy.'
+        run: echo I'm ready to be deploy.
