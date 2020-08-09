@@ -1,0 +1,19 @@
+name: CI/CD for master
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 🪐 Do a full test for this project.
+        run: auto/test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        run: echo 'I'm ready to be deploy.'

@@ -1,8 +1,6 @@
-name: pipeline
+name: CI for pull requests
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -11,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run a one-line script
+      - name: 🪐 Do a full test for this project.
         run: auto/test
