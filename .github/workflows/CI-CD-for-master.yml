@@ -16,4 +16,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: 🛫 Start to deploy the project.
         run: echo 'I'm ready to be deploy.'
