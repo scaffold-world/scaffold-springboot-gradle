@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/scaffold_db
+    url: jdbc:postgresql://localhost:5432/scaffold_db
     username: scaffold_admin
     password: password10
   jpa:

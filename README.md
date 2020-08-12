@@ -20,11 +20,8 @@ Have big confidence that it the best practise about using SpringBoot to build an
 ### Start without docker
 
 1. Set up the database, use postgresql
-2. Start via gradle:
-    ```bash
-    $ ./gradlew bootRun
-    ```
-3. Or, start in IDEA via `BootApplication`. Make sure you have configured the IDEA environment.
+2. Make sure you have configured the IDEA environment. Configure `application-local.yml`. Edit the `Active profile` to `local`.
+3. Start in IDEA via `BootApplication`.
 
 ### Run all the tests within docker
 
@@ -42,14 +39,35 @@ $ ./gradlew clean check
 
 ### Deploy database
 
+Use docker to set up the postgresql database.
+
+```shell script
+docker run -d -p 5432:5432 --name scaffold_db \
+    -v /var/lib/postgresql/data \
+    --env POSTGRES_USER=scaffold_admin \
+    --env POSTGRES_PASSWORD=password10 \
+    --env POSTGRES_DB=scaffold_db \
+  postgres:11.5
+```
+
 ## Access API
+
+```shell script
+curl -v http://localhost:8080
+```
 
 ## Build / Deployment
 
 ### Deployment
 
+Use git actions to trigger the CI/CD, see [Github action](https://github.com/Fatezhang/scaffold/actions)
+
 ## Support
 
 ### Troubleshooting
 
+See [Troubleshooting](./.docs/TroubleShooting.md)
+
 ### NewRelic
+
+N/A
