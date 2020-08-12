@@ -2,6 +2,8 @@
 A scaffold to build a web application. The tech stack includes `SpringBoot`, `FlyWay`, `docker`, `Junit5`.
 Have big confidence that it the best practise about using SpringBoot to build an RESTFUL repo.
 
+![CI/CD for master](https://github.com/Fatezhang/scaffold/workflows/CI/CD%20for%20master/badge.svg)
+
 ## Setup in local
 
 ### Prerequisites
