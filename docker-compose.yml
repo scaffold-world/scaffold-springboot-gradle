@@ -30,18 +30,23 @@ services:
     command: gradle clean check
 
   db:
-    image: postgres:11.5
+    image: mysql:5.7
     restart: always
+    privileged: true
     environment:
-      POSTGRES_USER: scaffold_admin
-      POSTGRES_PASSWORD: password10
-      POSTGRES_DB: scaffold_db
+      MYSQL_USER: scaffold_rw
+      MYSQL_PASSWORD: password10
+      MYSQL_DATABASE: scaffold_db
+      MYSQL_ROOT_PASSWORD: 123456
     networks:
       - app_net
     volumes:
-      - db-cache:/var/lib/postgresql/data
+      - ./mysql/conf:/etc/mysql
+      - ./mysql/logs:/var/log/mysql
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d/
     ports:
-      - 5432:5432
+      - 3306:3306
 
 networks:
   app_net:

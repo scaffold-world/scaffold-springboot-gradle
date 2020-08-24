@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/scaffold_db
-    username: scaffold_admin
+    url: jdbc:mysql://localhost:3306/scaffold_db?characterEncoding=utf8&useSSL=false
+    username: scaffold_rw
     password: password10
   jpa:
     show-sql: true

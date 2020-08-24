@@ -1,5 +1,4 @@
-CREATE TABLE demo
-(
-    id                   BIGSERIAL    NOT NULL,
-    PRIMARY KEY (id)
-);
+CREATE TABLE `demo` (
+    `id` varchar(36) NOT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
