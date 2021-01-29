@@ -111,7 +111,7 @@ project(":") {
     }
 
     ext {
-        NEWRELIC = 'com.newrelic.agent.java:newrelic-agent:5.8.0'
+        NEWRELIC = 'com.newrelic.agent.java:newrelic-agent:6.4.0'
     }
 
     configurations {
