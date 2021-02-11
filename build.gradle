@@ -142,7 +142,7 @@ project(":") {
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }
-        testImplementation "org.testcontainers:mysql:1.15.1"
+        testImplementation "org.testcontainers:mysql:1.15.2"
         testImplementation 'io.rest-assured:json-schema-validator:4.3.3'
         testCompile 'com.github.tomakehurst:wiremock:2.25.1'
 
