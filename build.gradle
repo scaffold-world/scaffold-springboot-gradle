@@ -12,7 +12,7 @@ plugins {
 project(":") {
     group = 'com.scaffold'
     version = '1.0.0'
-    sourceCompatibility = '11'
+    sourceCompatibility = '15'
 
     repositories {
         jcenter()
@@ -20,7 +20,7 @@ project(":") {
     }
 
     pmd {
-        toolVersion = '6.21.0'
+        toolVersion = '6.31.0'
         ruleSetFiles = files('config/pmd.xml')
         ruleSets = []
         consoleOutput = true
@@ -39,7 +39,7 @@ project(":") {
     }
 
     jacoco {
-        toolVersion = "0.8.4"
+        toolVersion = "0.8.6"
     }
 
     jacocoTestReport {
@@ -80,7 +80,7 @@ project(":") {
     }
 
     lombok {
-        version = "1.18.10"
+        version = "1.18.16"
     }
 
     test {
@@ -92,7 +92,7 @@ project(":") {
     }
 
     flyway {
-        url = "jdbc:postgresql://${project.findProperty("dbHost") ?: "localhost"}:5432/scaffold_db"
+        url = "jdbc:mysql://${project.findProperty("dbHost") ?: "localhost"}:3306/scaffold_db"
         user = 'scaffold_admin'
         password = 'password10'
     }
@@ -133,6 +133,7 @@ project(":") {
         implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
         implementation 'mysql:mysql-connector-java:8.0.23'
         implementation 'org.flywaydb:flyway-core:5.+'
         implementation 'net.logstash.logback:logstash-logback-encoder:6.+'
@@ -144,10 +145,10 @@ project(":") {
         }
         testImplementation "org.testcontainers:mysql:1.15.2"
         testImplementation 'io.rest-assured:json-schema-validator:4.3.3'
-        testCompile 'com.github.tomakehurst:wiremock:2.25.1'
+        testImplementation 'com.github.tomakehurst:wiremock:2.25.1'
 
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
-        compile "io.springfox:springfox-swagger2:3.0.0"
+        compileOnly "io.springfox:springfox-swagger2:3.0.0"
 
         newrelic(NEWRELIC)
     }
