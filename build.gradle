@@ -6,7 +6,7 @@ plugins {
     id 'jacoco'
     id 'pmd'
     id "io.freefair.lombok" version "5.3.3.3"
-    id "org.flywaydb.flyway" version "7.7.0"
+    id "org.flywaydb.flyway" version "7.8.1"
 }
 
 project(":") {
@@ -134,8 +134,8 @@ project(":") {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springframework.boot:spring-boot-starter-hateoas'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
-        implementation 'mysql:mysql-connector-java:8.0.23'
-        implementation 'org.flywaydb:flyway-core:5.+'
+        implementation 'mysql:mysql-connector-java:8.0.24'
+        implementation 'org.flywaydb:flyway-core:7.+'
         implementation 'net.logstash.logback:logstash-logback-encoder:6.+'
         implementation 'commons-beanutils:commons-beanutils:1.9.4'
         implementation 'com.vladmihalcea:hibernate-types-52:2.10.3'
@@ -143,7 +143,7 @@ project(":") {
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }
-        testImplementation "org.testcontainers:mysql:1.15.2"
+        testImplementation "org.testcontainers:mysql:1.15.3"
         testImplementation 'io.rest-assured:json-schema-validator:4.3.3'
         testImplementation 'com.github.tomakehurst:wiremock:2.25.1'
 
