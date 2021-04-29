@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "03:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: org.flywaydb.flyway
+    versions:
+    - 7.6.0
+    - 7.7.1
+    - 7.7.2
+    - 7.7.3
+    - 7.8.0
+  - dependency-name: io.freefair.lombok
+    versions:
+    - 5.3.2
+  - dependency-name: org.springframework.boot
+    versions:
+    - 2.4.4
