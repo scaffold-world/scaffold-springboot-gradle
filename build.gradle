@@ -145,7 +145,7 @@ project(":") {
         }
         testImplementation "org.testcontainers:mysql:1.15.3"
         testImplementation 'io.rest-assured:json-schema-validator:4.3.3'
-        testImplementation 'com.github.tomakehurst:wiremock:2.25.1'
+        testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
 
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
         compileOnly "io.springfox:springfox-swagger2:3.0.0"
