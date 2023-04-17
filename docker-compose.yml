@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   app:
-    image: gradle:6.8.1-jdk15
+    image: gradle:8.1.0-jdk17
     working_dir: /app
     volumes:
       - .:/app
@@ -19,7 +19,7 @@ services:
       - db
 
   test:
-    image: gradle:6.8.1-jdk15
+    image: gradle:8.1.0-jdk17
     working_dir: /app
     volumes:
       - .:/app
@@ -30,23 +30,19 @@ services:
     command: gradle clean check
 
   db:
-    image: mysql:5.7
+    image: postgres:15.2
     restart: always
     privileged: true
     environment:
-      MYSQL_USER: scaffold_rw
-      MYSQL_PASSWORD: password10
-      MYSQL_DATABASE: scaffold_db
-      MYSQL_ROOT_PASSWORD: 123456
+      POSTGRES_USER: local
+      POSTGRES_PASSWORD: local_pwd
+      POSTGRES_DB: scaffold
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
     networks:
       - app_net
-    volumes:
-      - ./mysql/conf:/etc/mysql
-      - ./mysql/logs:/var/log/mysql
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/init:/docker-entrypoint-initdb.d/
     ports:
-      - 3306:3306
+      - 5432:5432
 
 networks:
   app_net:

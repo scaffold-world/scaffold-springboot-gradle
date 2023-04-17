@@ -8,7 +8,7 @@ Have big confidence that it the best practise about using SpringBoot to build an
 
 ### Prerequisites
 
-- Java 11
+- Java 17
 - Docker
 
 ### Start within docker
@@ -42,21 +42,7 @@ $ ./gradlew clean check
 Use docker to set up the postgresql database.
 
 ```shell script
-# cd scaffold
-export PROJECT=/<some-workspace>/scaffold
-docker run -d -p 3306:3306 \
-    --restart=always \
-    --privileged=true \
-    --name scaffold_db \
-    --volume ${PROJECT}/mysql/conf:/etc/mysql \
-    --volume ${PROJECT}/mysql/logs:/var/log/mysql \
-    --volume ${PROJECT}/mysql/data:/var/lib/mysql \
-    --volume ${PROJECT}/mysql/init/:/docker-entrypoint-initdb.d/ \
-    --env MYSQL_USER=scaffold_rw \
-    --env MYSQL_PASSWORD=password10 \
-    --env MYSQL_ROOT_PASSWORD=123456 \
-    --env MYSQL_DB=scaffold_db \
-  mysql:5.7
+docker-compose up db -d
 ```
 
 ## Access API

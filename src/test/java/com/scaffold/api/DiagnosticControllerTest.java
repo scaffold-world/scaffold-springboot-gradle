@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
 @ExtendWith(MockitoExtension.class)
-public class DiagnosticControllerTest {
+class DiagnosticControllerTest {
 
     @Mock
     private DatabaseHealthCheck healthCheck;
@@ -26,7 +26,7 @@ public class DiagnosticControllerTest {
     class Nagios {
 
         @Test
-        public void shouldReturnOKIfDatabaseHealthCheckPass() {
+        void shouldReturnOKIfDatabaseHealthCheckPass() {
             when(healthCheck.isHealthy()).thenReturn(true);
             var actual = controller.nagios();
 
@@ -35,7 +35,7 @@ public class DiagnosticControllerTest {
         }
 
         @Test
-        public void shouldReturnNotOKIfDatabaseHealthCheckNotPass() {
+        void shouldReturnNotOKIfDatabaseHealthCheckNotPass() {
             when(healthCheck.isHealthy()).thenReturn(false);
             var actual = controller.nagios();
 
@@ -48,7 +48,7 @@ public class DiagnosticControllerTest {
     class Version {
 
         @Test
-        public void shouldReturnAppVersion() {
+        void shouldReturnAppVersion() {
             var controller = new DiagnosticController(healthCheck, "123.321");
             var actual = controller.version();
 
@@ -60,7 +60,7 @@ public class DiagnosticControllerTest {
     class Heartbeat {
 
         @Test
-        public void shouldReturnOK() {
+        void shouldReturnOK() {
             assertThat(controller.heartbeat()).isEqualTo("OK");
         }
     }
@@ -69,7 +69,7 @@ public class DiagnosticControllerTest {
     class Diagnosis {
 
         @Test
-        public void shouldReturnOK() {
+        void shouldReturnOK() {
             assertThat(controller.diagnosis()).isEqualTo("OK");
         }
     }
@@ -78,7 +78,7 @@ public class DiagnosticControllerTest {
     class Index {
 
         @Test
-        public void shouldReturnEndpointMap() {
+        void shouldReturnEndpointMap() {
             var endpointMap = controller.index();
             assertThat(endpointMap.containsKey("endpoints")).isTrue();
         }

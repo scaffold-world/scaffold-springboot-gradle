@@ -2,8 +2,6 @@ package com.scaffold.api.diagnosis;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/diagnostic")
 public class DiagnosticController {
 
-    private static final List<String> DIAGNOSTIC_LINKS = ImmutableList.of(
+    private static final List<String> DIAGNOSTIC_LINKS = List.of(
         "/diagnostic/status/heartbeat",
         "/diagnostic/status/diagnosis",
         "/diagnostic/status/nagios",
@@ -35,9 +33,7 @@ public class DiagnosticController {
 
     @GetMapping("/")
     public Map<String, List<String>> index() {
-        Map<String, List<String>> content = Maps.newHashMap();
-        content.put("endpoints", DIAGNOSTIC_LINKS);
-        return content;
+        return Map.of("endpoints", DIAGNOSTIC_LINKS);
     }
 
     @GetMapping("/status/heartbeat")
