@@ -1,0 +1,8 @@
+type Query {
+    getTheDemoObject(name: String): Demo
+}
+
+type Demo {
+    name: String
+    age: Int
+}
